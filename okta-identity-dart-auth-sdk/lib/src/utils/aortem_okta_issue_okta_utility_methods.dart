@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
-import 'package:http/src/mock_client.dart';
 
 /// Provides utility methods for interacting with Okta APIs
 /// Handles common operations like generating sign-in links and managing delegated access
@@ -16,10 +15,10 @@ class AortemOktaUtilityMethods {
   ///
   /// @param oktaDomain The base URL of your Okta organization
   /// @param apiToken A valid API token with necessary permissions
-  AortemOktaUtilityMethods(
-      {required this.oktaDomain,
-      required this.apiToken,
-      required MockClient client});
+  AortemOktaUtilityMethods({
+    required this.oktaDomain,
+    required this.apiToken,
+  });
 
   /// Generates a sign-in URL for OAuth 2.0 authorization code flow
   ///

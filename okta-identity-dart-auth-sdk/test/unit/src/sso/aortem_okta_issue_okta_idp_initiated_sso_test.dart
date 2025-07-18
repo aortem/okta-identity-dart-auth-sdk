@@ -40,20 +40,14 @@ void main() {
 
     test('throws ArgumentError when oktaDomain is empty', () {
       expect(
-        () => AortemOktaIdpInitiatedSSO(
-          oktaDomain: '',
-          clientId: clientId,
-        ),
+        () => AortemOktaIdpInitiatedSSO(oktaDomain: '', clientId: clientId),
         throwsA(isA<ArgumentError>()),
       );
     });
 
     test('throws ArgumentError when clientId is empty', () {
       expect(
-        () => AortemOktaIdpInitiatedSSO(
-          oktaDomain: oktaDomain,
-          clientId: '',
-        ),
+        () => AortemOktaIdpInitiatedSSO(oktaDomain: oktaDomain, clientId: ''),
         throwsA(isA<ArgumentError>()),
       );
     });
@@ -65,10 +59,7 @@ void main() {
         defaultRelayState: defaultRelayState,
       );
 
-      expect(
-        () => sso.initiateIdpSso((params) {}),
-        throwsA(isA<Exception>()),
-      );
+      expect(() => sso.initiateIdpSso((params) {}), throwsA(isA<Exception>()));
     });
 
     test('allows complete override of RelayState in consumer', () {

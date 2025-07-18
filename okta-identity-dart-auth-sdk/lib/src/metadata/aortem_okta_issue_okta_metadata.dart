@@ -33,7 +33,7 @@ class AortemOktaMetadata {
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
   AortemOktaMetadata({required this.oktaDomain, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+    : httpClient = httpClient ?? http.Client();
 
   /// Fetches the OpenID Connect metadata from Okta's well-known endpoint.
   ///
@@ -90,7 +90,8 @@ class AortemOktaMetadata {
         return metadata;
       } else {
         throw Exception(
-            'Failed to fetch metadata from Okta. Status code: ${response.statusCode}');
+          'Failed to fetch metadata from Okta. Status code: ${response.statusCode}',
+        );
       }
     } catch (e) {
       throw Exception('Error retrieving Okta metadata: $e');

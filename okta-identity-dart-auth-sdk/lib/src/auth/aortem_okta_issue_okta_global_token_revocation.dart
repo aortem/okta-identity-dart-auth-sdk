@@ -155,7 +155,7 @@ class AortemOktaGlobalTokenRevocationConsumer {
   /// ```
   Future<void> revokeToken({
     required void Function(OktaTokenRevocationPayloadBuilder builder)
-        buildPayload,
+    buildPayload,
   }) async {
     // Create and configure the payload builder
     final builder = OktaTokenRevocationPayloadBuilder();

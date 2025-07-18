@@ -7,15 +7,17 @@ import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_okta
 
 class FakeSDK extends AortemOktaBaseSDK {
   FakeSDK()
-      : super(
-            config: AortemOktaConfig(
+    : super(
+        config: AortemOktaConfig(
           oktaDomain: 'https://fake.okta.com',
           clientId: 'fake-client-id',
           redirectUri: 'fake:/callback',
-        ));
+        ),
+      );
 
   Future<Map<String, dynamic>> sendTokenRequest(
-      Map<String, dynamic> payload) async {
+    Map<String, dynamic> payload,
+  ) async {
     if (payload['username'] == 'user@example.com' &&
         payload['password'] == 'password123') {
       return {

@@ -14,10 +14,14 @@ void main() {
     test('revokeToken succeeds with status 200', () async {
       final mockClient = MockClient((request) async {
         expect(request.method, equals('POST'));
-        expect(request.url.toString(),
-            equals('https://$oktaDomain/oauth2/default/v1/revoke'));
-        expect(request.headers['Authorization'],
-            startsWith('Basic ')); // Check Basic auth
+        expect(
+          request.url.toString(),
+          equals('https://$oktaDomain/oauth2/default/v1/revoke'),
+        );
+        expect(
+          request.headers['Authorization'],
+          startsWith('Basic '),
+        ); // Check Basic auth
         expect(request.bodyFields['token'], equals(testToken));
         return http.Response('', 200);
       });
@@ -59,8 +63,13 @@ void main() {
 
       expect(
         () => revoker.revokeToken(token: testToken),
-        throwsA(predicate((e) =>
-            e is Exception && e.toString().contains('Failed to revoke token'))),
+        throwsA(
+          predicate(
+            (e) =>
+                e is Exception &&
+                e.toString().contains('Failed to revoke token'),
+          ),
+        ),
       );
     });
 

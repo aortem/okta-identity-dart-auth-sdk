@@ -12,22 +12,24 @@ void main() {
 
     late AortemOktaSocialLoginConsumer consumer;
 
-    test('should throw ArgumentError when required fields are missing',
-        () async {
-      consumer = AortemOktaSocialLoginConsumer(
-        oktaDomain: oktaDomain,
-        clientId: clientId,
-        redirectUri: redirectUri,
-        httpClient: http.MockClient((_) async => http.Response('{}', 400)),
-      );
+    test(
+      'should throw ArgumentError when required fields are missing',
+      () async {
+        consumer = AortemOktaSocialLoginConsumer(
+          oktaDomain: oktaDomain,
+          clientId: clientId,
+          redirectUri: redirectUri,
+          httpClient: http.MockClient((_) async => http.Response('{}', 400)),
+        );
 
-      expect(
-        () => consumer.signIn((payload) async {
-          // Missing provider and social_token
-        }),
-        throwsA(isA<ArgumentError>()),
-      );
-    });
+        expect(
+          () => consumer.signIn((payload) async {
+            // Missing provider and social_token
+          }),
+          throwsA(isA<ArgumentError>()),
+        );
+      },
+    );
 
     test('should throw Exception on failed response', () async {
       final mockClient = http.MockClient((_) async {
@@ -46,11 +48,15 @@ void main() {
           payload['provider'] = 'facebook';
           payload['social_token'] = 'invalid_token';
         }),
-        throwsA(predicate((e) =>
-            e is Exception &&
-            e
-                .toString()
-                .contains('Failed to authenticate with social provider'))),
+        throwsA(
+          predicate(
+            (e) =>
+                e is Exception &&
+                e.toString().contains(
+                  'Failed to authenticate with social provider',
+                ),
+          ),
+        ),
       );
     });
   });

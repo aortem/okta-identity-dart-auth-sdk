@@ -7,8 +7,9 @@ class MissingTokenFieldException implements Exception {
   final String message;
 
   /// Creates a [MissingTokenFieldException] with an optional custom [message]
-  MissingTokenFieldException(
-      [this.message = 'Token is required for revocation.']);
+  MissingTokenFieldException([
+    this.message = 'Token is required for revocation.',
+  ]);
 
   @override
   String toString() => 'MissingTokenFieldException: $message';

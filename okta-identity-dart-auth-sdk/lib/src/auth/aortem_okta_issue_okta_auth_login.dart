@@ -65,18 +65,19 @@ class AortemOktaAuthLoginConsumer {
     print('[DEBUG] oktaDomain: ${_baseSDK.oktaDomain}');
 
     // Construct the token endpoint URL
-    final uri =
-        Uri.parse('${_baseSDK.config.oktaDomain}/oauth2/default/v1/token');
+    final uri = Uri.parse(
+      '${_baseSDK.config.oktaDomain}/oauth2/default/v1/token',
+    );
     print('[DEBUG] Token URL: $uri');
     // Send the authentication request
     final response = await _baseSDK.httpClient.post(
       uri,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: payload.entries
-          .map((e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+          .map(
+            (e) =>
+                '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+          )
           .join('&'),
     );
 

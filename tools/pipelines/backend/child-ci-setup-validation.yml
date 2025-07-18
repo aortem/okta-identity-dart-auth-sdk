@@ -156,21 +156,16 @@ validate_format:
 
     - echo "🔧 Running pub.dev/Pana–style format check…"
     # silent check, exit code tells us pass/fail
-    - echo "🧹 Running dart format dry-run check..."
+    - dart format --output=none --set-exit-if-changed .
     - |
-      UNFORMATTED=$(dart format --output=none --set-exit-if-changed . 2>&1)
       if [ $? -ne 0 ]; then
-        echo "❌ Formatting issues detected!"
-        echo "$UNFORMATTED"
-        echo "🛠️ Please run 'dart format .' locally and commit the changes."
-        # Show list of files needing formatting
-        echo "📂 Files to fix:"
+        echo "❌ Formatting issues detected! Listing files that need formatting:"
+        # now show exactly which files are out of line
         dart format --dry-run .
         exit 1
       else
         echo "✅ All Dart files are properly formatted."
       fi
-
   rules:
     - when: always
 

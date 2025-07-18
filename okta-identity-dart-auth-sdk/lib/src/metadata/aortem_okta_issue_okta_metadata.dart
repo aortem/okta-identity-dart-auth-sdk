@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:ds_standard_features/ds_standard_features.dart'as http;
-
+import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
 /// A class for retrieving and caching Okta OpenID Connect metadata.
 ///
@@ -59,8 +58,8 @@ class AortemOktaMetadata {
   /// @throws Exception If the request fails or the metadata is invalid
   Future<Map<String, dynamic>> getMetadata() async {
     // Return cached metadata if available and not expired
-    if (_cachedMetadata != null && 
-        _cacheExpiry != null && 
+    if (_cachedMetadata != null &&
+        _cacheExpiry != null &&
         DateTime.now().isBefore(_cacheExpiry!)) {
       return _cachedMetadata!;
     }

@@ -29,7 +29,7 @@ class AortemOktaSocialLoginConsumer {
   /// - [oktaDomain]: The base URL of your Okta organization
   /// - [clientId]: The client ID of your Okta OAuth application
   /// - [redirectUri]: The redirect URI registered in your Okta application
-  /// 
+  ///
   /// Optional:
   /// - [httpClient]: Custom HTTP client instance (defaults to a new [http.Client])
   AortemOktaSocialLoginConsumer({

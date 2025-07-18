@@ -1,4 +1,3 @@
-
 /// Exception thrown when required fields are missing in user operations.
 class MissingRequiredFieldException implements Exception {
   /// A message describing the missing field(s)

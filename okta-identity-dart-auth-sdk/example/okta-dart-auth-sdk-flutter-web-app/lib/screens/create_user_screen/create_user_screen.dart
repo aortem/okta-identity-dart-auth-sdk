@@ -45,7 +45,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             Button(
               onTap: () async {
                 try {
-                  final auth = Provider.of<okta-identityAuth>(context, listen: false);
+                  final auth =
+                      Provider.of<OktaIdentityAuth>(context, listen: false);
                   UserCredential? credential =
                       await auth.createUserWithEmailAndPassword(
                     _emailController.text,

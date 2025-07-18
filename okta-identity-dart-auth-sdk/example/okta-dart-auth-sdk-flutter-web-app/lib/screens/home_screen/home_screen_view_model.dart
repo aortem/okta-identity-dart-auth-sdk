@@ -33,7 +33,7 @@ class HomeScreenViewModel extends ChangeNotifier {
     scopes: scopes,
     signInOption: SignInOption.standard,
   );
-  final okta-identityAuth? _okta-identitySdk = okta-identityApp.okta-identityAuth;
+  final OktaIdentityAuth? _okta-identitySdk = OktaIdentityApp.OktaIdentityAuth;
 
   String displayName = '';
   String? displayImage;

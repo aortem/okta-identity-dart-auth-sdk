@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 class InitializeRecaptchaConfigScreen extends StatelessWidget {
-  final okta-identityAuth auth;
+  final OktaIdentityAuth auth;
 
   const InitializeRecaptchaConfigScreen({super.key, required this.auth});
 

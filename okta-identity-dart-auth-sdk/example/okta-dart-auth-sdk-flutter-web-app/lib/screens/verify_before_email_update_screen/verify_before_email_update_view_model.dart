@@ -3,7 +3,7 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'package:flutter/material.dart';
 
 class VerifyBeforeEmailUpdateViewModel extends ChangeNotifier {
-  final okta-identityAuth? _okta-identitySdk = okta-identityApp.okta-identityAuth;
+  final OktaIdentityAuth? _okta-identitySdk = OktaIdentityApp.OktaIdentityAuth;
   bool loading = false;
 
   void setLoading(bool load) {

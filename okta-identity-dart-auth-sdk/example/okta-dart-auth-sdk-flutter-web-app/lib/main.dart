@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    late okta-identityAuth auth; // Declare auth variable at top level
+    late OktaIdentityAuth auth; // Declare auth variable at top level
 
     if (kIsWeb) {
       // initialize the facebook javascript SDK
@@ -25,15 +25,16 @@ void main() async {
 
       // Initialize for web
       debugPrint('Initializing okta-identity for Web...');
-      await okta-identityApp.initializeAppWithEnvironmentVariables(
-        apiKey: 'YOUR_API_KEY', // 'YOUR_API_KEY'
-        authdomain: 'YOUR_AUTH_DOMAIN', // 'YOUR_AUTH_DOMAIN'
-        projectId: 'YOUR_PROJECT_ID', // 'YOUR_PROJECT_ID'
-        messagingSenderId: 'YOUR_SENDER_ID', // 'YOUR_SENDER_ID'
-        bucketName: 'YOUR_BUCKET_NAME', // 'YOUR_BUCKET_NAME'
-        appId: 'YOUR_APP_ID', // 'YOUR_APP_ID'
-      );
-      auth = okta-identityApp.instance.getAuth(); // Initialize auth for web
+      await okta -
+          identityApp.initializeAppWithEnvironmentVariables(
+            apiKey: 'YOUR_API_KEY', // 'YOUR_API_KEY'
+            authdomain: 'YOUR_AUTH_DOMAIN', // 'YOUR_AUTH_DOMAIN'
+            projectId: 'YOUR_PROJECT_ID', // 'YOUR_PROJECT_ID'
+            messagingSenderId: 'YOUR_SENDER_ID', // 'YOUR_SENDER_ID'
+            bucketName: 'YOUR_BUCKET_NAME', // 'YOUR_BUCKET_NAME'
+            appId: 'YOUR_APP_ID', // 'YOUR_APP_ID'
+          );
+      auth = okta - identityApp.instance.getAuth(); // Initialize auth for web
       debugPrint('okta-identity initialized for Web.');
     } else {
       if (Platform.isAndroid || Platform.isIOS) {
@@ -46,15 +47,17 @@ void main() async {
         debugPrint('Service account loaded.');
 
         // Initialize okta-identity with the service account content
-        await okta-identityApp.initializeAppWithServiceAccount(
-          serviceAccountContent: serviceAccountContent,
-        );
-        auth = okta-identityApp.instance.getAuth(); // Initialize auth for mobile
+        await okta -
+            identityApp.initializeAppWithServiceAccount(
+              serviceAccountContent: serviceAccountContent,
+            );
+        auth =
+            okta - identityApp.instance.getAuth(); // Initialize auth for mobile
         debugPrint('okta-identity initialized for Mobile.');
 
         // Uncomment to use service account impersonation if needed
         /*
-        await okta-identityApp.initializeAppWithServiceAccountImpersonation(
+        await OktaIdentityApp.initializeAppWithServiceAccountImpersonation(
           impersonatedEmail: 'impersonatedEmail',
           serviceAccountContent: serviceAccountContent,
         );
@@ -67,7 +70,7 @@ void main() async {
 
     // Wrap the app with Provider
     runApp(
-      Provider<okta-identityAuth>.value(
+      Provider<OktaIdentityAuth>.value(
         value: auth,
         child: const MyApp(),
       ),

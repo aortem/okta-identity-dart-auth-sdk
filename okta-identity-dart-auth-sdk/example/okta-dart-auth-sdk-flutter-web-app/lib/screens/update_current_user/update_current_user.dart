@@ -13,7 +13,7 @@ class UpdateUserScreenState extends State<UpdateUserScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
-  final okta-identityApp auth = okta-identityApp.instance;
+  final OktaIdentityApp auth = OktaIdentityApp.instance;
 
   @override
   void dispose() {
@@ -30,8 +30,8 @@ class UpdateUserScreenState extends State<UpdateUserScreen> {
         User? user = auth.getCurrentUser();
 
         if (user != null) {
-          okta-identityApp.okta-identityAuth
-              ?.updateUserInformation(user.uid, user.idToken!, {
+          OktaIdentityApp.OktaIdentityAuth?.updateUserInformation(
+              user.uid, user.idToken!, {
             'email': _emailController.text,
             'phoneNumber': _phoneNumberController.text,
             'password': _passwordController.text,

@@ -38,11 +38,10 @@ class SignInWithPhoneNumberViewModel extends ChangeNotifier {
       setLoading(true);
 
       if (smsCode != '123456') {
-        throw okta -
-            identityAuthException(
-              code: 'invalid-verification-code',
-              message: 'Invalid verification code. Use 123456 for testing.',
-            );
+        throw OktaIdentityAuthException(
+          code: 'invalid-verification-code',
+          message: 'Invalid verification code. Use 123456 for testing.',
+        );
       }
 
       // Simulate sign in

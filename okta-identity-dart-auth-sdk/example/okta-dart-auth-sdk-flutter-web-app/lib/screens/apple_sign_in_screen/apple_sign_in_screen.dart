@@ -35,7 +35,7 @@ class _AppleSignInScreenState extends State<AppleSignInScreen> {
     super.initState();
     // Initialize the view model with okta-identity Auth instance
     _viewModel = AppleSignInViewModel(
-      auth: context.read<okta-identityAuth>(),
+      auth: context.read<OktaIdentityAuth>(),
     );
   }
 

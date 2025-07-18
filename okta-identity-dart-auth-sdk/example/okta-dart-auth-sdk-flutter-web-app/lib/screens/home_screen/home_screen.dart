@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _setupAuthListeners() {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
 
     // Subscribe to ID token changes
     StreamSubscription<User?>? idTokenSubscription;
@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _fetchCurrentIdToken() async {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     final user = auth.currentUser;
     setState(() {
       _currentUser = user;
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _connectToEmulator() {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     auth.connectAuthEmulator('localhost', 9099);
     setState(() {
       _isConnectedToEmulator = true;
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     return ChangeNotifierProvider(
       create: (context) => HomeScreenViewModel(),
       child: Consumer<HomeScreenViewModel>(
@@ -253,9 +253,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ActionTile(
                   onTap: () {
                     try {
-                      okta-identityApp.okta-identityAuth?.signOut();
-                      final okta-identityApp = okta-identityApp.instance;
-                      final currentUser = okta-identityApp.getCurrentUser();
+                      OktaIdentityApp.OktaIdentityAuth?.signOut();
+                      final OktaIdentityApp = OktaIdentityApp.instance;
+                      final currentUser = OktaIdentityApp.getCurrentUser();
 
                       if (currentUser == null) {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -286,9 +286,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 10.vSpace,
                 ActionTile(
                   onTap: () {
-                    okta-identityApp.okta-identityAuth?.deleteokta-identityUser();
-                    final okta-identityApp = okta-identityApp.instance;
-                    final currentUser = okta-identityApp.getCurrentUser();
+                    OktaIdentityApp.OktaIdentityAuth?.deleteokta -
+                        identityUser();
+                    final OktaIdentityApp = OktaIdentityApp.instance;
+                    final currentUser = OktaIdentityApp.getCurrentUser();
 
                     if (currentUser == null) {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -326,7 +327,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 10.vSpace,
                 ActionTile(
                   onTap: () async {
-                    var tokenId = await okta-identityApp.okta-identityAuth?.getIdToken();
+                    var tokenId =
+                        await OktaIdentityApp.OktaIdentityAuth?.getIdToken();
                     setState(() {
                       userIdToken = tokenId!;
                     });
@@ -339,8 +341,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 10.vSpace,
                 ActionTile(
                   onTap: () async {
-                    var tokenId =
-                        await okta-identityApp.okta-identityAuth?.getIdTokenResult();
+                    var tokenId = await OktaIdentityApp.OktaIdentityAuth
+                        ?.getIdTokenResult();
 
                     if (kDebugMode) {
                       print("token result  $tokenId");
@@ -381,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 10.vSpace,
                 ActionTile(
                   onTap: () async {
-                    okta-identityApp.okta-identityAuth?.setLanguageCodeMethod(
+                    OktaIdentityApp.OktaIdentityAuth?.setLanguageCodeMethod(
                         'en', 'firebasdartadminauthsdk');
 
                     // log("token result  $tokenId");
@@ -404,8 +406,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ActionTile(
                   onTap: () async {
                     // var tokenId=
-                    okta-identityApp.okta-identityAuth
-                        ?.getLanguageCodeMethod('firebasdartadminauthsdk');
+                    OktaIdentityApp.OktaIdentityAuth?.getLanguageCodeMethod(
+                        'firebasdartadminauthsdk');
 
                     // log("token result  $tokenId");
                   },
@@ -415,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ActionTile(
                   onTap: () async {
                     // var tokenId=
-                    okta-identityApp.okta-identityAuth?.getAuthBeforeChange();
+                    OktaIdentityApp.OktaIdentityAuth?.getAuthBeforeChange();
                   },
                   title: "Device Language",
                 ),

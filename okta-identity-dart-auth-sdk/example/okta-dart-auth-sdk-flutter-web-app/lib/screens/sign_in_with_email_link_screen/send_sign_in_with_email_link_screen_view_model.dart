@@ -6,7 +6,7 @@ class SendSignInWithEmailLinkScreenViewModel extends ChangeNotifier {
   bool loading = false;
   bool signingIn = false;
 
-  final okta-identityAuth? _okta-identitySdk = okta-identityApp.okta-identityAuth;
+  final OktaIdentityAuth? _okta-identitySdk = OktaIdentityApp.OktaIdentityAuth;
 
   void setLoading(bool load) {
     loading = load;

@@ -18,7 +18,7 @@ class MultiFactorResolverScreenState extends State<MultiFactorResolverScreen> {
   multi_factor.MultiFactorResolver? resolver;
 
   Future<void> getMultiFactorResolver() async {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     try {
       final mockError = multi_factor.MultiFactorError(
         hints: [

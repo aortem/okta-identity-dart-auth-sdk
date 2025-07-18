@@ -12,7 +12,7 @@ class StorageExample extends StatefulWidget {
 }
 
 class _StorageExampleState extends State<StorageExample> {
-  final okta-identityStorage storage = okta-identityApp.instance.getStorage();
+  final OktaIdentityStorage storage = OktaIdentityApp.instance.getStorage();
   Uint8List? fileBytes; // File data
   String? fileName; // File name
 

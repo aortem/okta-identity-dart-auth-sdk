@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 class AuthStateTestScreen extends StatefulWidget {
-  final okta-identityAuth auth;
+  final OktaIdentityAuth auth;
 
   const AuthStateTestScreen({super.key, required this.auth});
 

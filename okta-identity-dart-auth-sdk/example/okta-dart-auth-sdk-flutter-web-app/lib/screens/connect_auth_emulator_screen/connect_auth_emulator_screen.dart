@@ -61,7 +61,7 @@ class _ConnectAuthEmulatorScreenState extends State<ConnectAuthEmulatorScreen> {
     final port = int.tryParse(_portController.text) ?? 9099;
 
     try {
-      final auth = Provider.of<okta-identityAuth>(context, listen: false);
+      final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
       auth.connectAuthEmulator(host, port);
       setState(() {
         _result = 'Connected to Auth Emulator at $host:$port';

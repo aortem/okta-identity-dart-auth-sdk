@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     return ChangeNotifierProvider(
       create: (context) => SignUpViewModel(auth),
       child: Consumer<SignUpViewModel>(

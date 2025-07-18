@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 class SignInWithPopupViewModel extends ChangeNotifier {
-  final okta-identityAuth _auth;
+  final OktaIdentityAuth _auth;
   User? user;
   bool isLoading = false;
   String? errorMessage;
@@ -48,7 +48,7 @@ class SignInWithPopupViewModel extends ChangeNotifier {
 
       final userCredential = await _auth.signInWithPopup(provider, clientId);
       user = userCredential.user;
-    } on okta-identityAuthException catch (e) {
+    } on OktaIdentityAuthException catch (e) {
       errorMessage = e.message;
     } catch (e) {
       errorMessage = 'An unexpected error occurred';

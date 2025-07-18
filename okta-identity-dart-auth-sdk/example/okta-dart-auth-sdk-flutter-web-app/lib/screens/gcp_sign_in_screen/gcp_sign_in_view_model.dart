@@ -25,11 +25,10 @@ class GCPSignInViewModel extends ChangeNotifier {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
-        throw okta -
-            identityAuthException(
-              code: 'sign-in-cancelled',
-              message: 'Sign in was cancelled by the user',
-            );
+        throw OktaIdentityAuthException(
+          code: 'sign-in-cancelled',
+          message: 'Sign in was cancelled by the user',
+        );
       }
 
       // Get auth details from request

@@ -20,7 +20,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
       _message = '';
     });
 
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     try {
       await auth.sendPasswordResetEmail(_emailController.text.trim());
       setState(() {

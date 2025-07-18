@@ -21,7 +21,7 @@ class _RevokeAccessTokenScreenState extends State<RevokeAccessTokenScreen> {
     });
 
     try {
-      final auth = Provider.of<okta-identityAuth>(context, listen: false);
+      final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
 
       // Revoke the token
       await auth.revokeToken('');

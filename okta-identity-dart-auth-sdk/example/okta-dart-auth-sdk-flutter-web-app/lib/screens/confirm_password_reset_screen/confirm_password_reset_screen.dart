@@ -18,7 +18,7 @@ class _ConfirmPasswordResetScreenState
   final TextEditingController _newPasswordController = TextEditingController();
 
   Future<void> _confirmPasswordReset() async {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     try {
       String oobCode = _extractOobCode(_resetLinkController.text);
       await auth.confirmPasswordReset(oobCode, _newPasswordController.text);

@@ -18,7 +18,7 @@ class _IsSignInWithEmailLinkScreenState
   bool? _isValidLink;
 
   void _checkLink() {
-    final auth = Provider.of<okta-identityAuth>(context, listen: false);
+    final auth = Provider.of<OktaIdentityAuth>(context, listen: false);
     setState(() {
       _isValidLink = auth.isSignInWithEmailLink(_linkController.text);
     });

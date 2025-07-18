@@ -3,7 +3,7 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'package:flutter/material.dart';
 
 class SignUpViewModel extends ChangeNotifier {
-  final okta-identityAuth _auth;
+  final OktaIdentityAuth _auth;
 
   SignUpViewModel(this._auth);
 

@@ -66,13 +66,14 @@ class GetRedirectResultViewModel extends ChangeNotifier {
 
     try {
       // First check if we have a current user
-      final currentUser = okta-identityApp.instance.getCurrentUser();
+      final currentUser = okta - identityApp.instance.getCurrentUser();
       if (currentUser == null) {
         _error = 'No signed-in user found';
         return;
       }
 
-      final result = await okta-identityApp.okta-identityAuth?.getRedirectResult();
+      final result =
+          await okta - identityApp.OktaIdentityAuth?.getRedirectResult();
       log('Redirect result: $result');
 
       if (result != null) {
@@ -84,7 +85,7 @@ class GetRedirectResultViewModel extends ChangeNotifier {
       }
     } catch (e) {
       log('Error getting redirect result: $e');
-      _error = e is okta-identityAuthException
+      _error = e is OktaIdentityAuthException
           ? e.message
           : 'Failed to get redirect result';
       BotToast.showText(text: 'Error: $_error');

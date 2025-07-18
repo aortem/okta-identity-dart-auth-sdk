@@ -32,9 +32,9 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
     void main() async
     {
 
-        okta-identityApp.initializeAppWithEnvironmentVariables(apiKey:'api_key',projectId: 'project_id',);
+        OktaIdentityApp.initializeAppWithEnvironmentVariables(apiKey:'api_key',projectId: 'project_id',);
 
-        okta-identityApp.instance.getAuth();
+        OktaIdentityApp.instance.getAuth();
 
         runApp(const MyApp());
     }
@@ -46,15 +46,15 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
   import 'package:flutter/material.dart';
   import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
   ```
-- In the main function call the 'okta-identityApp.initializeAppWithEnvironmentVariables' and pass in your api key and project id
+- In the main function call the 'OktaIdentityApp.initializeAppWithEnvironmentVariables' and pass in your api key and project id
 
   ```
-    okta-identityApp.initializeAppWithEnvironmentVariables(apiKey:'api_key',projectId: 'project_id',);
+    OktaIdentityApp.initializeAppWithEnvironmentVariables(apiKey:'api_key',projectId: 'project_id',);
   ```
 
-- Aftwards call the 'okta-identityApp.instance.getAuth()'
+- Aftwards call the 'OktaIdentityApp.instance.getAuth()'
   ```
-    okta-identityApp.instance.getAuth();
+    OktaIdentityApp.instance.getAuth();
   ```
 - Then call the 'runApp(const MyApp())' method
 
@@ -74,9 +74,9 @@ For mobile we can use either [Service Account](#serviceaccount) or [Service acco
 
     void main() async
     {
-        okta-identityApp.initializeAppWithServiceAccount(serviceAccountKeyFilePath: 'path_to_json_file');
+        OktaIdentityApp.initializeAppWithServiceAccount(serviceAccountKeyFilePath: 'path_to_json_file');
 
-        okta-identityApp.instance.getAuth();
+        OktaIdentityApp.instance.getAuth();
         runApp(const MyApp());
     }
     ```
@@ -88,13 +88,13 @@ For mobile we can use either [Service Account](#serviceaccount) or [Service acco
   import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
   ```
 
-- In the main function call the 'okta-identityApp.initializeAppWithServiceAccount' function and pass the path to your the json file
+- In the main function call the 'OktaIdentityApp.initializeAppWithServiceAccount' function and pass the path to your the json file
   ```
-   okta-identityApp.initializeAppWithServiceAccount(serviceAccountKeyFilePath: 'path_to_json_file');
+   OktaIdentityApp.initializeAppWithServiceAccount(serviceAccountKeyFilePath: 'path_to_json_file');
   ```
-- Aftwards call the 'okta-identityApp.instance.getAuth()'
+- Aftwards call the 'OktaIdentityApp.instance.getAuth()'
   ```
-    okta-identityApp.instance.getAuth();
+    OktaIdentityApp.instance.getAuth();
   ```
 - Then call the 'runApp(const MyApp())' method
 
@@ -111,9 +111,9 @@ For mobile we can use either [Service Account](#serviceaccount) or [Service acco
 
     void main() async
     {
-        okta-identityApp.initializeAppWithServiceAccountImpersonation(serviceAccountEmail: service_account_email, userEmail: user_email)
+        OktaIdentityApp.initializeAppWithServiceAccountImpersonation(serviceAccountEmail: service_account_email, userEmail: user_email)
 
-        okta-identityApp.instance.getAuth();
+        OktaIdentityApp.instance.getAuth();
         runApp(const MyApp());
     }
     ```
@@ -125,13 +125,13 @@ For mobile we can use either [Service Account](#serviceaccount) or [Service acco
   import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
   ```
 
-- In the main function call the 'okta-identityApp.initializeAppWithServiceAccountImpersonation' function and pass the service_account_email and user_email
+- In the main function call the 'OktaIdentityApp.initializeAppWithServiceAccountImpersonation' function and pass the service_account_email and user_email
   ```
-    okta-identityApp.initializeAppWithServiceAccountImpersonation(serviceAccountEmail: serviceAccountEmail,userEmail:userEmail,)
+    OktaIdentityApp.initializeAppWithServiceAccountImpersonation(serviceAccountEmail: serviceAccountEmail,userEmail:userEmail,)
   ```
-- Aftwards call the 'okta-identityApp.instance.getAuth()'
+- Aftwards call the 'OktaIdentityApp.instance.getAuth()'
   ```
-    okta-identityApp.instance.getAuth();
+    OktaIdentityApp.instance.getAuth();
   ```
 - Then call the 'runApp(const MyApp())' method
 

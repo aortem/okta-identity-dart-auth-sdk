@@ -48,8 +48,9 @@ class AortemOktaAuthLoginConsumer {
     final Map<String, dynamic> payload = {
       'grant_type': 'password',
       'scope': 'openid profile email', // Default scope
-      'client_id': _baseSDK.clientId,
-      'redirect_uri': _baseSDK.redirectUri,
+      'client_id': _baseSDK.config.clientId,
+      'redirect_uri': _baseSDK.config.redirectUri,
+      'client_secret': _baseSDK.config.clientSecret,
     };
 
     // Apply consumer to customize the payload
@@ -61,10 +62,12 @@ class AortemOktaAuthLoginConsumer {
         'Payload must include both "username" and "password" fields.',
       );
     }
+    print('[DEBUG] oktaDomain: ${_baseSDK.oktaDomain}');
 
     // Construct the token endpoint URL
-    final uri = Uri.parse('${_baseSDK.oktaDomain}/oauth2/default/v1/token');
-
+    final uri =
+        Uri.parse('${_baseSDK.config.oktaDomain}/oauth2/default/v1/token');
+    print('[DEBUG] Token URL: $uri');
     // Send the authentication request
     final response = await _baseSDK.httpClient.post(
       uri,

@@ -31,9 +31,8 @@ void main() {
         );
 
         expect(
-          () async => await oktaUtility.acceptDelegatedRequest(
-            requestId: '12345',
-          ),
+          () async =>
+              await oktaUtility.acceptDelegatedRequest(requestId: '12345'),
           throwsA(isA<Exception>()),
         );
       });

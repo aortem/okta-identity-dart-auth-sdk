@@ -31,8 +31,10 @@ void main() {
 
       final result = await metadata.getMetadata();
       expect(result['issuer'], equals(mockResponse['issuer']));
-      expect(result['authorization_endpoint'],
-          equals(mockResponse['authorization_endpoint']));
+      expect(
+        result['authorization_endpoint'],
+        equals(mockResponse['authorization_endpoint']),
+      );
 
       // Verify cache works: second call shouldn't trigger new HTTP call
       final cached = await metadata.getMetadata();

@@ -23,11 +23,7 @@ void main() {
 
     test('throws ArgumentError for empty config values', () {
       expect(
-        () => AortemOktaConfig(
-          oktaDomain: '',
-          clientId: '',
-          redirectUri: '',
-        ),
+        () => AortemOktaConfig(oktaDomain: '', clientId: '', redirectUri: ''),
         throwsA(isA<ArgumentError>()),
       );
     });

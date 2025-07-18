@@ -13,7 +13,7 @@ class OktaUserRequestBuilder {
   final Map<String, dynamic> _data = {
     'profile': {},
     'credentials': {
-      'password': {'value': null}
+      'password': {'value': null},
     },
   };
 
@@ -89,7 +89,7 @@ class AortemOktaUserManagementConsumer {
   /// @throws OktaApiException If the API request fails
   Future<Map<String, dynamic>> signUp({
     required FutureOr<void> Function(OktaUserRequestBuilder builder)
-        buildPayload,
+    buildPayload,
     bool activate = true,
   }) async {
     final builder = OktaUserRequestBuilder();
@@ -105,7 +105,8 @@ class AortemOktaUserManagementConsumer {
         profile['login'] == null ||
         password == null) {
       throw MissingRequiredFieldException(
-          'Missing required fields: email, login, or password.');
+        'Missing required fields: email, login, or password.',
+      );
     }
 
     final uri = Uri.parse('$oktaDomain/api/v1/users?activate=$activate');
@@ -155,7 +156,8 @@ class AortemOktaUserManagementConsumer {
     required String newPassword,
   }) async {
     final uri = Uri.parse(
-        '$oktaDomain/api/v1/users/$userId/credentials/change_password');
+      '$oktaDomain/api/v1/users/$userId/credentials/change_password',
+    );
 
     final body = {
       'oldPassword': {'value': oldPassword},
@@ -177,8 +179,8 @@ class AortemOktaUserManagementConsumer {
 
   /// Creates standard headers for API requests
   Map<String, String> _headers() => {
-        'Authorization': 'SSWS $apiToken',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      };
+    'Authorization': 'SSWS $apiToken',
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  };
 }

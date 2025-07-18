@@ -1,21 +1,20 @@
-
 /// Represents the token response received from Okta's OAuth2 token endpoint.
-/// 
+///
 /// Contains the authentication tokens and metadata returned after a successful
 /// username/password authentication.
 class AortemOktaTokenResponse {
   /// The access token used to authenticate API requests.
   final String accessToken;
-  
+
   /// The ID token containing user information in JWT format (optional).
   final String? idToken;
-  
+
   /// The refresh token used to obtain new access tokens (optional).
   final String? refreshToken;
-  
+
   /// The lifetime in seconds of the access token.
   final int expiresIn;
-  
+
   /// The type of token returned (typically 'Bearer').
   final String tokenType;
 

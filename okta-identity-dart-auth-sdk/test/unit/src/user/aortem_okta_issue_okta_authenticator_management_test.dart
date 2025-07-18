@@ -13,8 +13,10 @@ void main() {
   group('AortemOktaAuthenticatorManagement', () {
     test('addAuthenticator - success', () async {
       final mockClient = MockClient((http.Request request) async {
-        expect(request.url.toString(),
-            'https://$oktaDomain/api/v1/users/$userId/factors');
+        expect(
+          request.url.toString(),
+          'https://$oktaDomain/api/v1/users/$userId/factors',
+        );
         expect(request.method, 'POST');
         expect(request.headers['Authorization'], 'SSWS $apiToken');
         return http.Response(jsonEncode({'id': 'factor123'}), 200);
@@ -44,8 +46,10 @@ void main() {
       ];
 
       final mockClient = MockClient((http.Request request) async {
-        expect(request.url.toString(),
-            'https://$oktaDomain/api/v1/users/$userId/factors');
+        expect(
+          request.url.toString(),
+          'https://$oktaDomain/api/v1/users/$userId/factors',
+        );
         expect(request.method, 'GET');
         return http.Response(jsonEncode(mockResponse), 200);
       });
@@ -64,8 +68,10 @@ void main() {
 
     test('deleteAuthenticator - success', () async {
       final mockClient = MockClient((http.Request request) async {
-        expect(request.url.toString(),
-            'https://$oktaDomain/api/v1/users/$userId/factors/$factorId');
+        expect(
+          request.url.toString(),
+          'https://$oktaDomain/api/v1/users/$userId/factors/$factorId',
+        );
         expect(request.method, 'DELETE');
         return http.Response('', 204);
       });
@@ -79,53 +85,59 @@ void main() {
       await manager.deleteAuthenticator(userId: userId, factorId: factorId);
     });
 
-    test('addAuthenticator - missing authenticatorType throws ArgumentError',
-        () async {
-      final manager = AortemOktaAuthenticatorManagement(
-        oktaDomain: oktaDomain,
-        apiToken: apiToken,
-        httpClient: MockClient((_) async => http.Response('', 200)),
-      );
+    test(
+      'addAuthenticator - missing authenticatorType throws ArgumentError',
+      () async {
+        final manager = AortemOktaAuthenticatorManagement(
+          oktaDomain: oktaDomain,
+          apiToken: apiToken,
+          httpClient: MockClient((_) async => http.Response('', 200)),
+        );
 
-      expect(
-        () => manager.addAuthenticator(
-          userId: userId,
-          payloadBuilder: () => {'profile': {}}, // Missing authenticatorType
-        ),
-        throwsA(isA<ArgumentError>()),
-      );
-    });
+        expect(
+          () => manager.addAuthenticator(
+            userId: userId,
+            payloadBuilder: () => {'profile': {}}, // Missing authenticatorType
+          ),
+          throwsA(isA<ArgumentError>()),
+        );
+      },
+    );
 
-    test('listAuthenticators - invalid response format throws Exception',
-        () async {
-      final mockClient = MockClient((http.Request request) async {
-        return http.Response(jsonEncode({'not': 'a list'}), 200);
-      });
+    test(
+      'listAuthenticators - invalid response format throws Exception',
+      () async {
+        final mockClient = MockClient((http.Request request) async {
+          return http.Response(jsonEncode({'not': 'a list'}), 200);
+        });
 
-      final manager = AortemOktaAuthenticatorManagement(
-        oktaDomain: oktaDomain,
-        apiToken: apiToken,
-        httpClient: mockClient,
-      );
+        final manager = AortemOktaAuthenticatorManagement(
+          oktaDomain: oktaDomain,
+          apiToken: apiToken,
+          httpClient: mockClient,
+        );
 
-      expect(
-        () => manager.listAuthenticators(userId: userId),
-        throwsA(isA<Exception>()),
-      );
-    });
+        expect(
+          () => manager.listAuthenticators(userId: userId),
+          throwsA(isA<Exception>()),
+        );
+      },
+    );
 
-    test('deleteAuthenticator - missing factorId throws ArgumentError',
-        () async {
-      final manager = AortemOktaAuthenticatorManagement(
-        oktaDomain: oktaDomain,
-        apiToken: apiToken,
-        httpClient: MockClient((_) async => http.Response('', 204)),
-      );
+    test(
+      'deleteAuthenticator - missing factorId throws ArgumentError',
+      () async {
+        final manager = AortemOktaAuthenticatorManagement(
+          oktaDomain: oktaDomain,
+          apiToken: apiToken,
+          httpClient: MockClient((_) async => http.Response('', 204)),
+        );
 
-      expect(
-        () => manager.deleteAuthenticator(userId: userId, factorId: ''),
-        throwsA(isA<ArgumentError>()),
-      );
-    });
+        expect(
+          () => manager.deleteAuthenticator(userId: userId, factorId: ''),
+          throwsA(isA<ArgumentError>()),
+        );
+      },
+    );
   });
 }

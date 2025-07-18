@@ -46,8 +46,9 @@ void main() {
     });
 
     test('throws OktaRevocationException on HTTP error', () async {
-      final mockClient =
-          MockClient((_) async => http.Response('Unauthorized', 401));
+      final mockClient = MockClient(
+        (_) async => http.Response('Unauthorized', 401),
+      );
 
       final consumer = AortemOktaGlobalTokenRevocationConsumer(
         oktaDomain: 'https://example.okta.com',
@@ -57,9 +58,11 @@ void main() {
       );
 
       expect(
-        () async => await consumer.revokeToken(buildPayload: (builder) {
-          builder.setToken('abc123');
-        }),
+        () async => await consumer.revokeToken(
+          buildPayload: (builder) {
+            builder.setToken('abc123');
+          },
+        ),
         throwsA(isA<OktaRevocationException>()),
       );
     });

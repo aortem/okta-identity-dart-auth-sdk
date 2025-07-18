@@ -29,7 +29,7 @@ class AortemOktaSocialLoginConsumer {
   /// - [oktaDomain]: The base URL of your Okta organization
   /// - [clientId]: The client ID of your Okta OAuth application
   /// - [redirectUri]: The redirect URI registered in your Okta application
-  /// 
+  ///
   /// Optional:
   /// - [httpClient]: Custom HTTP client instance (defaults to a new [http.Client])
   AortemOktaSocialLoginConsumer({
@@ -67,7 +67,8 @@ class AortemOktaSocialLoginConsumer {
   /// Throws [ArgumentError] if required fields ('provider' or 'social_token') are missing.
   /// Throws [Exception] if the authentication request fails.
   Future<Map<String, dynamic>> signIn(
-      FutureOr<void> Function(Map<String, dynamic>) modifyPayload) async {
+    FutureOr<void> Function(Map<String, dynamic>) modifyPayload,
+  ) async {
     // Base payload with required OAuth2 parameters for token exchange
     final Map<String, dynamic> body = {
       'grant_type': 'urn:ietf:params:oauth:grant-type:token-exchange',
@@ -82,13 +83,12 @@ class AortemOktaSocialLoginConsumer {
     // Validate required social authentication fields
     if (!body.containsKey('provider') || !body.containsKey('social_token')) {
       throw ArgumentError(
-          'Missing required fields: provider and/or social_token');
+        'Missing required fields: provider and/or social_token',
+      );
     }
 
     final uri = Uri.parse('$oktaDomain/oauth2/v1/token');
-    final headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    };
+    final headers = {'Content-Type': 'application/x-www-form-urlencoded'};
 
     final response = await httpClient.post(
       uri,

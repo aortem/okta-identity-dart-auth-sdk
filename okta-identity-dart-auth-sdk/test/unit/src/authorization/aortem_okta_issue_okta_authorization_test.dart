@@ -25,7 +25,9 @@ void main() {
       });
 
       expect(
-          url.toString(), contains('https://$oktaDomain/oauth2/v1/authorize'));
+        url.toString(),
+        contains('https://$oktaDomain/oauth2/v1/authorize'),
+      );
       expect(url.queryParameters['client_id'], equals(clientId));
       expect(url.queryParameters['redirect_uri'], equals(redirectUri));
       expect(url.queryParameters['response_type'], equals('code'));
@@ -34,21 +36,22 @@ void main() {
     });
 
     test(
-        'throws ArgumentError if required fields are missing in URL construction',
-        () {
-      final auth = AortemOktaAuthorization(
-        oktaDomain: oktaDomain,
-        clientId: clientId,
-        redirectUri: redirectUri,
-      );
+      'throws ArgumentError if required fields are missing in URL construction',
+      () {
+        final auth = AortemOktaAuthorization(
+          oktaDomain: oktaDomain,
+          clientId: clientId,
+          redirectUri: redirectUri,
+        );
 
-      expect(
-        () => auth.authorizeApplication((params) {
-          params.remove('client_id');
-        }),
-        throwsA(isA<ArgumentError>()),
-      );
-    });
+        expect(
+          () => auth.authorizeApplication((params) {
+            params.remove('client_id');
+          }),
+          throwsA(isA<ArgumentError>()),
+        );
+      },
+    );
 
     test('successfully exchanges authorization code for tokens', () async {
       final mockClient = MockClient((request) async {
@@ -61,12 +64,13 @@ void main() {
         expect(body['redirect_uri'], equals(redirectUri));
 
         return http.Response(
-            jsonEncode({
-              'access_token': 'abc123',
-              'id_token': 'xyz456',
-              'token_type': 'Bearer',
-            }),
-            200);
+          jsonEncode({
+            'access_token': 'abc123',
+            'id_token': 'xyz456',
+            'token_type': 'Bearer',
+          }),
+          200,
+        );
       });
 
       final auth = AortemOktaAuthorization(

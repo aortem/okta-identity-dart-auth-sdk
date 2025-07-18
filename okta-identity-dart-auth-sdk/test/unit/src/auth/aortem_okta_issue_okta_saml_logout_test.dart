@@ -24,16 +24,22 @@ void main() {
 
       expect(url, contains('SAMLRequest=mockSAMLRequestData'));
       expect(url, contains(Uri.encodeComponent(applicationId)));
-      expect(url,
-          contains('RelayState=${Uri.encodeComponent(defaultRelayState)}'));
+      expect(
+        url,
+        contains('RelayState=${Uri.encodeComponent(defaultRelayState)}'),
+      );
     });
 
     test('throws ArgumentError when SAMLRequest is missing', () async {
       expect(
         () => consumer.logout((payload) {}),
-        throwsA(predicate((e) =>
-            e is ArgumentError &&
-            e.message == 'SAMLRequest is required in the logout payload.')),
+        throwsA(
+          predicate(
+            (e) =>
+                e is ArgumentError &&
+                e.message == 'SAMLRequest is required in the logout payload.',
+          ),
+        ),
       );
     });
 

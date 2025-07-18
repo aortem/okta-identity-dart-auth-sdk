@@ -14,39 +14,42 @@ void main() {
       capturedRequests = [];
     });
 
-    test('registerClient returns credentials on successful registration',
-        () async {
-      final mockClient = MockClient((http.Request request) async {
-        capturedRequests.add(request);
+    test(
+      'registerClient returns credentials on successful registration',
+      () async {
+        final mockClient = MockClient((http.Request request) async {
+          capturedRequests.add(request);
 
-        expect(request.method, equals('POST'));
-        expect(request.url.toString(), contains('/oauth2/v1/clients'));
+          expect(request.method, equals('POST'));
+          expect(request.url.toString(), contains('/oauth2/v1/clients'));
 
-        final body = jsonDecode(request.body);
-        expect(body['redirect_uris'], contains('https://myapp.dev/callback'));
-        expect(body['application_type'], equals('web'));
+          final body = jsonDecode(request.body);
+          expect(body['redirect_uris'], contains('https://myapp.dev/callback'));
+          expect(body['application_type'], equals('web'));
 
-        return http.Response(
+          return http.Response(
             jsonEncode({
               'client_id': 'abc123',
               'client_secret': 'secret456',
               'token_endpoint_auth_method': 'client_secret_basic',
             }),
-            201);
-      });
+            201,
+          );
+        });
 
-      final registration = AortemOktaDynamicClientRegistration(
-        oktaDomain: 'example.okta.com',
-        httpClient: mockClient,
-      );
+        final registration = AortemOktaDynamicClientRegistration(
+          oktaDomain: 'example.okta.com',
+          httpClient: mockClient,
+        );
 
-      final response = await registration.registerClient((payload) {
-        payload['redirect_uris'] = ['https://myapp.dev/callback'];
-      });
+        final response = await registration.registerClient((payload) {
+          payload['redirect_uris'] = ['https://myapp.dev/callback'];
+        });
 
-      expect(response['client_id'], equals('abc123'));
-      expect(response['client_secret'], equals('secret456'));
-    });
+        expect(response['client_id'], equals('abc123'));
+        expect(response['client_secret'], equals('secret456'));
+      },
+    );
 
     test('throws ArgumentError if redirect_uris is missing', () async {
       final registration = AortemOktaDynamicClientRegistration(
@@ -76,9 +79,13 @@ void main() {
         () => registration.registerClient((payload) {
           payload['redirect_uris'] = ['https://myapp.dev/callback'];
         }),
-        throwsA(predicate((e) =>
-            e is Exception &&
-            e.toString().contains('Client registration failed'))),
+        throwsA(
+          predicate(
+            (e) =>
+                e is Exception &&
+                e.toString().contains('Client registration failed'),
+          ),
+        ),
       );
     });
 
@@ -96,9 +103,13 @@ void main() {
         () => registration.registerClient((payload) {
           payload['redirect_uris'] = ['https://myapp.dev/callback'];
         }),
-        throwsA(predicate((e) =>
-            e is Exception &&
-            e.toString().contains('Dynamic client registration failed'))),
+        throwsA(
+          predicate(
+            (e) =>
+                e is Exception &&
+                e.toString().contains('Dynamic client registration failed'),
+          ),
+        ),
       );
     });
   });

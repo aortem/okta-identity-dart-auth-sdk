@@ -85,14 +85,16 @@ class AortemOktaOidcLogoutConsumer {
     _validatePayload(payload);
 
     // Construct the logout URL with query parameters
-    final logoutUrl = Uri.parse('$oktaDomain/oauth2/v1/logout')
-        .replace(queryParameters: payload);
+    final logoutUrl = Uri.parse(
+      '$oktaDomain/oauth2/v1/logout',
+    ).replace(queryParameters: payload);
 
     // Make the logout request (returns 302 redirect by default)
     final response = await httpClient.get(logoutUrl);
     if (response.statusCode != 200 && response.statusCode != 302) {
       throw Exception(
-          'Logout failed with status ${response.statusCode}: ${response.body}');
+        'Logout failed with status ${response.statusCode}: ${response.body}',
+      );
     }
 
     return logoutUrl;
@@ -112,7 +114,8 @@ class AortemOktaOidcLogoutConsumer {
     if (!payload.containsKey('post_logout_redirect_uri') ||
         payload['post_logout_redirect_uri']!.isEmpty) {
       throw ArgumentError(
-          'Missing required parameter: post_logout_redirect_uri');
+        'Missing required parameter: post_logout_redirect_uri',
+      );
     }
   }
 }

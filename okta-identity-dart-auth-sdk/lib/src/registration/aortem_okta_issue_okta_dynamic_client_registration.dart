@@ -77,7 +77,8 @@ class AortemOktaDynamicClientRegistration {
     // Validate required fields
     if (payload['redirect_uris'] == null || payload['redirect_uris'].isEmpty) {
       throw ArgumentError(
-          'At least one redirect_uri is required for client registration');
+        'At least one redirect_uri is required for client registration',
+      );
     }
 
     final uri = Uri.https(oktaDomain, '/oauth2/v1/clients');

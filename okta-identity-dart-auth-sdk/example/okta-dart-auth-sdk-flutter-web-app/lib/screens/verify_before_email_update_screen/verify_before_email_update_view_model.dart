@@ -3,7 +3,7 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'package:flutter/material.dart';
 
 class VerifyBeforeEmailUpdateViewModel extends ChangeNotifier {
-  final OktaIdentityAuth? _okta-identitySdk = OktaIdentityApp.OktaIdentityAuth;
+  final OktaIdentityAuth? _oktaIdentitySdk = OktaIdentityApp.OktaIdentityAuth;
   bool loading = false;
 
   void setLoading(bool load) {
@@ -18,7 +18,8 @@ class VerifyBeforeEmailUpdateViewModel extends ChangeNotifier {
   }) async {
     try {
       setLoading(true);
-      await _okta-identitySdk?.verifyBeforeEmailUpdate(newEmail, action: actionCode);
+      await _oktaIdentitySdk?.verifyBeforeEmailUpdate(newEmail,
+          action: actionCode);
       BotToast.showText(text: 'Verification email has been sent to $newEmail');
       onFinished();
     } catch (e) {

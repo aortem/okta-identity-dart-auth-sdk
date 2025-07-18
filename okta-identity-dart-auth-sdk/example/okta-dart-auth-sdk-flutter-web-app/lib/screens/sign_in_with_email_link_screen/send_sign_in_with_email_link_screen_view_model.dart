@@ -6,7 +6,7 @@ class SendSignInWithEmailLinkScreenViewModel extends ChangeNotifier {
   bool loading = false;
   bool signingIn = false;
 
-  final OktaIdentityAuth? _okta-identitySdk = OktaIdentityApp.OktaIdentityAuth;
+  final OktaIdentityAuth? _oktaIdentitySdk = OktaIdentityApp.OktaIdentityAuth;
 
   void setLoading(bool load) {
     loading = load;
@@ -22,7 +22,7 @@ class SendSignInWithEmailLinkScreenViewModel extends ChangeNotifier {
     try {
       setLoading(true);
 
-      await _okta-identitySdk?.sendSignInLinkToEmail(
+      await _oktaIdentitySdk?.sendSignInLinkToEmail(
         email,
       );
 
@@ -40,7 +40,7 @@ class SendSignInWithEmailLinkScreenViewModel extends ChangeNotifier {
       setSigningIn(true);
 
       final userCredential =
-          await _okta-identitySdk?.signInWithEmailLink(email, emailLink);
+          await _oktaIdentitySdk?.signInWithEmailLink(email, emailLink);
 
       if (userCredential != null) {
         BotToast.showText(

@@ -16,10 +16,10 @@ class HomeScreenViewModel extends ChangeNotifier {
   }
 
   void refreshUser() {
-    displayName = _okta-identitySdk?.currentUser?.displayName ?? '';
-    displayImage = _okta-identitySdk?.currentUser?.photoURL;
+    displayName = _oktaIdentitySdk?.currentUser?.displayName ?? '';
+    displayImage = _oktaIdentitySdk?.currentUser?.photoURL;
     numberOfLinkedProviders =
-        _okta-identitySdk?.currentUser?.providerUserInfo?.length ?? 0;
+        _oktaIdentitySdk?.currentUser?.providerUserInfo?.length ?? 0;
     notifyListeners();
   }
 
@@ -33,7 +33,7 @@ class HomeScreenViewModel extends ChangeNotifier {
     scopes: scopes,
     signInOption: SignInOption.standard,
   );
-  final OktaIdentityAuth? _okta-identitySdk = OktaIdentityApp.OktaIdentityAuth;
+  final OktaIdentityAuth? _oktaIdentitySdk = OktaIdentityApp.OktaIdentityAuth;
 
   String displayName = '';
   String? displayImage;
@@ -48,7 +48,7 @@ class HomeScreenViewModel extends ChangeNotifier {
   Future<void> reloadUser() async {
     try {
       setLoading(true);
-      await _okta-identitySdk?.reloadUser();
+      await _oktaIdentitySdk?.reloadUser();
       refreshUser();
       BotToast.showText(text: 'Reload Successful');
     } catch (e) {
@@ -69,7 +69,7 @@ class HomeScreenViewModel extends ChangeNotifier {
     try {
       setVerificationLoading(true);
 
-      await _okta-identitySdk?.sendEmailVerificationCode();
+      await _oktaIdentitySdk?.sendEmailVerificationCode();
 
       onSuccess();
       BotToast.showText(text: 'Code Sent');
@@ -89,7 +89,7 @@ class HomeScreenViewModel extends ChangeNotifier {
   Future<void> getAdditionalUserInfo() async {
     try {
       setAdditionalInfoLoading(true);
-      await _okta-identitySdk?.getAdditionalUserInfo();
+      await _oktaIdentitySdk?.getAdditionalUserInfo();
 
       BotToast.showText(text: 'Additional Info Gotten Successfully');
       refreshUser();
@@ -117,7 +117,7 @@ class HomeScreenViewModel extends ChangeNotifier {
       }
 
       var signInAuth = await signInAccount?.authentication;
-      await _okta-identitySdk?.linkProviderToUser(
+      await _oktaIdentitySdk?.linkProviderToUser(
         getPlatformId(),
         signInAuth!.idToken!,
       );

@@ -1,4 +1,4 @@
-name: okta-identity
+name: okta_identity
 description: "This sample app highlights the classes, methods,and functions used in the okta-identity Dart Amin Auth SDK."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   okta_identity_dart_auth_sdk:
-    path: ../../../okta_identity_dart_auth_sdk
+    path: ../../../okta-identity-dart-auth-sdk
   provider: ^6.1.2
   bot_toast: ^4.1.3
   google_sign_in: ^6.2.1

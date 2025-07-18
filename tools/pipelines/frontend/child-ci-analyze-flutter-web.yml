@@ -8,7 +8,7 @@ analyze_flutter_web:
     - echo "Analyzing example project..."
     - cd okta-identity-dart-auth-sdk/example/okta-identity-dart-auth-sdk-flutter-web-app
     - flutter pub get || { echo "Failed to install dependencies. Exiting..."; exit 1; }
-    - flutter analyze > analysis_report.txt 2> error_log.txt || true
+    - dart analyze > analysis_report.txt 2> error_log.txt || true
 
     # Filter and summarize analysis results
     - echo "Separating issues into categories..."

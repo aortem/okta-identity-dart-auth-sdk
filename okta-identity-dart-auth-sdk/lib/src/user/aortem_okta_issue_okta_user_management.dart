@@ -12,9 +12,7 @@ import '../exception/aortem_okta_issue_okta_missing_feild_exception.dart';
 class OktaUserRequestBuilder {
   final Map<String, dynamic> _data = {
     'profile': {},
-    'credentials': {
-      'password': {'value': null},
-    },
+    'credentials': {'password': <String, dynamic>{}},
   };
 
   /// Sets the user's email address
@@ -31,8 +29,9 @@ class OktaUserRequestBuilder {
   void setLastName(String lastName) => _data['profile']['lastName'] = lastName;
 
   /// Sets the user's password
-  void setPassword(String password) =>
-      _data['credentials']['password']['value'] = password;
+  void setPassword(String password) {
+    (_data['credentials']['password'] ??= {})['value'] = password;
+  }
 
   /// Sets a custom profile field
   void setProfileField(String key, dynamic value) =>

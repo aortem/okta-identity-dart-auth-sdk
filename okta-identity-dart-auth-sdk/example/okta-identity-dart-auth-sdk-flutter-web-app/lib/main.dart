@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/IdpSsoTestScreen.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/OktaAuthorization.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/OktaDynamicClientRegistration.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_auth_login.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_auth_management.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_logout_complete.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_logout_screen.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_mfa_login.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_social_login.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_token_revocation.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_token_validation.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/okta_user_management.dart';
-import 'package:okta-identity-dart-auth-sdk-flutter-web-app/screens/oktametadata_screen.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/IdpSsoTestScreen.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaAuthorization.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaDynamicClientRegistration.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_auth_login.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_auth_management.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_logout_complete.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_logout_screen.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_mfa_login.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_social_login.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_token_exchange.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_token_revocation.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_token_validation.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_user_management.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_utility_screen.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/oktametadata_screen.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_base_sdk_screen.dart';
 
 void main() {
   runApp(const OktaSampleApp());
@@ -69,6 +72,18 @@ class OktaHomePage extends StatelessWidget {
                 },
               ),
               FeatureButton(
+                title: "OktaBaseSDKSetup",
+                description: "Base SDK Setup and Configuration",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const OktaBaseSDKScreen(),
+                    ),
+                  );
+                },
+              ),
+              FeatureButton(
                 title: "OktaSocialLogin(Social Sign-In)",
                 description:
                     "Implement Social Sign-In Flow via Consumer Pattern",
@@ -98,8 +113,7 @@ class OktaHomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) =>
-                          const TokenValidation(token: '<JWT_TOKEN>'),
+                      builder: (_) => const TokenValidationScreen(),
                     ),
                   );
                 },
@@ -189,6 +203,26 @@ class OktaHomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => OktaAuthScreen()),
+                  );
+                },
+              ),
+              FeatureButton(
+                title: "OktaTokenExchange",
+                description: "Token Exchange and Refresh via Consumer Pattern",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => TokenExchangeScreen()),
+                  );
+                },
+              ),
+              FeatureButton(
+                title: "OktaUtilityMethods",
+                description: "",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => OktaUtilityScreen()),
                   );
                 },
               ),

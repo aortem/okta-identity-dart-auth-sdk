@@ -9,64 +9,105 @@ class OktaUtilityScreen extends StatefulWidget {
 }
 
 class _OktaUtilityScreenState extends State<OktaUtilityScreen> {
-  String output = '';
+  final okta = AortemOktaUtilityMethods(
+    oktaDomain: 'https://dev-123456.okta.com', // Replace with your Okta domain
+    apiToken: 'yourApiToken', // Replace with your API token
+  );
 
-  final String oktaDomain = 'dev-123456.okta.com';
-  final String clientId = 'your-client-id';
-  final String redirectUri = 'http://localhost:8080/callback';
-  final String apiToken = 'your-api-token';
-  final String requestId = 'your-request-id';
+  String signInUrl = '';
+  String delegatedResponse = '';
+  final _clientIdController = TextEditingController();
+  final _redirectUriController = TextEditingController();
+  final _delegatedRequestIdController = TextEditingController();
 
-  Future<void> generateSignInLink() async {
+  Future<void> _generateSignInLink() async {
     try {
-      final util = AortemOktaUtilityMethods(
-        oktaDomain: oktaDomain,
-        apiToken: apiToken,
+      final url = await okta.getSignInLink(
+        redirectUri: _redirectUriController.text,
+        clientId: _clientIdController.text,
       );
-      final url = await util.getSignInLink(
-        clientId: clientId,
-        redirectUri: redirectUri,
-      );
-      setState(() => output = 'Sign-in URL:\n$url');
+      setState(() {
+        signInUrl = url;
+      });
     } catch (e) {
-      setState(() => output = 'Error: $e');
+      setState(() {
+        signInUrl = 'Error: $e';
+      });
     }
   }
 
-  Future<void> acceptDelegation() async {
+  Future<void> _acceptDelegatedAccess() async {
     try {
-      final util = AortemOktaUtilityMethods(
-        oktaDomain: oktaDomain,
-        apiToken: apiToken,
+      final response = await okta.acceptDelegatedRequest(
+        requestId: _delegatedRequestIdController.text,
       );
-      final result = await util.acceptDelegatedRequest(requestId: requestId);
-      setState(() => output = 'Delegation Response:\n$result');
+      setState(() {
+        delegatedResponse = response.toString();
+      });
     } catch (e) {
-      setState(() => output = 'Error: $e');
+      setState(() {
+        delegatedResponse = 'Error: $e';
+      });
     }
+  }
+
+  @override
+  void dispose() {
+    _clientIdController.dispose();
+    _redirectUriController.dispose();
+    _delegatedRequestIdController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Utility Methods')),
+      appBar: AppBar(title: const Text('Okta Utility Methods UI')),
       body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: generateSignInLink,
-              child: const Text('Generate Sign-In Link'),
-            ),
-            ElevatedButton(
-              onPressed: acceptDelegation,
-              child: const Text('Accept Delegated Request'),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: SingleChildScrollView(child: SelectableText(output)),
-            ),
-          ],
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Generate Sign-In Link',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextField(
+                controller: _clientIdController,
+                decoration: const InputDecoration(labelText: 'Client ID'),
+              ),
+              TextField(
+                controller: _redirectUriController,
+                decoration: const InputDecoration(labelText: 'Redirect URI'),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _generateSignInLink,
+                child: const Text('Generate Link'),
+              ),
+              SelectableText('Sign-In URL: $signInUrl'),
+
+              const Divider(height: 40),
+
+              const Text(
+                'Accept Delegated Request',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextField(
+                controller: _delegatedRequestIdController,
+                decoration: const InputDecoration(
+                  labelText: 'Delegated Request ID',
+                ),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _acceptDelegatedAccess,
+                child: const Text('Accept Request'),
+              ),
+              SelectableText('Response: $delegatedResponse'),
+            ],
+          ),
         ),
       ),
     );

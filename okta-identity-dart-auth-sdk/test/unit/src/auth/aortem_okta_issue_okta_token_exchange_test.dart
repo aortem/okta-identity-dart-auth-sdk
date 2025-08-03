@@ -29,13 +29,13 @@ void main() {
         'refresh_token': 'mockRefreshToken',
       });
 
-      when(mockHttpClient.post(
-        Uri.parse('https://example.okta.com/oauth2/default/v1/token'),
-        headers: anyNamed('headers'),
-        body: anyNamed('body'),
-      )).thenAnswer(
-        (_) async => http.Response(mockResponse, 200),
-      );
+      when(
+        mockHttpClient.post(
+          Uri.parse('https://example.okta.com/oauth2/default/v1/token'),
+          headers: anyNamed('headers'),
+          body: anyNamed('body'),
+        ),
+      ).thenAnswer((_) async => http.Response(mockResponse, 200));
 
       // Prepare the consumer callback
       final modifyPayload = (Map<String, String> payload) {
@@ -44,7 +44,8 @@ void main() {
       };
 
       final response = await tokenExchangeConsumer.exchangeToken(
-          modifyPayload: modifyPayload);
+        modifyPayload: modifyPayload,
+      );
 
       // Verify the expected result
       expect(response['access_token'], 'mockAccessToken');
@@ -59,32 +60,36 @@ void main() {
 
       expect(
         () async => await tokenExchangeConsumer.exchangeToken(
-            modifyPayload: modifyPayload),
+          modifyPayload: modifyPayload,
+        ),
         throwsA(isA<ArgumentError>()),
       );
     });
 
-    test('should throw ArgumentError if authorization code is missing',
-        () async {
-      final modifyPayload = (Map<String, String> payload) {
-        payload['grant_type'] = 'authorization_code'; // Missing the 'code'
-      };
+    test(
+      'should throw ArgumentError if authorization code is missing',
+      () async {
+        final modifyPayload = (Map<String, String> payload) {
+          payload['grant_type'] = 'authorization_code'; // Missing the 'code'
+        };
 
-      expect(
-        () async => await tokenExchangeConsumer.exchangeToken(
-            modifyPayload: modifyPayload),
-        throwsA(isA<ArgumentError>()),
-      );
-    });
+        expect(
+          () async => await tokenExchangeConsumer.exchangeToken(
+            modifyPayload: modifyPayload,
+          ),
+          throwsA(isA<ArgumentError>()),
+        );
+      },
+    );
 
     test('should throw Exception if network request fails', () async {
-      when(mockHttpClient.post(
-        Uri.parse('https://example.okta.com/oauth2/default/v1/token'),
-        headers: anyNamed('headers'),
-        body: anyNamed('body'),
-      )).thenAnswer(
-        (_) async => http.Response('Network error', 500),
-      );
+      when(
+        mockHttpClient.post(
+          Uri.parse('https://example.okta.com/oauth2/default/v1/token'),
+          headers: anyNamed('headers'),
+          body: anyNamed('body'),
+        ),
+      ).thenAnswer((_) async => http.Response('Network error', 500));
 
       final modifyPayload = (Map<String, String> payload) {
         payload['grant_type'] = 'authorization_code';
@@ -93,7 +98,8 @@ void main() {
 
       expect(
         () async => await tokenExchangeConsumer.exchangeToken(
-            modifyPayload: modifyPayload),
+          modifyPayload: modifyPayload,
+        ),
         throwsA(isA<Exception>()),
       );
     });

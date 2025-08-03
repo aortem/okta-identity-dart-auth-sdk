@@ -29,10 +29,8 @@ class AortemOktaTokenValidator {
   /// Requires:
   /// - [oktaDomain]: Your Okta domain (e.g., 'your-org.okta.com')
   /// - [clientId]: The client ID that should match the token's audience claim
-  AortemOktaTokenValidator({
-    required this.oktaDomain,
-    required this.clientId,
-  }) : issuer = 'https://$oktaDomain/oauth2/default';
+  AortemOktaTokenValidator({required this.oktaDomain, required this.clientId})
+    : issuer = 'https://$oktaDomain/oauth2/default';
 
   /// Validates a JWT token and returns its decoded payload if valid.
   ///
@@ -97,7 +95,8 @@ class AortemOktaTokenValidator {
 
     if (response.statusCode != 200) {
       throw TokenValidationException(
-          'Failed to retrieve JWKS: ${response.statusCode}');
+        'Failed to retrieve JWKS: ${response.statusCode}',
+      );
     }
 
     final json = jsonDecode(response.body);
@@ -121,7 +120,10 @@ class AortemOktaTokenValidator {
 
   /// Verifies the token's signature using RSA-PSS with SHA-256.
   Future<bool> _verifySignature(
-      SimplePublicKey publicKey, List<int> data, List<int> signature) async {
+    SimplePublicKey publicKey,
+    List<int> data,
+    List<int> signature,
+  ) async {
     final algorithm = RsaPss(Sha256());
     return algorithm.verify(
       data,

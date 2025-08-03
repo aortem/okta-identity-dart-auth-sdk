@@ -1,4 +1,3 @@
-
 /// Exception thrown when token validation fails.
 ///
 /// This exception indicates various validation failures including:

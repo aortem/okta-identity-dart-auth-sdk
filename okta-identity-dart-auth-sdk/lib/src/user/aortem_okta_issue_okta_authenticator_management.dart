@@ -173,8 +173,9 @@ class AortemOktaAuthenticatorManagement {
     if (userId.isEmpty) throw ArgumentError('userId is required.');
     if (factorId.isEmpty) throw ArgumentError('factorId is required.');
 
-    final url =
-        Uri.parse('https://$oktaDomain/api/v1/users/$userId/factors/$factorId');
+    final url = Uri.parse(
+      'https://$oktaDomain/api/v1/users/$userId/factors/$factorId',
+    );
 
     try {
       final response = await _httpClient.delete(

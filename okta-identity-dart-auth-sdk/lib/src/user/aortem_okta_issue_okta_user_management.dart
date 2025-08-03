@@ -12,9 +12,7 @@ import '../exception/aortem_okta_issue_okta_missing_feild_exception.dart';
 class OktaUserRequestBuilder {
   final Map<String, dynamic> _data = {
     'profile': {},
-    'credentials': {
-      'password': {'value': null}
-    },
+    'credentials': {'password': <String, dynamic>{}},
   };
 
   /// Sets the user's email address
@@ -31,8 +29,9 @@ class OktaUserRequestBuilder {
   void setLastName(String lastName) => _data['profile']['lastName'] = lastName;
 
   /// Sets the user's password
-  void setPassword(String password) =>
-      _data['credentials']['password']['value'] = password;
+  void setPassword(String password) {
+    (_data['credentials']['password'] ??= {})['value'] = password;
+  }
 
   /// Sets a custom profile field
   void setProfileField(String key, dynamic value) =>
@@ -89,7 +88,7 @@ class AortemOktaUserManagementConsumer {
   /// @throws OktaApiException If the API request fails
   Future<Map<String, dynamic>> signUp({
     required FutureOr<void> Function(OktaUserRequestBuilder builder)
-        buildPayload,
+    buildPayload,
     bool activate = true,
   }) async {
     final builder = OktaUserRequestBuilder();
@@ -105,7 +104,8 @@ class AortemOktaUserManagementConsumer {
         profile['login'] == null ||
         password == null) {
       throw MissingRequiredFieldException(
-          'Missing required fields: email, login, or password.');
+        'Missing required fields: email, login, or password.',
+      );
     }
 
     final uri = Uri.parse('$oktaDomain/api/v1/users?activate=$activate');
@@ -155,7 +155,8 @@ class AortemOktaUserManagementConsumer {
     required String newPassword,
   }) async {
     final uri = Uri.parse(
-        '$oktaDomain/api/v1/users/$userId/credentials/change_password');
+      '$oktaDomain/api/v1/users/$userId/credentials/change_password',
+    );
 
     final body = {
       'oldPassword': {'value': oldPassword},
@@ -177,8 +178,8 @@ class AortemOktaUserManagementConsumer {
 
   /// Creates standard headers for API requests
   Map<String, String> _headers() => {
-        'Authorization': 'SSWS $apiToken',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      };
+    'Authorization': 'SSWS $apiToken',
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  };
 }

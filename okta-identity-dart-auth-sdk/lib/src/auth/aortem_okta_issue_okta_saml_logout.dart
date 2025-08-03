@@ -82,9 +82,7 @@ class AortemOktaSamlLogoutConsumer {
     FutureOr<void> Function(Map<String, String> payload) payloadModifier,
   ) async {
     // Base payload with required SAML parameters
-    final Map<String, String> payload = {
-      'RelayState': defaultRelayState,
-    };
+    final Map<String, String> payload = {'RelayState': defaultRelayState};
 
     // Allow consumer to modify the payload (sync or async)
     await Future.sync(() => payloadModifier(payload));
@@ -97,8 +95,10 @@ class AortemOktaSamlLogoutConsumer {
 
     // Construct the query string with properly encoded parameters
     final queryString = payload.entries
-        .map((e) =>
-            '${Uri.encodeQueryComponent(e.key)}=${Uri.encodeQueryComponent(e.value)}')
+        .map(
+          (e) =>
+              '${Uri.encodeQueryComponent(e.key)}=${Uri.encodeQueryComponent(e.value)}',
+        )
         .join('&');
 
     // Construct the full SAML logout URL

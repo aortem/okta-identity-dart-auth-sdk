@@ -115,7 +115,9 @@ class AortemOktaTokenExchangeConsumer {
     }
 
     if (grantType == 'refresh_token' && payload['refresh_token'] == null) {
-      throw ArgumentError('Missing "refresh_token" for refresh_token grant type.');
+      throw ArgumentError(
+        'Missing "refresh_token" for refresh_token grant type.',
+      );
     }
 
     final uri = Uri.parse('$oktaDomain/oauth2/default/v1/token');

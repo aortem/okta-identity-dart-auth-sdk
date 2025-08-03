@@ -30,15 +30,19 @@ void main() {
         httpClient: FakeHttpClient(), // Simulated success response
       );
 
-      final logoutUri = await consumer.logout(modify: (payload) {
-        // You could also add id_token_hint here
-        payload['custom'] = 'value';
-      });
+      final logoutUri = await consumer.logout(
+        modify: (payload) {
+          // You could also add id_token_hint here
+          payload['custom'] = 'value';
+        },
+      );
 
       expect(logoutUri.toString(), contains('logout'));
       expect(logoutUri.queryParameters['client_id'], equals(clientId));
-      expect(logoutUri.queryParameters['post_logout_redirect_uri'],
-          equals(redirectUri));
+      expect(
+        logoutUri.queryParameters['post_logout_redirect_uri'],
+        equals(redirectUri),
+      );
       expect(logoutUri.queryParameters['custom'], equals('value'));
     });
 
@@ -51,9 +55,11 @@ void main() {
       );
 
       expect(
-        () => consumer.logout(modify: (payload) {
-          payload.remove('client_id');
-        }),
+        () => consumer.logout(
+          modify: (payload) {
+            payload.remove('client_id');
+          },
+        ),
         throwsA(isA<ArgumentError>()),
       );
     });
@@ -63,14 +69,13 @@ void main() {
         oktaDomain: oktaDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,
-        httpClient:
-            FakeHttpClient(statusCode: 500, body: 'Internal Server Error'),
+        httpClient: FakeHttpClient(
+          statusCode: 500,
+          body: 'Internal Server Error',
+        ),
       );
 
-      expect(
-        () => consumer.logout(modify: (_) {}),
-        throwsA(isA<Exception>()),
-      );
+      expect(() => consumer.logout(modify: (_) {}), throwsA(isA<Exception>()));
     });
   });
 }

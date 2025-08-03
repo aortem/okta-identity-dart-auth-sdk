@@ -73,7 +73,8 @@ class AortemOktaConfig {
     // Validation check for empty required parameters
     if (oktaDomain.isEmpty || clientId.isEmpty || redirectUri.isEmpty) {
       throw ArgumentError(
-          'Okta domain, clientId, and redirectUri must not be empty.');
+        'Okta domain, clientId, and redirectUri must not be empty.',
+      );
     }
   }
 
@@ -111,12 +112,11 @@ class AortemOktaBaseSDK {
   /// - [httpClient]: Optional custom HTTP client (uses default if not provided)
   ///
   /// The constructor stores the configuration and initializes the HTTP client.
-  AortemOktaBaseSDK({
-    required AortemOktaConfig config,
-    http.Client? httpClient,
-  })  : _config = config, // Stores the provided configuration
-        _httpClient = httpClient ??
-            http.Client(); // Uses provided client or creates a default one
+  AortemOktaBaseSDK({required AortemOktaConfig config, http.Client? httpClient})
+    : _config = config, // Stores the provided configuration
+      _httpClient =
+          httpClient ??
+          http.Client(); // Uses provided client or creates a default one
 
   /// Private field storing the Okta configuration.
   /// Accessed through the public getter `config`.

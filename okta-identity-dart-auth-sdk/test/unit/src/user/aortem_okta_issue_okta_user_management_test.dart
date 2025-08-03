@@ -13,17 +13,19 @@ void main() {
       );
     });
 
-    test('signUp - missing fields throws MissingRequiredFieldException',
-        () async {
-      expect(
-        () => consumer.signUp(
-          buildPayload: (builder) {
-            builder.setLogin('missing@example.com'); // No password or email
-          },
-        ),
-        throwsA(isA<MissingRequiredFieldException>()),
-      );
-    });
+    test(
+      'signUp - missing fields throws MissingRequiredFieldException',
+      () async {
+        expect(
+          () => consumer.signUp(
+            buildPayload: (builder) {
+              builder.setLogin('missing@example.com'); // No password or email
+            },
+          ),
+          throwsA(isA<MissingRequiredFieldException>()),
+        );
+      },
+    );
 
     test('signUp - bad request throws OktaApiException', () async {
       final badConsumer = AortemOktaUserManagementConsumer(

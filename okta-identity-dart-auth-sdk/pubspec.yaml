@@ -4,7 +4,7 @@ version: 0.0.1-pre
 repository: https://github.com/aortem_sdks/okta_identity_dart_auth_sdk
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.8.2
 
 # Add regular dependencies here.
 
@@ -12,18 +12,14 @@ dependencies:
 #------------------ STANDARD FEATURES---------------------------------
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
-  ds_standard_features: ^0.0.4 #Standard Dart Team Utilities For HTTP //Default
-  build_web_compilers: ^4.0.11
+  ds_standard_features: ^0.0.8 #Standard Dart Team Utilities For HTTP //Default
   jwt_generator: ^0.0.3
-  cryptography: ^2.7.0
 
 
 #------------------ TESTING FEATURES---------------------------------
 
 dev_dependencies:
-  ds_tools_testing: ^0.0.4 #Standard Dart Team Testing Tools
-  test_reporter: any #required to generate JUnit report 
-  http: any
+  ds_tools_testing: ^0.0.5 #Standard Dart Team Testing Tools
   git_hooks: any
 
 # Optional Local Hooks for development.

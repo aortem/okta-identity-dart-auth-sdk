@@ -13,7 +13,7 @@ dependencies:
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
   ds_standard_features: ^0.0.8 #Standard Dart Team Utilities For HTTP //Default
-  jwt_generator: ^0.0.3
+  jwt_generator: ^0.0.4
 
 
 #------------------ TESTING FEATURES---------------------------------

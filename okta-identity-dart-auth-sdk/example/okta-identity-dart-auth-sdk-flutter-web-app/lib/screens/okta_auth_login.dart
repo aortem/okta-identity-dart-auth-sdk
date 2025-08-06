@@ -13,12 +13,12 @@ class OktaAuthLoginScreen extends StatefulWidget {
 }
 
 class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
-  final TextEditingController _usernameController = TextEditingController(
-    text: 'developers@aortem.io',
-  );
-  final TextEditingController _passwordController = TextEditingController(
-    text: 'Hello@1234',
-  );
+  // final TextEditingController _usernameController = TextEditingController(
+  //   text: 'developers@aortem.io',
+  // );
+  // final TextEditingController _passwordController = TextEditingController(
+  //   text: 'Hello@1234',
+  // );
   // final _oktaDomain = 'https://dev-07140130.okta.com';
   final _oktaDomain = 'dev-07140130.okta.com';
   final _clientId = '0oaplfz1eaN0o0DLU5d7';

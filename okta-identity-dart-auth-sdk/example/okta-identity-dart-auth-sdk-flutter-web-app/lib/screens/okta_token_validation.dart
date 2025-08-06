@@ -15,8 +15,8 @@ class _TokenValidationScreenState extends State<TokenValidationScreen> {
   bool _isLoading = false;
 
   final validator = AortemOktaTokenValidator(
-    oktaDomain: 'dev-123456.okta.com',
-    clientId: 'yourClientId',
+    oktaDomain: 'dev-07140130.okta.com',
+    clientId: '0oaplfz1eaN0o0DLU5d7',
   );
 
   Future<void> _validate() async {

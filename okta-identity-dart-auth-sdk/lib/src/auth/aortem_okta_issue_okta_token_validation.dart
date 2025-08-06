@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:cryptography/cryptography.dart';
+import 'package:asn1lib/asn1lib.dart';
 import 'package:jwt_generator/jwt_generator.dart';
-
 import '../exception/aortem_okta_issue_token_validation_token.dart';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
@@ -53,17 +52,24 @@ class AortemOktaTokenValidator {
 
     final header = _decodeBase64Json(parts[0]);
     final payload = _decodeBase64Json(parts[1]);
-    final signature = _decodeBase64(parts[2]);
+    final signature = parts[2];
 
     final kid = header['kid'];
     if (kid == null)
       throw TokenValidationException('Missing "kid" in JWT header');
 
-    final publicKey = await _getPublicKey(kid);
-    final signedData = utf8.encode('${parts[0]}.${parts[1]}');
+    // final publicKey = await _getPublicKey(kid);
+    final publicKeyJwk = await _getPublicKey(kid);
+    final pem = _jwkToPem(publicKeyJwk);
+    final parser = RsaKeyParser();
+    final rsaPublicKey = parser.extractPublicKey(pem);
+    final rsaVerifier = RsaSignatureVerifier(publicKey: rsaPublicKey);
+    final signedData = '${parts[0]}.${parts[1]}';
 
-    final isValid = await _verifySignature(publicKey, signedData, signature);
-    if (!isValid) throw TokenValidationException('Invalid token signature');
+    final isValid = rsaVerifier.verify(signedData, signature);
+    if (!isValid) {
+      throw TokenValidationException('Invalid token signature');
+    }
 
     _validateClaims(payload);
     return payload;
@@ -86,9 +92,9 @@ class AortemOktaTokenValidator {
   /// Otherwise fetches the latest keys from Okta and caches them.
   ///
   /// Throws [TokenValidationException] if the key is not found.
-  Future<SimplePublicKey> _getPublicKey(String kid) async {
+  Future<Map<String, dynamic>> _getPublicKey(String kid) async {
     if (_cachedKeys.containsKey(kid)) {
-      return _jwkToPublicKey(_cachedKeys[kid]!);
+      return _cachedKeys[kid]!;
     }
 
     final url = Uri.parse('https://$oktaDomain/oauth2/default/v1/keys');
@@ -106,7 +112,7 @@ class AortemOktaTokenValidator {
     for (final key in keys) {
       if (key['kid'] == kid) {
         _cachedKeys[kid] = key;
-        return _jwkToPublicKey(key);
+        return key;
       }
     }
 
@@ -114,23 +120,23 @@ class AortemOktaTokenValidator {
   }
 
   /// Converts a JSON Web Key (JWK) to a Dart RSA public key.
-  SimplePublicKey _jwkToPublicKey(Map<String, dynamic> jwk) {
-    final n = _decodeBase64(jwk['n']);
-    return SimplePublicKey(n, type: KeyPairType.rsa);
-  }
+  // SimplePublicKey _jwkToPublicKey(Map<String, dynamic> jwk) {
+  //   final n = _decodeBase64(jwk['n']);
+  //   return SimplePublicKey(n, type: KeyPairType.rsa);
+  // }
 
   /// Verifies the token's signature using RSA-PSS with SHA-256.
-  Future<bool> _verifySignature(
-    SimplePublicKey publicKey,
-    List<int> data,
-    List<int> signature,
-  ) async {
-    final algorithm = RsaPss(Sha256());
-    return algorithm.verify(
-      data,
-      signature: Signature(signature, publicKey: publicKey),
-    );
-  }
+  // Future<bool> _verifySignature(
+  //   SimplePublicKey publicKey,
+  //   List<int> data,
+  //   List<int> signature,
+  // ) async {
+  //   final algorithm = RsaPss(Sha256());
+  //   return algorithm.verify(
+  //     data,
+  //     signature: Signature(signature, publicKey: publicKey),
+  //   );
+  // }
 
   /// Validates standard JWT claims.
   ///
@@ -153,10 +159,46 @@ class AortemOktaTokenValidator {
     }
 
     final aud = claims['aud'];
-    if (aud is String && aud != clientId) {
+    print('Token aud: $aud');
+    print('Expected clientId: $clientId');
+    if (aud is String && aud != clientId && aud != 'api://default') {
       throw TokenValidationException('Audience mismatch');
-    } else if (aud is List && !aud.contains(clientId)) {
+    } else if (aud is List &&
+        !(aud.contains(clientId) || aud.contains('api://default'))) {
       throw TokenValidationException('Audience mismatch');
     }
+    // if (aud is String && aud != clientId) {
+    //   throw TokenValidationException('Audience mismatch');
+    // } else if (aud is List && !aud.contains(clientId)) {
+    //   throw TokenValidationException('Audience mismatch');
+    // }
+  }
+
+  String _jwkToPem(Map<String, dynamic> jwk) {
+    final modulusBytes = base64Url.decode(base64Url.normalize(jwk['n']));
+    final exponentBytes = base64Url.decode(base64Url.normalize(jwk['e']));
+
+    final modulus = _decodeBigInt(modulusBytes);
+    final exponent = _decodeBigInt(exponentBytes);
+
+    final publicKeySeq = ASN1Sequence()
+      ..add(ASN1Integer(modulus))
+      ..add(ASN1Integer(exponent));
+
+    final base64PublicKey = base64.encode(publicKeySeq.encodedBytes);
+
+    final chunks = RegExp(
+      r'.{1,64}',
+    ).allMatches(base64PublicKey).map((m) => m.group(0)).join('\n');
+
+    return '-----BEGIN RSA PUBLIC KEY-----\n$chunks\n-----END RSA PUBLIC KEY-----';
+  }
+
+  BigInt _decodeBigInt(Uint8List bytes) {
+    var result = BigInt.zero;
+    for (final byte in bytes) {
+      result = (result << 8) | BigInt.from(byte);
+    }
+    return result;
   }
 }

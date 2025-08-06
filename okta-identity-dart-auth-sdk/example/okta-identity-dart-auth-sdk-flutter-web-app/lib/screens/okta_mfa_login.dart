@@ -57,7 +57,7 @@ class _OktaLoginPageState extends State<OktaLoginPage> {
   Future<void> _handleCallback() async {
     final uri = Uri.parse(html.window.location.href);
     final code = uri.queryParameters['code'];
-    final state = uri.queryParameters['state'];
+    // final state = uri.queryParameters['state'];
 
     if (code == null) {
       setState(() => _error = 'Authorization code not found.');

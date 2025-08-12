@@ -1,5 +1,5 @@
 @JS()
-library google_auth_web;
+library;
 
 import 'dart:async';
 import 'package:js/js.dart';
@@ -24,8 +24,7 @@ Future<String> fetchGoogleToken() async {
 
   initialize(
     InitOptions(
-      client_id:
-          '727324779430-rljtatkjhd10o0avi9pfu7ple0d86h8o.apps.googleusercontent.com', // replace this
+      client_id: '**google_web_login.dart**', // replace this
       callback: allowInterop((response) {
         final dynamic credential = response['credential']; // safe cast
         if (credential != null) {

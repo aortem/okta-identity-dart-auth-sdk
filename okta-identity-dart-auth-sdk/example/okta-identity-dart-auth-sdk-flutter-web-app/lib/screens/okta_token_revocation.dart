@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 class OktaTokenRevocationScreen extends StatefulWidget {
-  const OktaTokenRevocationScreen({Key? key}) : super(key: key);
+  const OktaTokenRevocationScreen({super.key});
 
   @override
   State<OktaTokenRevocationScreen> createState() =>

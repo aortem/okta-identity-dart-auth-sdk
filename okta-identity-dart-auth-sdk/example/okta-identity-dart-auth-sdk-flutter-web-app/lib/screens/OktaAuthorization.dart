@@ -3,7 +3,7 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'dart:html' as html;
 
 class OktaAuthScreen extends StatefulWidget {
-  const OktaAuthScreen({Key? key}) : super(key: key);
+  const OktaAuthScreen({super.key});
 
   @override
   State<OktaAuthScreen> createState() => _OktaAuthScreenState();

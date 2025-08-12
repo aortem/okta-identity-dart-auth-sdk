@@ -42,6 +42,8 @@ dependencies:
   google_sign_in: ^7.1.1
   js: ^0.6.7
 
+  crypto: any
+  http: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

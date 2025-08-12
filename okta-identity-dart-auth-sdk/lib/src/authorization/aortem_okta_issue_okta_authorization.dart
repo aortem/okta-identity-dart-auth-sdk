@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// Handles Okta authorization flows using OpenID Connect protocol.
+/// Handles OktaIdentity authorization flows using OpenID Connect protocol.
 ///
 /// This class provides methods for:
 /// - Constructing authorization URLs for user redirection
@@ -11,15 +11,15 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 ///
 /// Supports both public clients (without client secret) and confidential clients
 /// (with client secret).
-class OktaAuthorization {
-  /// The client ID registered in your Okta application
+class OktaIdentityAuthorization {
+  /// The client ID registered in your OktaIdentity application
   final String clientId;
 
-  /// The redirect URI registered in your Okta application
+  /// The redirect URI registered in your OktaIdentity application
   final String redirectUri;
 
-  /// The base domain of your Okta organization (e.g. 'your-domain.okta.com')
-  final String oktaDomain;
+  /// The base domain of your OktaIdentity organization (e.g. 'your-domain.okta.com')
+  final String oktaIdentityDomain;
 
   /// The client secret for confidential clients (optional for public clients)
   final String? clientSecret;
@@ -27,25 +27,25 @@ class OktaAuthorization {
   /// The HTTP client used for making requests
   final http.Client _httpClient;
 
-  /// Creates an instance of [OktaAuthorization].
+  /// Creates an instance of [OktaIdentityAuthorization].
   ///
   /// Required parameters:
-  /// - [clientId]: Your Okta application's client ID
+  /// - [clientId]: Your OktaIdentity application's client ID
   /// - [redirectUri]: The registered redirect URI
-  /// - [oktaDomain]: Your Okta organization domain
+  /// - [oktaIdentityDomain]: Your OktaIdentity organization domain
   ///
   /// Optional parameters:
   /// - [clientSecret]: Required for confidential clients
   /// - [httpClient]: Custom HTTP client (defaults to standard [http.Client])
-  OktaAuthorization({
+  OktaIdentityAuthorization({
     required this.clientId,
     required this.redirectUri,
-    required this.oktaDomain,
+    required this.oktaIdentityDomain,
     this.clientSecret,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
 
-  /// Constructs an authorization URL for redirecting users to Okta login.
+  /// Constructs an authorization URL for redirecting users to OktaIdentity login.
   ///
   /// Uses a consumer pattern to allow customization of OAuth parameters while
   /// ensuring required fields are present. Default parameters include:
@@ -54,10 +54,10 @@ class OktaAuthorization {
   ///
   /// Example:
   /// ```dart
-  /// final auth = OktaAuthorization(
+  /// final auth = OktaIdentityAuthorization(
   ///   clientId: 'your_client_id',
   ///   redirectUri: 'com.example.app:/callback',
-  ///   oktaDomain: 'your-domain.okta.com',
+  ///   oktaIdentityDomain: 'your-domain.okta.com',
   /// );
   ///
   /// final url = auth.authorizeApplication((params) {
@@ -89,7 +89,7 @@ class OktaAuthorization {
       }
     }
 
-    return Uri.https(oktaDomain, '/oauth2/v1/authorize', params);
+    return Uri.https(oktaIdentityDomain, '/oauth2/v1/authorize', params);
   }
 
   /// Exchanges an authorization code for tokens using the token endpoint.
@@ -131,7 +131,7 @@ class OktaAuthorization {
       throw ArgumentError('Missing required field: code');
     }
 
-    final uri = Uri.https(oktaDomain, '/oauth2/v1/token');
+    final uri = Uri.https(oktaIdentityDomain, '/oauth2/v1/token');
 
     try {
       final response = await _httpClient.post(

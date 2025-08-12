@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-class OktaUtilityScreen extends StatefulWidget {
-  const OktaUtilityScreen({super.key});
+class OktaIdentityUtilityScreen extends StatefulWidget {
+  const OktaIdentityUtilityScreen({super.key});
 
   @override
-  State<OktaUtilityScreen> createState() => _OktaUtilityScreenState();
+  State<OktaIdentityUtilityScreen> createState() =>
+      _OktaIdentityUtilityScreenState();
 }
 
-class _OktaUtilityScreenState extends State<OktaUtilityScreen> {
-  final okta = OktaUtilityMethods(
-    oktaDomain: 'https://dev-123456.okta.com', // Replace with your Okta domain
+class _OktaIdentityUtilityScreenState extends State<OktaIdentityUtilityScreen> {
+  final okta = OktaIdentityUtilityMethods(
+    oktaIdentityDomain:
+        'https://dev-123456.okta.com', // Replace with your OktaIdentity domain
     apiToken: 'yourApiToken', // Replace with your API token
   );
 
@@ -62,7 +64,7 @@ class _OktaUtilityScreenState extends State<OktaUtilityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Utility Methods UI')),
+      appBar: AppBar(title: const Text('OktaIdentity Utility Methods UI')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(

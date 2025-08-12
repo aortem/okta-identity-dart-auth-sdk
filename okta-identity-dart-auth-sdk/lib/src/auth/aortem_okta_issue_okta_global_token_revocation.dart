@@ -17,12 +17,12 @@ import '../exception/aortem_okta_issue_missing_token_exception.dart';
 ///
 /// Example Usage:
 /// ```dart
-/// final builder = OktaTokenRevocationPayloadBuilder()
+/// final builder = OktaIdentityTokenRevocationPayloadBuilder()
 ///   ..setToken('eyJhbGciOiJSUzI1NiIs...')
 ///   ..setTokenTypeHint('refresh_token');
 /// final payload = builder.build();
 /// ```
-class OktaTokenRevocationPayloadBuilder {
+class OktaIdentityTokenRevocationPayloadBuilder {
   /// The token to be revoked (required)
   String? token;
 
@@ -68,7 +68,7 @@ class OktaTokenRevocationPayloadBuilder {
   }
 }
 
-/// Provides global token revocation functionality for Okta OAuth 2.0 tokens.
+/// Provides global token revocation functionality for OktaIdentity OAuth 2.0 tokens.
 ///
 /// This class implements the OAuth 2.0 Token Revocation (RFC 7009) specification
 /// to programmatically revoke tokens across all sessions and devices.
@@ -84,13 +84,13 @@ class OktaTokenRevocationPayloadBuilder {
 /// - Requires proper client credentials
 /// - Should only be used with HTTPS connections
 /// - Tokens are immediately invalidated globally
-class OktaGlobalTokenRevocationConsumer {
-  /// The base domain of the Okta organization
+class OktaIdentityGlobalTokenRevocationConsumer {
+  /// The base domain of the OktaIdentity organization
   ///
   /// Example: 'your-org.okta.com'
-  final String oktaDomain;
+  final String oktaIdentityDomain;
 
-  /// The client ID registered in your Okta application
+  /// The client ID registered in your OktaIdentity application
   final String clientId;
 
   /// The client secret for confidential clients
@@ -104,8 +104,8 @@ class OktaGlobalTokenRevocationConsumer {
   /// Creates a new token revocation consumer instance.
   ///
   /// Required Parameters:
-  /// - [oktaDomain]: Your Okta organization's domain (e.g., 'your-org.okta.com')
-  /// - [clientId]: The client ID of your registered Okta application
+  /// - [oktaIdentityDomain]: Your OktaIdentity organization's domain (e.g., 'your-org.okta.com')
+  /// - [clientId]: The client ID of your registered OktaIdentity application
   ///
   /// Optional Parameters:
   /// - [clientSecret]: Required for confidential clients (default: null)
@@ -113,14 +113,14 @@ class OktaGlobalTokenRevocationConsumer {
   ///
   /// Example:
   /// ```dart
-  /// final revoker = OktaGlobalTokenRevocationConsumer(
-  ///   oktaDomain: 'your-org.okta.com',
+  /// final revoker = OktaIdentityGlobalTokenRevocationConsumer(
+  ///   oktaIdentityDomain: 'your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   clientSecret: 'your-secret-here',
   /// );
   /// ```
-  OktaGlobalTokenRevocationConsumer({
-    required this.oktaDomain,
+  OktaIdentityGlobalTokenRevocationConsumer({
+    required this.oktaIdentityDomain,
     required this.clientId,
     this.clientSecret,
     http.Client? httpClient,
@@ -131,7 +131,7 @@ class OktaGlobalTokenRevocationConsumer {
   /// This method performs the following operations:
   /// 1. Constructs the revocation payload using the builder pattern
   /// 2. Validates all required fields
-  /// 3. Sends the revocation request to Okta's OAuth 2.0 revocation endpoint
+  /// 3. Sends the revocation request to OktaIdentity's OAuth 2.0 revocation endpoint
   /// 4. Verifies the response status
   ///
   /// Parameters:
@@ -142,7 +142,7 @@ class OktaGlobalTokenRevocationConsumer {
   ///
   /// Throws:
   /// - [MissingTokenFieldException] if token is not provided
-  /// - [OktaRevocationException] if the API request fails
+  /// - [OktaIdentityRevocationException] if the API request fails
   ///
   /// Example:
   /// ```dart
@@ -154,11 +154,11 @@ class OktaGlobalTokenRevocationConsumer {
   /// );
   /// ```
   Future<void> revokeToken({
-    required void Function(OktaTokenRevocationPayloadBuilder builder)
+    required void Function(OktaIdentityTokenRevocationPayloadBuilder builder)
     buildPayload,
   }) async {
     // Create and configure the payload builder
-    final builder = OktaTokenRevocationPayloadBuilder();
+    final builder = OktaIdentityTokenRevocationPayloadBuilder();
     buildPayload(builder);
     final payload = builder.build();
 
@@ -170,7 +170,7 @@ class OktaGlobalTokenRevocationConsumer {
     };
 
     // Construct the revocation endpoint URI
-    final uri = Uri.parse('$oktaDomain/oauth2/default/v1/revoke');
+    final uri = Uri.parse('$oktaIdentityDomain/oauth2/default/v1/revoke');
 
     // Execute the revocation request
     final response = await _httpClient.post(
@@ -181,7 +181,7 @@ class OktaGlobalTokenRevocationConsumer {
 
     // Validate the response
     if (response.statusCode != 200) {
-      throw OktaRevocationException(
+      throw OktaIdentityRevocationException(
         'Failed to revoke token. Status code: ${response.statusCode}, Body: ${response.body}',
       );
     }

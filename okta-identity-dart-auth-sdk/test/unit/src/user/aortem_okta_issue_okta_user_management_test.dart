@@ -3,12 +3,12 @@ import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_okta
 import 'package:okta_identity_dart_auth_sdk/src/user/aortem_okta_issue_okta_user_management.dart';
 
 void main() {
-  group('OktaUserManagementConsumer', () {
-    late OktaUserManagementConsumer consumer;
+  group('OktaIdentityUserManagementConsumer', () {
+    late OktaIdentityUserManagementConsumer consumer;
 
     setUp(() {
-      consumer = OktaUserManagementConsumer(
-        oktaDomain: 'https://mock.okta.com',
+      consumer = OktaIdentityUserManagementConsumer(
+        oktaIdentityDomain: 'https://mock.okta.com',
         apiToken: 'dummy-token',
       );
     });
@@ -27,9 +27,9 @@ void main() {
       },
     );
 
-    test('signUp - bad request throws OktaApiException', () async {
-      final badConsumer = OktaUserManagementConsumer(
-        oktaDomain: 'https://mock.okta.com',
+    test('signUp - bad request throws OktaIdentityApiException', () async {
+      final badConsumer = OktaIdentityUserManagementConsumer(
+        oktaIdentityDomain: 'https://mock.okta.com',
         apiToken: 'dummy-token',
       );
 

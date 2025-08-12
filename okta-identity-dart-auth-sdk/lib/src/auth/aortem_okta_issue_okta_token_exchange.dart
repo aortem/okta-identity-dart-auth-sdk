@@ -2,40 +2,40 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// A consumer-style class to handle OAuth 2.0 token exchange and refresh operations with Okta.
+/// A consumer-style class to handle OAuth 2.0 token exchange and refresh operations with OktaIdentity.
 ///
 /// This class implements the OAuth 2.0 token endpoint for:
 /// - Authorization code exchange (for code flow)
 /// - Refresh token requests
-/// - Other OAuth 2.0 grant types supported by Okta
+/// - Other OAuth 2.0 grant types supported by OktaIdentity
 ///
 /// The consumer pattern allows flexible configuration of token requests while
 /// maintaining required parameters and validation.
-class OktaTokenExchangeConsumer {
-  /// The base domain URL of the Okta authorization server
+class OktaIdentityTokenExchangeConsumer {
+  /// The base domain URL of the OktaIdentity authorization server
   /// (e.g., 'https://your-org.okta.com')
-  final String oktaDomain;
+  final String oktaIdentityDomain;
 
-  /// The client ID of the OAuth application registered in Okta
+  /// The client ID of the OAuth application registered in OktaIdentity
   final String clientId;
 
   /// The client secret (required for confidential clients, optional for public clients)
   final String? clientSecret;
 
-  /// The redirect URI registered in the Okta application
+  /// The redirect URI registered in the OktaIdentity application
   final String redirectUri;
 
-  /// Creates an instance of [OktaTokenExchangeConsumer].
+  /// Creates an instance of [OktaIdentityTokenExchangeConsumer].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base URL of your Okta organization
-  /// - [clientId]: The client ID of your Okta OAuth application
-  /// - [redirectUri]: The redirect URI registered in your Okta application
+  /// - [oktaIdentityDomain]: The base URL of your OktaIdentity organization
+  /// - [clientId]: The client ID of your OktaIdentity OAuth application
+  /// - [redirectUri]: The redirect URI registered in your OktaIdentity application
   ///
   /// Optional parameter:
   /// - [clientSecret]: The client secret for confidential clients
-  OktaTokenExchangeConsumer({
-    required this.oktaDomain,
+  OktaIdentityTokenExchangeConsumer({
+    required this.oktaIdentityDomain,
     required this.clientId,
     required this.redirectUri,
     this.clientSecret,
@@ -57,8 +57,8 @@ class OktaTokenExchangeConsumer {
   ///
   /// Example usage for authorization code exchange:
   /// ```dart
-  /// final tokenExchange = OktaTokenExchangeConsumer(
-  ///   oktaDomain: 'https://your-org.okta.com',
+  /// final tokenExchange = OktaIdentityTokenExchangeConsumer(
+  ///   oktaIdentityDomain: 'https://your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   redirectUri: 'com.example.app:/callback',
   /// );
@@ -120,7 +120,7 @@ class OktaTokenExchangeConsumer {
       );
     }
 
-    final uri = Uri.parse('$oktaDomain/oauth2/default/v1/token');
+    final uri = Uri.parse('$oktaIdentityDomain/oauth2/default/v1/token');
 
     try {
       final response = await http.post(

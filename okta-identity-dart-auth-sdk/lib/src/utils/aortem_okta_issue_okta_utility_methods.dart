@@ -2,25 +2,28 @@ import 'dart:convert';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// Provides utility methods for interacting with Okta APIs
+/// Provides utility methods for interacting with OktaIdentity APIs
 /// Handles common operations like generating sign-in links and managing delegated access
-class OktaUtilityMethods {
-  /// The base domain of the Okta organization (e.g. 'https://your-org.okta.com')
-  final String oktaDomain;
+class OktaIdentityUtilityMethods {
+  /// The base domain of the OktaIdentity organization (e.g. 'https://your-org.okta.com')
+  final String oktaIdentityDomain;
 
-  /// The API token used for authenticating with Okta's APIs
+  /// The API token used for authenticating with OktaIdentity's APIs
   final String apiToken;
 
-  /// Creates an instance of OktaUtilityMethods
+  /// Creates an instance of OktaIdentityUtilityMethods
   ///
-  /// @param oktaDomain The base URL of your Okta organization
+  /// @param oktaIdentityDomain The base URL of your OktaIdentity organization
   /// @param apiToken A valid API token with necessary permissions
-  OktaUtilityMethods({required this.oktaDomain, required this.apiToken});
+  OktaIdentityUtilityMethods({
+    required this.oktaIdentityDomain,
+    required this.apiToken,
+  });
 
   /// Generates a sign-in URL for OAuth 2.0 authorization code flow
   ///
-  /// @param redirectUri The URI where Okta should redirect after authentication
-  /// @param clientId The client ID of your Okta OAuth application
+  /// @param redirectUri The URI where OktaIdentity should redirect after authentication
+  /// @param clientId The client ID of your OktaIdentity OAuth application
   /// @return Future<String> containing the sign-in URL
   /// @throws Exception if the request fails or response is invalid
   Future<String> getSignInLink({
@@ -35,10 +38,10 @@ class OktaUtilityMethods {
       'scope': 'openid profile email', // Default scopes for OpenID Connect
     };
 
-    // Send request to Okta's authorization endpoint
+    // Send request to OktaIdentity's authorization endpoint
     final response = await _sendRequest(
       'POST',
-      Uri.parse('$oktaDomain/oauth2/v1/authorize'),
+      Uri.parse('$oktaIdentityDomain/oauth2/v1/authorize'),
       body: jsonEncode(requestBody),
     );
 
@@ -46,10 +49,10 @@ class OktaUtilityMethods {
     return response['sign_in_url'];
   }
 
-  /// Accepts a delegated access request in Okta
+  /// Accepts a delegated access request in OktaIdentity
   ///
   /// @param requestId The ID of the delegated access request to accept
-  /// @return Future<Map<String, dynamic>> containing the response from Okta
+  /// @return Future<Map<String, dynamic>> containing the response from OktaIdentity
   /// @throws Exception if the request fails or response is invalid
   Future<Map<String, dynamic>> acceptDelegatedRequest({
     required String requestId,
@@ -60,17 +63,19 @@ class OktaUtilityMethods {
       'action': 'accept', // Action to accept the delegated request
     };
 
-    // Send request to Okta's delegated requests endpoint
+    // Send request to OktaIdentity's delegated requests endpoint
     final response = await _sendRequest(
       'POST',
-      Uri.parse('$oktaDomain/api/v1/delegatedRequests/$requestId/accept'),
+      Uri.parse(
+        '$oktaIdentityDomain/api/v1/delegatedRequests/$requestId/accept',
+      ),
       body: jsonEncode(requestBody),
     );
 
     return response;
   }
 
-  /// Internal helper method to send authenticated HTTP requests to Okta
+  /// Internal helper method to send authenticated HTTP requests to OktaIdentity
   ///
   /// @param method The HTTP method ('GET' or 'POST')
   /// @param url The full URL to request

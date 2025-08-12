@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'dart:html' as html;
 
-class OktaLogoutScreen extends StatefulWidget {
-  const OktaLogoutScreen({super.key});
+class OktaIdentityLogoutScreen extends StatefulWidget {
+  const OktaIdentityLogoutScreen({super.key});
 
   @override
-  State<OktaLogoutScreen> createState() => _OktaLogoutScreenState();
+  State<OktaIdentityLogoutScreen> createState() =>
+      _OktaIdentityLogoutScreenState();
 }
 
-class _OktaLogoutScreenState extends State<OktaLogoutScreen> {
+class _OktaIdentityLogoutScreenState extends State<OktaIdentityLogoutScreen> {
   String _message = "Click the button below to logout.";
   bool _isLoading = false;
 
@@ -19,8 +20,9 @@ class _OktaLogoutScreenState extends State<OktaLogoutScreen> {
       _message = "Processing logout...";
     });
 
-    final logoutConsumer = OktaOidcLogoutConsumer(
-      oktaDomain: 'https://dev-07140130.okta.com', // Replace with your domain
+    final logoutConsumer = OktaIdentityOidcLogoutConsumer(
+      oktaIdentityDomain:
+          'https://dev-07140130.okta.com', // Replace with your domain
       clientId: '0oaplfz1eaN0o0DLU5d7', // Replace with your Client ID
       postLogoutRedirectUri: 'http://localhost:8080',
     );
@@ -48,7 +50,7 @@ class _OktaLogoutScreenState extends State<OktaLogoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta OIDC Logout')),
+      appBar: AppBar(title: const Text('OktaIdentity OIDC Logout')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -61,7 +63,7 @@ class _OktaLogoutScreenState extends State<OktaLogoutScreen> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _performLogout,
-                      child: const Text("Logout from Okta"),
+                      child: const Text("Logout from OktaIdentity"),
                     ),
                   ],
                 ),

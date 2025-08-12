@@ -10,7 +10,7 @@ class IdpSsoTestScreen extends StatefulWidget {
 }
 
 class _IdpSsoTestScreenState extends State<IdpSsoTestScreen> {
-  final _oktaDomain = 'dev-123456.okta.com'; // Replace with your domain
+  final _oktaIdentityDomain = 'dev-123456.okta.com'; // Replace with your domain
   final _clientId = '0oaplfz1eaN0o0DLU5d7'; // Replace with your clientId
   final _relayState =
       'https://localhost:8080/callback'; // Can be app link or URL
@@ -20,8 +20,8 @@ class _IdpSsoTestScreenState extends State<IdpSsoTestScreen> {
 
   void _buildSsoUrl() {
     try {
-      final sso = OktaIdpInitiatedSSO(
-        oktaDomain: _oktaDomain,
+      final sso = OktaIdentityIdpInitiatedSSO(
+        oktaIdentityDomain: _oktaIdentityDomain,
         clientId: _clientId,
         defaultRelayState: _relayState,
       );

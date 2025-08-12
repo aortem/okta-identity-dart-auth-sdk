@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-class OktaSocialLoginScreen extends StatefulWidget {
-  const OktaSocialLoginScreen({super.key});
+class OktaIdentitySocialLoginScreen extends StatefulWidget {
+  const OktaIdentitySocialLoginScreen({super.key});
 
   @override
-  State<OktaSocialLoginScreen> createState() => _OktaSocialLoginScreenState();
+  State<OktaIdentitySocialLoginScreen> createState() =>
+      _OktaIdentitySocialLoginScreenState();
 }
 
-class _OktaSocialLoginScreenState extends State<OktaSocialLoginScreen> {
+class _OktaIdentitySocialLoginScreenState
+    extends State<OktaIdentitySocialLoginScreen> {
   String result = '';
   bool isLoading = false;
 
@@ -18,8 +20,8 @@ class _OktaSocialLoginScreenState extends State<OktaSocialLoginScreen> {
       result = '';
     });
 
-    final socialLoginConsumer = OktaSocialLoginConsumer(
-      oktaDomain: 'https://dev-07140130.okta.com',
+    final socialLoginConsumer = OktaIdentitySocialLoginConsumer(
+      oktaIdentityDomain: 'https://dev-07140130.okta.com',
       clientId: '0oaplfz1eaN0o0DLU5d7',
       redirectUri: 'http://localhost:8080/callback',
     );
@@ -46,14 +48,14 @@ class _OktaSocialLoginScreenState extends State<OktaSocialLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Social Login Demo')),
+      appBar: AppBar(title: const Text('OktaIdentity Social Login Demo')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Click below to simulate Google Sign-In with Okta SDK',
+              'Click below to simulate Google Sign-In with OktaIdentity SDK',
               style: TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),

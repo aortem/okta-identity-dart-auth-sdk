@@ -1,13 +1,13 @@
-/// Exception thrown when the Okta API returns an error during token revocation.
+/// Exception thrown when the OktaIdentity API returns an error during token revocation.
 ///
-/// This exception wraps error responses from Okta's token revocation endpoint.
-class OktaRevocationException implements Exception {
+/// This exception wraps error responses from OktaIdentity's token revocation endpoint.
+class OktaIdentityRevocationException implements Exception {
   /// The error message from the API response
   final String message;
 
-  /// Creates an [OktaRevocationException] with the given [message]
-  OktaRevocationException(this.message);
+  /// Creates an [OktaIdentityRevocationException] with the given [message]
+  OktaIdentityRevocationException(this.message);
 
   @override
-  String toString() => 'OktaRevocationException: $message';
+  String toString() => 'OktaIdentityRevocationException: $message';
 }

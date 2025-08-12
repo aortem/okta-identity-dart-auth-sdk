@@ -1,8 +1,8 @@
-/// Represents the token response received from Okta's OAuth2 token endpoint.
+/// Represents the token response received from OktaIdentity's OAuth2 token endpoint.
 ///
 /// Contains the authentication tokens and metadata returned after a successful
 /// username/password authentication.
-class OktaTokenResponse {
+class OktaIdentityTokenResponse {
   /// The access token used to authenticate API requests.
   final String accessToken;
 
@@ -18,8 +18,8 @@ class OktaTokenResponse {
   /// The type of token returned (typically 'Bearer').
   final String tokenType;
 
-  /// Creates an instance of [OktaTokenResponse] with the given token values.
-  OktaTokenResponse({
+  /// Creates an instance of [OktaIdentityTokenResponse] with the given token values.
+  OktaIdentityTokenResponse({
     required this.accessToken,
     this.idToken,
     this.refreshToken,
@@ -28,8 +28,8 @@ class OktaTokenResponse {
   });
 
   /// Creates an instance from a JSON map.
-  factory OktaTokenResponse.fromJson(Map<String, dynamic> json) {
-    return OktaTokenResponse(
+  factory OktaIdentityTokenResponse.fromJson(Map<String, dynamic> json) {
+    return OktaIdentityTokenResponse(
       accessToken: json['access_token'],
       idToken: json['id_token'],
       refreshToken: json['refresh_token'],

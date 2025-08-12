@@ -6,14 +6,14 @@ import 'package:http/testing.dart';
 import 'dart:convert';
 
 void main() {
-  group('OktaAuthorization', () {
-    const oktaDomain = 'example.okta.com';
+  group('OktaIdentityAuthorization', () {
+    const oktaIdentityDomain = 'example.okta.com';
     const clientId = 'test-client-id';
     const redirectUri = 'https://myapp.com/callback';
 
     test('constructs correct authorization URL', () {
-      final auth = OktaAuthorization(
-        oktaDomain: oktaDomain,
+      final auth = OktaIdentityAuthorization(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         redirectUri: redirectUri,
       );
@@ -26,7 +26,7 @@ void main() {
 
       expect(
         url.toString(),
-        contains('https://$oktaDomain/oauth2/v1/authorize'),
+        contains('https://$oktaIdentityDomain/oauth2/v1/authorize'),
       );
       expect(url.queryParameters['client_id'], equals(clientId));
       expect(url.queryParameters['redirect_uri'], equals(redirectUri));
@@ -38,8 +38,8 @@ void main() {
     test(
       'throws ArgumentError if required fields are missing in URL construction',
       () {
-        final auth = OktaAuthorization(
-          oktaDomain: oktaDomain,
+        final auth = OktaIdentityAuthorization(
+          oktaIdentityDomain: oktaIdentityDomain,
           clientId: clientId,
           redirectUri: redirectUri,
         );
@@ -73,8 +73,8 @@ void main() {
         );
       });
 
-      final auth = OktaAuthorization(
-        oktaDomain: oktaDomain,
+      final auth = OktaIdentityAuthorization(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         redirectUri: redirectUri,
         httpClient: mockClient,
@@ -94,8 +94,8 @@ void main() {
         return http.Response('Invalid request', 400);
       });
 
-      final auth = OktaAuthorization(
-        oktaDomain: oktaDomain,
+      final auth = OktaIdentityAuthorization(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         redirectUri: redirectUri,
         httpClient: mockClient,

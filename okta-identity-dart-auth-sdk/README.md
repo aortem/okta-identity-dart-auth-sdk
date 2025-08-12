@@ -1,29 +1,29 @@
-# Okta Identity Dart Auth SDK
+# OktaIdentity Identity Dart Auth SDK
 
 ## Overview
 
-The **Okta Identity Dart Auth SDK** provides a lightweight, idiomatic Dart/Flutter toolkit for implementing Okta OIDC authentication flows. It helps you:
+The **OktaIdentity Identity Dart Auth SDK** provides a lightweight, idiomatic Dart/Flutter toolkit for implementing OktaIdentity OIDC authentication flows. It helps you:
 
 * Build `/authorize` requests (PKCE).
 * Exchange authorization codes and refresh tokens.
 * Perform **Resource Owner Password** (ROPC) logins when appropriate.
 * Validate ID tokens (JWKS, signature & claims).
-* Handle common Okta/OIDC errors in a consistent way.
+* Handle common OktaIdentity/OIDC errors in a consistent way.
 
-This package wraps the Okta OAuth2/OpenID Connect endpoints and includes helpers for PKCE, token handling, and validation.
+This package wraps the OktaIdentity OAuth2/OpenID Connect endpoints and includes helpers for PKCE, token handling, and validation.
 
 ## Features
 
-* **Authorization Code + PKCE**: Generate a PKCE pair, redirect to Okta, and exchange the returned code for tokens.
+* **Authorization Code + PKCE**: Generate a PKCE pair, redirect to OktaIdentity, and exchange the returned code for tokens.
 * **ROPC Login**: First-party/password flows for trusted apps (server-side or enterprise scenarios).
 * **Token Exchange & Refresh**: Swap an auth code for tokens, refresh access/ID tokens.
-* **ID Token Validation**: Validate signature and claims against Okta’s JWKS.
+* **ID Token Validation**: Validate signature and claims against OktaIdentity’s JWKS.
 * **Typed Errors**: Consistent exceptions for request and auth failures.
 
 ## Getting Started
 
 * Dart SDK **3.8.x** (or compatible Flutter).
-* An **Okta Developer Org** and an **OIDC app integration** (Client ID, Redirect URI, Issuer/Domain).
+* An **OktaIdentity Developer Org** and an **OIDC app integration** (Client ID, Redirect URI, Issuer/Domain).
 * (Optional) A **client secret** if your app is *confidential* (server-side). Don’t embed client secrets in public/mobile apps.
 
 ## Installation
@@ -53,12 +53,12 @@ import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 ### 1) Configure the SDK
 
-Create a base configuration with your Okta details:
+Create a base configuration with your OktaIdentity details:
 
 ```dart
-// Create the Okta config for your app/org
-final config = OktaConfig(
-  oktaDomain: 'dev-12345678.okta.com',  // issuer host (no https://)
+// Create the OktaIdentity config for your app/org
+final config = OktaIdentityConfig(
+  oktaIdentityDomain: 'dev-12345678.okta.com',  // issuer host (no https://)
   clientId: 'YOUR_CLIENT_ID',
   redirectUri: 'https://yourapp.example.com/callback',
   scope: ['openid', 'profile', 'email', 'offline_access'],
@@ -66,10 +66,10 @@ final config = OktaConfig(
 );
 
 // Instantiate the base SDK
-final okta = OktaBaseSDK(config);
+final okta = OktaIdentityBaseSDK(config);
 ```
 
-> `oktaDomain` should be the hostname portion of your issuer (e.g. `dev-xxxxx.okta.com`). Your Okta app’s **Redirect URI** must exactly match what you pass here.
+> `oktaIdentityDomain` should be the hostname portion of your issuer (e.g. `dev-xxxxx.okta.com`). Your OktaIdentity app’s **Redirect URI** must exactly match what you pass here.
 
 ### 2) Authorization Code + PKCE (recommended)
 
@@ -81,8 +81,8 @@ final pkce = await okta.utils.generatePkcePair();
 // pkce.codeVerifier, pkce.codeChallenge
 
 // Build the /authorize URL for your login button/webview
-final auth = OktaAuthorization(
-  oktaDomain: config.oktaDomain,
+final auth = OktaIdentityAuthorization(
+  oktaIdentityDomain: config.oktaIdentityDomain,
   clientId: config.clientId,
   redirectUri: config.redirectUri,
 );
@@ -96,14 +96,14 @@ final authorizeUrl = auth.authorizeUrl(
 );
 
 // → Open `authorizeUrl` in a browser/webview.
-// → After consent/login, Okta will redirect back to `redirectUri` with `?code=...&state=...`
+// → After consent/login, OktaIdentity will redirect back to `redirectUri` with `?code=...&state=...`
 ```
 
 **b. Exchange the authorization code for tokens**
 
 ```dart
 // When your redirect/callback handler receives `code`:
-final tokenExchange = OktaTokenExchangeConsumer(okta);
+final tokenExchange = OktaIdentityTokenExchangeConsumer(okta);
 
 final tokens = await tokenExchange.exchangeToken((payload) async {
   payload['grant_type'] = 'authorization_code';
@@ -127,13 +127,13 @@ final refreshed = await tokenExchange.exchangeToken((payload) async {
 ### 3) Validate an ID Token
 
 ```dart
-final validator = OktaTokenValidator(okta);
+final validator = OktaIdentityTokenValidator(okta);
 
 // Throws if invalid signature/claims; returns decoded payload on success.
 final payload = await validator.validateToken(tokens.idToken);
 
 // Optionally validate custom claims too:
-validator.validateClaims(payload, expectedIssuer: 'https://${config.oktaDomain}/oauth2/default');
+validator.validateClaims(payload, expectedIssuer: 'https://${config.oktaIdentityDomain}/oauth2/default');
 ```
 
 ### 4) ROPC (Resource Owner Password) login (optional)
@@ -141,7 +141,7 @@ validator.validateClaims(payload, expectedIssuer: 'https://${config.oktaDomain}/
 Use for first-party, trusted apps only (typically server-side or enterprise environments). Not recommended for public/mobile clients.
 
 ```dart
-final ropc = OktaAuthLoginConsumer(okta);
+final ropc = OktaIdentityAuthLoginConsumer(okta);
 
 final ropcTokens = await ropc.signIn((payload) {
   payload['username'] = 'user@example.com';
@@ -159,10 +159,10 @@ Most network and OAuth errors are surfaced as typed exceptions:
 ```dart
 try {
   final payload = await validator.validateToken(tokens.idToken);
-} on OktaTokenValidationException catch (e) {
+} on OktaIdentityTokenValidationException catch (e) {
   // Signature/claims invalid, expired, wrong audience/issuer, etc.
-} on OktaRequestException catch (e) {
-  // HTTP/network issues or non-2xx responses from Okta
+} on OktaIdentityRequestException catch (e) {
+  // HTTP/network issues or non-2xx responses from OktaIdentity
 } catch (e) {
   // Other errors
 }
@@ -172,7 +172,7 @@ try {
 
 * **Never embed client secrets** in mobile or browser apps.
 * Prefer **Authorization Code + PKCE** for public clients.
-* Ensure your **Redirect URI** matches your Okta app config exactly.
+* Ensure your **Redirect URI** matches your OktaIdentity app config exactly.
 * Always **validate** ID tokens server-side for sensitive operations.
 
 ## Example Apps
@@ -181,12 +181,12 @@ The repository includes a Flutter Web example showing authorization, token excha
 
 ## API Surface (at a glance)
 
-* `OktaConfig` – Domain, clientId, redirectUri, scopes, optional clientSecret.
-* `OktaBaseSDK` – Root container that wires up helpers and utilities.
-* `OktaAuthorization` – Builds `/authorize` URLs (PKCE).
-* `OktaTokenExchangeConsumer` – Exchanges codes and refresh tokens.
-* `OktaAuthLoginConsumer` – ROPC login.
-* `OktaTokenValidator` – Fetches JWKS and validates ID tokens.
+* `OktaIdentityConfig` – Domain, clientId, redirectUri, scopes, optional clientSecret.
+* `OktaIdentityBaseSDK` – Root container that wires up helpers and utilities.
+* `OktaIdentityAuthorization` – Builds `/authorize` URLs (PKCE).
+* `OktaIdentityTokenExchangeConsumer` – Exchanges codes and refresh tokens.
+* `OktaIdentityAuthLoginConsumer` – ROPC login.
+* `OktaIdentityTokenValidator` – Fetches JWKS and validates ID tokens.
 * Exceptions in `exception/` – Request, validation, and auth-specific errors.
 * Utilities in `utils/` – PKCE helpers and common HTTP plumbing.
 

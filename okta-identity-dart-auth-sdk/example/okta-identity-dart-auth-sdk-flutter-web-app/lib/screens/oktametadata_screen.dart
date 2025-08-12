@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-class OktaMetadataScreen extends StatefulWidget {
-  const OktaMetadataScreen({super.key});
+class OktaIdentityMetadataScreen extends StatefulWidget {
+  const OktaIdentityMetadataScreen({super.key});
 
   @override
-  State<OktaMetadataScreen> createState() => _OktaMetadataScreenState();
+  State<OktaIdentityMetadataScreen> createState() =>
+      _OktaIdentityMetadataScreenState();
 }
 
-class _OktaMetadataScreenState extends State<OktaMetadataScreen> {
-  final _oktaDomain = 'dev-07140130.okta.com'; // <-- Update to your domain
+class _OktaIdentityMetadataScreenState
+    extends State<OktaIdentityMetadataScreen> {
+  final _oktaIdentityDomain =
+      'dev-07140130.okta.com'; // <-- Update to your domain
   Map<String, dynamic>? _metadata;
   String? _error;
   bool _isLoading = false;
@@ -22,7 +25,9 @@ class _OktaMetadataScreenState extends State<OktaMetadataScreen> {
     });
 
     try {
-      final oktaMetadata = OktaMetadata(oktaDomain: _oktaDomain);
+      final oktaMetadata = OktaIdentityMetadata(
+        oktaIdentityDomain: _oktaIdentityDomain,
+      );
       final data = await oktaMetadata.getMetadata();
 
       setState(() {
@@ -46,7 +51,7 @@ class _OktaMetadataScreenState extends State<OktaMetadataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('🔍 Okta Metadata Viewer')),
+      appBar: AppBar(title: const Text('🔍 OktaIdentity Metadata Viewer')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(

@@ -24,8 +24,9 @@ class _DynamicClientRegistrationScreenState
       _error = null;
     });
 
-    final registrar = OktaDynamicClientRegistration(
-      oktaDomain: 'dev-123456.okta.com', // Replace with your Okta domain
+    final registrar = OktaIdentityDynamicClientRegistration(
+      oktaIdentityDomain:
+          'dev-123456.okta.com', // Replace with your OktaIdentity domain
     );
 
     try {

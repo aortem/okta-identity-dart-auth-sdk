@@ -5,22 +5,24 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 
-class OktaAuthLoginScreen extends StatefulWidget {
-  const OktaAuthLoginScreen({super.key});
+class OktaIdentityAuthLoginScreen extends StatefulWidget {
+  const OktaIdentityAuthLoginScreen({super.key});
 
   @override
-  State<OktaAuthLoginScreen> createState() => _OktaAuthLoginScreenState();
+  State<OktaIdentityAuthLoginScreen> createState() =>
+      _OktaIdentityAuthLoginScreenState();
 }
 
-class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
+class _OktaIdentityAuthLoginScreenState
+    extends State<OktaIdentityAuthLoginScreen> {
   // final TextEditingController _usernameController = TextEditingController(
   //   text: 'developers@aortem.io',
   // );
   // final TextEditingController _passwordController = TextEditingController(
   //   text: 'Hello@1234',
   // );
-  // final _oktaDomain = 'https://dev-07140130.okta.com';
-  final _oktaDomain = 'dev-07140130.okta.com';
+  // final _oktaIdentityDomain = 'https://dev-07140130.okta.com';
+  final _oktaIdentityDomain = 'dev-07140130.okta.com';
   final _clientId = '0oaplfz1eaN0o0DLU5d7';
   final _redirectUri = 'http://localhost:8080/callback'; // match your okta app
 
@@ -62,8 +64,8 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
     if (uri.queryParameters.containsKey('code')) {
       setState(() => _result = "🔁 Handling callback...");
 
-      final tokenHandler = OktaTokenExchangeConsumer(
-        oktaDomain: _oktaDomain,
+      final tokenHandler = OktaIdentityTokenExchangeConsumer(
+        oktaIdentityDomain: _oktaIdentityDomain,
         clientId: _clientId,
         redirectUri: _redirectUri,
       );
@@ -94,8 +96,8 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
 
   Future<void> _startLogin() async {
     _generateAndStorePkcePair();
-    final authorize = OktaAuthorization(
-      oktaDomain: _oktaDomain,
+    final authorize = OktaIdentityAuthorization(
+      oktaIdentityDomain: _oktaIdentityDomain,
       clientId: _clientId,
       redirectUri: _redirectUri,
       // scopes: ['openid', 'profile', 'email'],
@@ -112,8 +114,8 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
   }
 
   Future<void> _logout() async {
-    final logoutConsumer = OktaOidcLogoutConsumer(
-      oktaDomain: _oktaDomain,
+    final logoutConsumer = OktaIdentityOidcLogoutConsumer(
+      oktaIdentityDomain: _oktaIdentityDomain,
       clientId: _clientId,
       postLogoutRedirectUri: _redirectUri,
     );
@@ -131,9 +133,9 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
 
   Future<void> _samlLogout() async {
     try {
-      final samlLogout = OktaSamlLogoutConsumer(
-        oktaDomain: 'https://dev-07140130.okta.com',
-        applicationId: '0oaplfz1eaN0o0DLU5d7', // Your Okta SAML App ID
+      final samlLogout = OktaIdentitySamlLogoutConsumer(
+        oktaIdentityDomain: 'https://dev-07140130.okta.com',
+        applicationId: '0oaplfz1eaN0o0DLU5d7', // Your OktaIdentity SAML App ID
         defaultRelayState:
             'http://localhost:8080/logout', // or another post-logout URL
       );
@@ -157,7 +159,7 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Auth Login')),
+      appBar: AppBar(title: const Text('OktaIdentity Auth Login')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -169,12 +171,12 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _startLogin,
-              child: const Text('🔐 Start Okta Login'),
+              child: const Text('🔐 Start OktaIdentity Login'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _logout,
-              child: const Text('🚪 Logout from Okta'),
+              child: const Text('🚪 Logout from OktaIdentity'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(

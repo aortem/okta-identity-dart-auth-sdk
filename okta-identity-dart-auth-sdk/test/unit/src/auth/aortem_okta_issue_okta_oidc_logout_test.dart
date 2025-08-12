@@ -17,14 +17,14 @@ class FakeHttpClient extends http.BaseClient {
 }
 
 void main() {
-  const oktaDomain = 'https://fake.okta.com';
+  const oktaIdentityDomain = 'https://fake.okta.com';
   const clientId = 'fake-client-id';
   const redirectUri = 'fake:/logout';
 
-  group('OktaOidcLogoutConsumer', () {
+  group('OktaIdentityOidcLogoutConsumer', () {
     test('returns logout Uri successfully', () async {
-      final consumer = OktaOidcLogoutConsumer(
-        oktaDomain: oktaDomain,
+      final consumer = OktaIdentityOidcLogoutConsumer(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,
         httpClient: FakeHttpClient(), // Simulated success response
@@ -47,8 +47,8 @@ void main() {
     });
 
     test('throws ArgumentError if required fields are missing', () async {
-      final consumer = OktaOidcLogoutConsumer(
-        oktaDomain: oktaDomain,
+      final consumer = OktaIdentityOidcLogoutConsumer(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,
         httpClient: FakeHttpClient(),
@@ -65,8 +65,8 @@ void main() {
     });
 
     test('throws Exception on HTTP failure response', () async {
-      final consumer = OktaOidcLogoutConsumer(
-        oktaDomain: oktaDomain,
+      final consumer = OktaIdentityOidcLogoutConsumer(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,
         httpClient: FakeHttpClient(

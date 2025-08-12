@@ -5,11 +5,11 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 import '../exception/aortem_okta_issue_okta_api_exception.dart';
 import '../exception/aortem_okta_issue_okta_missing_feild_exception.dart';
 
-/// Builder pattern class for constructing Okta user requests.
+/// Builder pattern class for constructing OktaIdentity user requests.
 ///
 /// Provides a fluent interface for setting user properties and credentials
-/// when creating or updating Okta user accounts.
-class OktaUserRequestBuilder {
+/// when creating or updating OktaIdentity user accounts.
+class OktaIdentityUserRequestBuilder {
   final Map<String, dynamic> _data = {
     'profile': {},
     'credentials': {'password': <String, dynamic>{}},
@@ -41,31 +41,31 @@ class OktaUserRequestBuilder {
   Map<String, dynamic> build() => _data;
 }
 
-/// Provides consumer-style user management operations for Okta.
+/// Provides consumer-style user management operations for OktaIdentity.
 ///
-/// This class implements Okta's User API with a consumer pattern for
+/// This class implements OktaIdentity's User API with a consumer pattern for
 /// flexible request building. Supports:
 /// - User registration
 /// - Profile retrieval
 /// - Password changes
-class OktaUserManagementConsumer {
-  /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
-  final String oktaDomain;
+class OktaIdentityUserManagementConsumer {
+  /// The base domain of the OktaIdentity organization (e.g., 'your-org.okta.com')
+  final String oktaIdentityDomain;
 
-  /// The Okta API token with user management permissions
+  /// The OktaIdentity API token with user management permissions
   final String apiToken;
 
-  /// Creates an [OktaUserManagementConsumer] instance.
+  /// Creates an [OktaIdentityUserManagementConsumer] instance.
   ///
   /// Required parameters:
-  /// - [oktaDomain]: Your Okta organization domain
+  /// - [oktaIdentityDomain]: Your OktaIdentity organization domain
   /// - [apiToken]: An API token with sufficient permissions
-  OktaUserManagementConsumer({
-    required this.oktaDomain,
+  OktaIdentityUserManagementConsumer({
+    required this.oktaIdentityDomain,
     required this.apiToken,
   });
 
-  /// Registers a new user with Okta using a consumer pattern.
+  /// Registers a new user with OktaIdentity using a consumer pattern.
   ///
   /// Example:
   /// ```dart
@@ -85,13 +85,13 @@ class OktaUserManagementConsumer {
   /// @param activate Whether to immediately activate the user (default: true)
   /// @return User profile data
   /// @throws MissingRequiredFieldException If email, login or password is missing
-  /// @throws OktaApiException If the API request fails
+  /// @throws OktaIdentityApiException If the API request fails
   Future<Map<String, dynamic>> signUp({
-    required FutureOr<void> Function(OktaUserRequestBuilder builder)
+    required FutureOr<void> Function(OktaIdentityUserRequestBuilder builder)
     buildPayload,
     bool activate = true,
   }) async {
-    final builder = OktaUserRequestBuilder();
+    final builder = OktaIdentityUserRequestBuilder();
     await buildPayload(builder);
     final payload = builder.build();
 
@@ -108,7 +108,9 @@ class OktaUserManagementConsumer {
       );
     }
 
-    final uri = Uri.parse('$oktaDomain/api/v1/users?activate=$activate');
+    final uri = Uri.parse(
+      '$oktaIdentityDomain/api/v1/users?activate=$activate',
+    );
     final response = await http.post(
       uri,
       headers: {
@@ -120,7 +122,7 @@ class OktaUserManagementConsumer {
     );
 
     if (response.statusCode >= 400) {
-      throw OktaApiException(response.statusCode, response.body);
+      throw OktaIdentityApiException(response.statusCode, response.body);
     }
 
     return jsonDecode(response.body) as Map<String, dynamic>;
@@ -128,15 +130,15 @@ class OktaUserManagementConsumer {
 
   /// Retrieves a user's profile by ID.
   ///
-  /// @param userId The Okta user ID
+  /// @param userId The OktaIdentity user ID
   /// @return User profile data
-  /// @throws OktaApiException If the API request fails
+  /// @throws OktaIdentityApiException If the API request fails
   Future<Map<String, dynamic>> getUserProfile(String userId) async {
-    final uri = Uri.parse('$oktaDomain/api/v1/users/$userId');
+    final uri = Uri.parse('$oktaIdentityDomain/api/v1/users/$userId');
     final response = await http.get(uri, headers: _headers());
 
     if (response.statusCode >= 400) {
-      throw OktaApiException(response.statusCode, response.body);
+      throw OktaIdentityApiException(response.statusCode, response.body);
     }
 
     return jsonDecode(response.body) as Map<String, dynamic>;
@@ -144,18 +146,18 @@ class OktaUserManagementConsumer {
 
   /// Changes a user's password.
   ///
-  /// @param userId The Okta user ID
+  /// @param userId The OktaIdentity user ID
   /// @param oldPassword The user's current password
   /// @param newPassword The desired new password
   /// @return Operation result
-  /// @throws OktaApiException If the API request fails
+  /// @throws OktaIdentityApiException If the API request fails
   Future<Map<String, dynamic>> changePassword({
     required String userId,
     required String oldPassword,
     required String newPassword,
   }) async {
     final uri = Uri.parse(
-      '$oktaDomain/api/v1/users/$userId/credentials/change_password',
+      '$oktaIdentityDomain/api/v1/users/$userId/credentials/change_password',
     );
 
     final body = {
@@ -170,7 +172,7 @@ class OktaUserManagementConsumer {
     );
 
     if (response.statusCode >= 400) {
-      throw OktaApiException(response.statusCode, response.body);
+      throw OktaIdentityApiException(response.statusCode, response.body);
     }
 
     return jsonDecode(response.body) as Map<String, dynamic>;

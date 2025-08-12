@@ -1,39 +1,39 @@
 import 'dart:async';
 
-/// A class to handle SAML 2.0 logout operations with Okta using a consumer pattern.
+/// A class to handle SAML 2.0 logout operations with OktaIdentity using a consumer pattern.
 ///
 /// This class implements the SAML Single Logout (SLO) flow to properly log users out
-/// of both the application and Okta session. It follows the SAML 2.0 Web Browser
+/// of both the application and OktaIdentity session. It follows the SAML 2.0 Web Browser
 /// Single Logout Profile.
 ///
 /// The consumer pattern allows flexible configuration of the SAML logout request
 /// while ensuring required parameters are present.
-class OktaSamlLogoutConsumer {
-  /// The base domain URL of the Okta organization
+class OktaIdentitySamlLogoutConsumer {
+  /// The base domain URL of the OktaIdentity organization
   /// (e.g., 'https://your-org.okta.com')
-  final String oktaDomain;
+  final String oktaIdentityDomain;
 
-  /// The ID of the SAML application in Okta
+  /// The ID of the SAML application in OktaIdentity
   final String applicationId;
 
   /// The default RelayState value to be included in logout requests
   final String defaultRelayState;
 
-  /// Creates an instance of [OktaSamlLogoutConsumer].
+  /// Creates an instance of [OktaIdentitySamlLogoutConsumer].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base URL of your Okta organization (must not be empty)
-  /// - [applicationId]: The ID of your SAML application in Okta (must not be empty)
+  /// - [oktaIdentityDomain]: The base URL of your OktaIdentity organization (must not be empty)
+  /// - [applicationId]: The ID of your SAML application in OktaIdentity (must not be empty)
   /// - [defaultRelayState]: The default RelayState value (must not be empty)
   ///
   /// Throws [ArgumentError] if any required parameters are empty.
-  OktaSamlLogoutConsumer({
-    required this.oktaDomain,
+  OktaIdentitySamlLogoutConsumer({
+    required this.oktaIdentityDomain,
     required this.applicationId,
     required this.defaultRelayState,
   }) {
-    if (oktaDomain.isEmpty) {
-      throw ArgumentError('Okta domain is required.');
+    if (oktaIdentityDomain.isEmpty) {
+      throw ArgumentError('OktaIdentity domain is required.');
     }
     if (applicationId.isEmpty) {
       throw ArgumentError('SAML application ID is required.');
@@ -58,8 +58,8 @@ class OktaSamlLogoutConsumer {
   ///
   /// Example usage:
   /// ```dart
-  /// final samlLogout = OktaSamlLogoutConsumer(
-  ///   oktaDomain: 'https://your-org.okta.com',
+  /// final samlLogout = OktaIdentitySamlLogoutConsumer(
+  ///   oktaIdentityDomain: 'https://your-org.okta.com',
   ///   applicationId: '0oa1a2b3c4d5e6f7g8h9',
   ///   defaultRelayState: 'https://yourapp.com/logout',
   /// );
@@ -103,7 +103,7 @@ class OktaSamlLogoutConsumer {
 
     // Construct the full SAML logout URL
     final logoutUrl =
-        '$oktaDomain/app/${Uri.encodeComponent(applicationId)}/slo/saml?$queryString';
+        '$oktaIdentityDomain/app/${Uri.encodeComponent(applicationId)}/slo/saml?$queryString';
 
     return logoutUrl;
   }

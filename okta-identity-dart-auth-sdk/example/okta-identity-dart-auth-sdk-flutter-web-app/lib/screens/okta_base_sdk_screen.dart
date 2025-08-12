@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-class OktaBaseSDKScreen extends StatefulWidget {
-  const OktaBaseSDKScreen({super.key});
+class OktaIdentityBaseSDKScreen extends StatefulWidget {
+  const OktaIdentityBaseSDKScreen({super.key});
 
   @override
-  State<OktaBaseSDKScreen> createState() => _OktaBaseSDKScreenState();
+  State<OktaIdentityBaseSDKScreen> createState() =>
+      _OktaIdentityBaseSDKScreenState();
 }
 
-class _OktaBaseSDKScreenState extends State<OktaBaseSDKScreen> {
-  late OktaBaseSDK _sdk;
+class _OktaIdentityBaseSDKScreenState extends State<OktaIdentityBaseSDKScreen> {
+  late OktaIdentityBaseSDK _sdk;
   String _status = 'Initializing...';
 
   @override
@@ -20,14 +21,14 @@ class _OktaBaseSDKScreenState extends State<OktaBaseSDKScreen> {
 
   void _initializeSdk() {
     try {
-      final config = OktaConfig(
-        oktaDomain: 'https://dev-07140130.okta.com',
+      final config = OktaIdentityConfig(
+        oktaIdentityDomain: 'https://dev-07140130.okta.com',
         clientId: '0oaplfz1eaN0o0DLU5d7',
         redirectUri: 'http://localhost:8080/callback',
         clientSecret: 'yourClientSecret',
       );
 
-      _sdk = OktaBaseSDK(config: config);
+      _sdk = OktaIdentityBaseSDK(config: config);
 
       setState(() {
         _status = 'SDK initialized successfully!';
@@ -48,7 +49,7 @@ class _OktaBaseSDKScreenState extends State<OktaBaseSDKScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Base SDK')),
+      appBar: AppBar(title: const Text('OktaIdentity Base SDK')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -57,7 +58,7 @@ class _OktaBaseSDKScreenState extends State<OktaBaseSDKScreen> {
             Text('Status: $_status', style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
             if (_status.contains('success')) ...[
-              Text('Okta Domain: ${_sdk.config.oktaDomain}'),
+              Text('OktaIdentity Domain: ${_sdk.config.oktaIdentityDomain}'),
               Text('Client ID: ${_sdk.config.clientId}'),
               Text('Redirect URI: ${_sdk.config.redirectUri}'),
             ],

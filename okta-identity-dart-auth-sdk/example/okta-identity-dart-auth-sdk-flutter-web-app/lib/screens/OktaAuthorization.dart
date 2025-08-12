@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'dart:html' as html;
 
-class OktaAuthScreen extends StatefulWidget {
-  const OktaAuthScreen({super.key});
+class OktaIdentityAuthScreen extends StatefulWidget {
+  const OktaIdentityAuthScreen({super.key});
 
   @override
-  State<OktaAuthScreen> createState() => _OktaAuthScreenState();
+  State<OktaIdentityAuthScreen> createState() => _OktaIdentityAuthScreenState();
 }
 
-class _OktaAuthScreenState extends State<OktaAuthScreen> {
-  late OktaAuthorization _auth;
+class _OktaIdentityAuthScreenState extends State<OktaIdentityAuthScreen> {
+  late OktaIdentityAuthorization _auth;
   String? _authUrl;
   String? _tokenResult;
   final String clientId = 'your-client-id';
-  final String oktaDomain = 'dev-123456.okta.com';
+  final String oktaIdentityDomain = 'dev-123456.okta.com';
   final String redirectUri =
       'http://localhost:1234/callback'; // Update for web origin
 
   @override
   void initState() {
     super.initState();
-    _auth = OktaAuthorization(
+    _auth = OktaIdentityAuthorization(
       clientId: clientId,
       redirectUri: redirectUri,
-      oktaDomain: oktaDomain,
+      oktaIdentityDomain: oktaIdentityDomain,
     );
   }
 
@@ -66,7 +66,7 @@ class _OktaAuthScreenState extends State<OktaAuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Auth Sample')),
+      appBar: AppBar(title: const Text('OktaIdentity Auth Sample')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

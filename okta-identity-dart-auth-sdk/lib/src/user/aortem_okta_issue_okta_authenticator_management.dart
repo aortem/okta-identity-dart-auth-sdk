@@ -8,34 +8,34 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// flexible authenticator configuration.
 typedef AuthenticatorPayloadBuilder = Map<String, dynamic> Function();
 
-/// Manages Okta user authenticators (factors) through Okta's Factors API.
+/// Manages OktaIdentity user authenticators (factors) through OktaIdentity's Factors API.
 ///
 /// This class provides methods to:
 /// - Add new authenticators (SMS, TOTP, Push Notification, etc.)
 /// - List registered authenticators for a user
 /// - Delete existing authenticators
 ///
-/// Requires an Okta API token with appropriate permissions.
-class OktaAuthenticatorManagement {
-  /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
-  final String oktaDomain;
+/// Requires an OktaIdentity API token with appropriate permissions.
+class OktaIdentityAuthenticatorManagement {
+  /// The base domain of the OktaIdentity organization (e.g., 'your-org.okta.com')
+  final String oktaIdentityDomain;
 
-  /// The Okta API token used for authentication
+  /// The OktaIdentity API token used for authentication
   final String apiToken;
 
   /// The HTTP client used for making requests
   final http.Client _httpClient;
 
-  /// Creates an instance of [OktaAuthenticatorManagement].
+  /// Creates an instance of [OktaIdentityAuthenticatorManagement].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base domain of your Okta organization
-  /// - [apiToken]: A valid Okta API token with factors management permissions
+  /// - [oktaIdentityDomain]: The base domain of your OktaIdentity organization
+  /// - [apiToken]: A valid OktaIdentity API token with factors management permissions
   ///
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
-  OktaAuthenticatorManagement({
-    required this.oktaDomain,
+  OktaIdentityAuthenticatorManagement({
+    required this.oktaIdentityDomain,
     required this.apiToken,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
@@ -48,8 +48,8 @@ class OktaAuthenticatorManagement {
   ///
   /// Example:
   /// ```dart
-  /// final authManager = OktaAuthenticatorManagement(
-  ///   oktaDomain: 'your-org.okta.com',
+  /// final authManager = OktaIdentityAuthenticatorManagement(
+  ///   oktaIdentityDomain: 'your-org.okta.com',
   ///   apiToken: 'your_api_token',
   /// );
   ///
@@ -80,7 +80,9 @@ class OktaAuthenticatorManagement {
       throw ArgumentError('authenticatorType is required in the payload.');
     }
 
-    final url = Uri.parse('https://$oktaDomain/api/v1/users/$userId/factors');
+    final url = Uri.parse(
+      'https://$oktaIdentityDomain/api/v1/users/$userId/factors',
+    );
 
     try {
       final response = await _httpClient.post(
@@ -123,7 +125,9 @@ class OktaAuthenticatorManagement {
   }) async {
     if (userId.isEmpty) throw ArgumentError('userId is required.');
 
-    final url = Uri.parse('https://$oktaDomain/api/v1/users/$userId/factors');
+    final url = Uri.parse(
+      'https://$oktaIdentityDomain/api/v1/users/$userId/factors',
+    );
 
     try {
       final response = await _httpClient.get(
@@ -174,7 +178,7 @@ class OktaAuthenticatorManagement {
     if (factorId.isEmpty) throw ArgumentError('factorId is required.');
 
     final url = Uri.parse(
-      'https://$oktaDomain/api/v1/users/$userId/factors/$factorId',
+      'https://$oktaIdentityDomain/api/v1/users/$userId/factors/$factorId',
     );
 
     try {

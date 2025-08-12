@@ -7,7 +7,7 @@ import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_miss
 import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_revocation_exception.dart';
 
 void main() {
-  group('OktaGlobalTokenRevocationConsumer', () {
+  group('OktaIdentityGlobalTokenRevocationConsumer', () {
     test('successfully revokes token', () async {
       final mockClient = MockClient((request) async {
         expect(request.url.path, contains('/v1/revoke'));
@@ -17,8 +17,8 @@ void main() {
         return http.Response('', 200);
       });
 
-      final consumer = OktaGlobalTokenRevocationConsumer(
-        oktaDomain: 'https://example.okta.com',
+      final consumer = OktaIdentityGlobalTokenRevocationConsumer(
+        oktaIdentityDomain: 'https://example.okta.com',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
         httpClient: mockClient,
@@ -32,8 +32,8 @@ void main() {
     });
 
     test('throws MissingTokenFieldException when token is missing', () async {
-      final consumer = OktaGlobalTokenRevocationConsumer(
-        oktaDomain: 'https://example.okta.com',
+      final consumer = OktaIdentityGlobalTokenRevocationConsumer(
+        oktaIdentityDomain: 'https://example.okta.com',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
         httpClient: MockClient((_) async => http.Response('', 200)),
@@ -45,13 +45,13 @@ void main() {
       );
     });
 
-    test('throws OktaRevocationException on HTTP error', () async {
+    test('throws OktaIdentityRevocationException on HTTP error', () async {
       final mockClient = MockClient(
         (_) async => http.Response('Unauthorized', 401),
       );
 
-      final consumer = OktaGlobalTokenRevocationConsumer(
-        oktaDomain: 'https://example.okta.com',
+      final consumer = OktaIdentityGlobalTokenRevocationConsumer(
+        oktaIdentityDomain: 'https://example.okta.com',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
         httpClient: mockClient,
@@ -63,7 +63,7 @@ void main() {
             builder.setToken('abc123');
           },
         ),
-        throwsA(isA<OktaRevocationException>()),
+        throwsA(isA<OktaIdentityRevocationException>()),
       );
     });
   });

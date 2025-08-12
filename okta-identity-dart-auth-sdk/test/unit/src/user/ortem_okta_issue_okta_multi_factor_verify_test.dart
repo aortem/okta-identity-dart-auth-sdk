@@ -5,8 +5,8 @@ import 'package:http/testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/user/aortem_okta_issue_okta_multi_factor_verify.dart';
 
 void main() {
-  group('OktaTokenRevocation', () {
-    const oktaDomain = 'dev-123456.okta.com';
+  group('OktaIdentityTokenRevocation', () {
+    const oktaIdentityDomain = 'dev-123456.okta.com';
     const clientId = 'test-client-id';
     const clientSecret = 'test-secret';
     const testToken = 'dummy-token';
@@ -16,7 +16,7 @@ void main() {
         expect(request.method, equals('POST'));
         expect(
           request.url.toString(),
-          equals('https://$oktaDomain/oauth2/default/v1/revoke'),
+          equals('https://$oktaIdentityDomain/oauth2/default/v1/revoke'),
         );
         expect(
           request.headers['Authorization'],
@@ -26,8 +26,8 @@ void main() {
         return http.Response('', 200);
       });
 
-      final revoker = OktaTokenRevocation(
-        oktaDomain: oktaDomain,
+      final revoker = OktaIdentityTokenRevocation(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         clientSecret: clientSecret,
         httpClient: mockClient,
@@ -37,8 +37,8 @@ void main() {
     });
 
     test('throws ArgumentError for empty token', () {
-      final revoker = OktaTokenRevocation(
-        oktaDomain: oktaDomain,
+      final revoker = OktaIdentityTokenRevocation(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         clientSecret: clientSecret,
       );
@@ -54,8 +54,8 @@ void main() {
         return http.Response('Unauthorized', 401);
       });
 
-      final revoker = OktaTokenRevocation(
-        oktaDomain: oktaDomain,
+      final revoker = OktaIdentityTokenRevocation(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         clientSecret: clientSecret,
         httpClient: mockClient,
@@ -79,8 +79,8 @@ void main() {
         return http.Response('', 200);
       });
 
-      final revoker = OktaTokenRevocation(
-        oktaDomain: oktaDomain,
+      final revoker = OktaIdentityTokenRevocation(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         clientSecret: clientSecret,
         httpClient: mockClient,

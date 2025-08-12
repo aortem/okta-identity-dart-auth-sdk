@@ -14,8 +14,8 @@ class _TokenValidationScreenState extends State<TokenValidationScreen> {
   String _result = '';
   bool _isLoading = false;
 
-  final validator = OktaTokenValidator(
-    oktaDomain: 'dev-07140130.okta.com',
+  final validator = OktaIdentityTokenValidator(
+    oktaIdentityDomain: 'dev-07140130.okta.com',
     clientId: '0oaplfz1eaN0o0DLU5d7',
   );
 

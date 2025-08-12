@@ -5,25 +5,25 @@ import 'package:http/testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/user/aortem_okta_issue_okta_authenticator_management.dart';
 
 void main() {
-  const oktaDomain = 'test.okta.com';
+  const oktaIdentityDomain = 'test.okta.com';
   const apiToken = 'fake-token';
   const userId = 'user123';
   const factorId = 'factorABC';
 
-  group('OktaAuthenticatorManagement', () {
+  group('OktaIdentityAuthenticatorManagement', () {
     test('addAuthenticator - success', () async {
       final mockClient = MockClient((http.Request request) async {
         expect(
           request.url.toString(),
-          'https://$oktaDomain/api/v1/users/$userId/factors',
+          'https://$oktaIdentityDomain/api/v1/users/$userId/factors',
         );
         expect(request.method, 'POST');
         expect(request.headers['Authorization'], 'SSWS $apiToken');
         return http.Response(jsonEncode({'id': 'factor123'}), 200);
       });
 
-      final manager = OktaAuthenticatorManagement(
-        oktaDomain: oktaDomain,
+      final manager = OktaIdentityAuthenticatorManagement(
+        oktaIdentityDomain: oktaIdentityDomain,
         apiToken: apiToken,
         httpClient: mockClient,
       );
@@ -48,14 +48,14 @@ void main() {
       final mockClient = MockClient((http.Request request) async {
         expect(
           request.url.toString(),
-          'https://$oktaDomain/api/v1/users/$userId/factors',
+          'https://$oktaIdentityDomain/api/v1/users/$userId/factors',
         );
         expect(request.method, 'GET');
         return http.Response(jsonEncode(mockResponse), 200);
       });
 
-      final manager = OktaAuthenticatorManagement(
-        oktaDomain: oktaDomain,
+      final manager = OktaIdentityAuthenticatorManagement(
+        oktaIdentityDomain: oktaIdentityDomain,
         apiToken: apiToken,
         httpClient: mockClient,
       );
@@ -70,14 +70,14 @@ void main() {
       final mockClient = MockClient((http.Request request) async {
         expect(
           request.url.toString(),
-          'https://$oktaDomain/api/v1/users/$userId/factors/$factorId',
+          'https://$oktaIdentityDomain/api/v1/users/$userId/factors/$factorId',
         );
         expect(request.method, 'DELETE');
         return http.Response('', 204);
       });
 
-      final manager = OktaAuthenticatorManagement(
-        oktaDomain: oktaDomain,
+      final manager = OktaIdentityAuthenticatorManagement(
+        oktaIdentityDomain: oktaIdentityDomain,
         apiToken: apiToken,
         httpClient: mockClient,
       );
@@ -88,8 +88,8 @@ void main() {
     test(
       'addAuthenticator - missing authenticatorType throws ArgumentError',
       () async {
-        final manager = OktaAuthenticatorManagement(
-          oktaDomain: oktaDomain,
+        final manager = OktaIdentityAuthenticatorManagement(
+          oktaIdentityDomain: oktaIdentityDomain,
           apiToken: apiToken,
           httpClient: MockClient((_) async => http.Response('', 200)),
         );
@@ -111,8 +111,8 @@ void main() {
           return http.Response(jsonEncode({'not': 'a list'}), 200);
         });
 
-        final manager = OktaAuthenticatorManagement(
-          oktaDomain: oktaDomain,
+        final manager = OktaIdentityAuthenticatorManagement(
+          oktaIdentityDomain: oktaIdentityDomain,
           apiToken: apiToken,
           httpClient: mockClient,
         );
@@ -127,8 +127,8 @@ void main() {
     test(
       'deleteAuthenticator - missing factorId throws ArgumentError',
       () async {
-        final manager = OktaAuthenticatorManagement(
-          oktaDomain: oktaDomain,
+        final manager = OktaIdentityAuthenticatorManagement(
+          oktaIdentityDomain: oktaIdentityDomain,
           apiToken: apiToken,
           httpClient: MockClient((_) async => http.Response('', 204)),
         );

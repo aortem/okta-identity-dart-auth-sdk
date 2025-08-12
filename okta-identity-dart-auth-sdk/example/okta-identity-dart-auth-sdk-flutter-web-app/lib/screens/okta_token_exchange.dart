@@ -16,8 +16,8 @@ class _TokenExchangeScreenState extends State<TokenExchangeScreen> {
   String _result = '';
   bool _loading = false;
 
-  final _tokenExchange = OktaTokenExchangeConsumer(
-    oktaDomain: 'https://dev-123456.okta.com',
+  final _tokenExchange = OktaIdentityTokenExchangeConsumer(
+    oktaIdentityDomain: 'https://dev-123456.okta.com',
     clientId: 'yourClientId',
     redirectUri: 'com.example.app:/callback',
     clientSecret: 'yourClientSecretIfNeeded',
@@ -83,7 +83,7 @@ class _TokenExchangeScreenState extends State<TokenExchangeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Token Exchange')),
+      appBar: AppBar(title: const Text('OktaIdentity Token Exchange')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(

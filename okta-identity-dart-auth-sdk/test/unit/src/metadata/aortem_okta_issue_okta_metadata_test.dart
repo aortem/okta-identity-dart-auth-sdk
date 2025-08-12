@@ -6,8 +6,8 @@ import 'dart:convert';
 import 'package:okta_identity_dart_auth_sdk/src/metadata/aortem_okta_issue_okta_metadata.dart';
 
 void main() {
-  group('OktaMetadata', () {
-    const oktaDomain = 'example.okta.com';
+  group('OktaIdentityMetadata', () {
+    const oktaIdentityDomain = 'example.okta.com';
     const metadataUrl =
         'https://example.okta.com/.well-known/openid-configuration';
 
@@ -24,8 +24,8 @@ void main() {
         return http.Response(jsonEncode(mockResponse), 200);
       });
 
-      final metadata = OktaMetadata(
-        oktaDomain: oktaDomain,
+      final metadata = OktaIdentityMetadata(
+        oktaIdentityDomain: oktaIdentityDomain,
         httpClient: mockClient,
       );
 
@@ -46,8 +46,8 @@ void main() {
         return http.Response('Internal Server Error', 500);
       });
 
-      final metadata = OktaMetadata(
-        oktaDomain: oktaDomain,
+      final metadata = OktaIdentityMetadata(
+        oktaIdentityDomain: oktaIdentityDomain,
         httpClient: mockClient,
       );
 
@@ -62,8 +62,8 @@ void main() {
         return http.Response('Not JSON', 200);
       });
 
-      final metadata = OktaMetadata(
-        oktaDomain: oktaDomain,
+      final metadata = OktaIdentityMetadata(
+        oktaIdentityDomain: oktaIdentityDomain,
         httpClient: mockClient,
       );
 
@@ -83,8 +83,8 @@ void main() {
         return http.Response(jsonEncode(incompleteResponse), 200);
       });
 
-      final metadata = OktaMetadata(
-        oktaDomain: oktaDomain,
+      final metadata = OktaIdentityMetadata(
+        oktaIdentityDomain: oktaIdentityDomain,
         httpClient: mockClient,
       );
 
@@ -102,8 +102,8 @@ void main() {
         return http.Response(jsonEncode(mockResponse), 200);
       });
 
-      final metadata = OktaMetadata(
-        oktaDomain: oktaDomain,
+      final metadata = OktaIdentityMetadata(
+        oktaIdentityDomain: oktaIdentityDomain,
         httpClient: mockClient,
       );
 

@@ -5,15 +5,15 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class OktaLoginPage extends StatefulWidget {
-  const OktaLoginPage({super.key});
+class OktaIdentityLoginPage extends StatefulWidget {
+  const OktaIdentityLoginPage({super.key});
 
   @override
-  State<OktaLoginPage> createState() => _OktaLoginPageState();
+  State<OktaIdentityLoginPage> createState() => _OktaIdentityLoginPageState();
 }
 
-class _OktaLoginPageState extends State<OktaLoginPage> {
-  final String oktaDomain = 'dev-07140130.okta.com';
+class _OktaIdentityLoginPageState extends State<OktaIdentityLoginPage> {
+  final String oktaIdentityDomain = 'dev-07140130.okta.com';
   final String clientId = '0oaplfz1eaN0o0DLU5d7';
   final String redirectUri = 'http://localhost:8080/callback';
 
@@ -35,11 +35,11 @@ class _OktaLoginPageState extends State<OktaLoginPage> {
     return base64UrlEncode(challengeBytes).replaceAll('=', '');
   }
 
-  void _loginWithOkta() {
+  void _loginWithOktaIdentity() {
     _codeVerifier = _generateCodeVerifier();
     final codeChallenge = _generateCodeChallenge(_codeVerifier);
 
-    final uri = Uri.https(oktaDomain, '/oauth2/default/v1/authorize', {
+    final uri = Uri.https(oktaIdentityDomain, '/oauth2/default/v1/authorize', {
       'client_id': clientId,
       'response_type': 'code',
       'scope': 'openid profile email',
@@ -49,7 +49,7 @@ class _OktaLoginPageState extends State<OktaLoginPage> {
       'state': 'customState123',
     });
 
-    // Redirect to Okta login page
+    // Redirect to OktaIdentity login page
     html.window.location.href = uri.toString();
   }
 
@@ -64,7 +64,7 @@ class _OktaLoginPageState extends State<OktaLoginPage> {
       return;
     }
 
-    final tokenUri = Uri.https(oktaDomain, '/oauth2/default/v1/token');
+    final tokenUri = Uri.https(oktaIdentityDomain, '/oauth2/default/v1/token');
     final response = await http.post(
       tokenUri,
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -103,14 +103,14 @@ class _OktaLoginPageState extends State<OktaLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Web Auth')),
+      appBar: AppBar(title: const Text('OktaIdentity Web Auth')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: _loginWithOkta,
-              child: const Text('🔐 Sign in with Okta'),
+              onPressed: _loginWithOktaIdentity,
+              child: const Text('🔐 Sign in with OktaIdentity'),
             ),
             const SizedBox(height: 20),
             if (_accessToken != null) Text('✅ Access Token: $_accessToken'),

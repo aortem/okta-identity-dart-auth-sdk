@@ -4,22 +4,22 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
 /// A callback type for modifying logout payload parameters.
 ///
-/// Used to customize the logout request parameters before they are sent to Okta.
+/// Used to customize the logout request parameters before they are sent to OktaIdentity.
 typedef LogoutPayloadModifier = FutureOr<void> Function(Map<String, String>);
 
-/// A class to handle OpenID Connect logout operations with Okta using a consumer pattern.
+/// A class to handle OpenID Connect logout operations with OktaIdentity using a consumer pattern.
 ///
 /// This class implements the OIDC end-session endpoint to properly log users out
-/// of both the application and Okta session. It supports the consumer pattern for
+/// of both the application and OktaIdentity session. It supports the consumer pattern for
 /// flexible payload configuration.
 ///
 /// The logout flow follows OpenID Connect RP-Initiated Logout specifications.
-class OktaOidcLogoutConsumer {
-  /// The base domain URL of the Okta authorization server
+class OktaIdentityOidcLogoutConsumer {
+  /// The base domain URL of the OktaIdentity authorization server
   /// (e.g., 'https://your-org.okta.com')
-  final String oktaDomain;
+  final String oktaIdentityDomain;
 
-  /// The client ID of the OAuth application registered in Okta
+  /// The client ID of the OAuth application registered in OktaIdentity
   final String clientId;
 
   /// The URI where the user should be redirected after logout
@@ -28,17 +28,17 @@ class OktaOidcLogoutConsumer {
   /// The HTTP client used to make requests (can be customized for testing)
   final http.Client httpClient;
 
-  /// Creates an instance of [OktaOidcLogoutConsumer].
+  /// Creates an instance of [OktaIdentityOidcLogoutConsumer].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base URL of your Okta organization
-  /// - [clientId]: The client ID of your Okta OAuth application
+  /// - [oktaIdentityDomain]: The base URL of your OktaIdentity organization
+  /// - [clientId]: The client ID of your OktaIdentity OAuth application
   /// - [postLogoutRedirectUri]: The redirect URI after logout completes
   ///
   /// Optional parameter:
   /// - [httpClient]: Custom HTTP client instance (defaults to a new [http.Client])
-  OktaOidcLogoutConsumer({
-    required this.oktaDomain,
+  OktaIdentityOidcLogoutConsumer({
+    required this.oktaIdentityDomain,
     required this.clientId,
     required this.postLogoutRedirectUri,
     http.Client? httpClient,
@@ -48,13 +48,13 @@ class OktaOidcLogoutConsumer {
   ///
   /// The [modify] callback allows customization of the logout parameters while
   /// ensuring required fields are present. The base payload includes:
-  /// - client_id: The Okta application client ID
+  /// - client_id: The OktaIdentity application client ID
   /// - post_logout_redirect_uri: The redirect URI after logout
   ///
   /// Example usage:
   /// ```dart
-  /// final logoutConsumer = OktaOidcLogoutConsumer(
-  ///   oktaDomain: 'https://your-org.okta.com',
+  /// final logoutConsumer = OktaIdentityOidcLogoutConsumer(
+  ///   oktaIdentityDomain: 'https://your-org.okta.com',
   ///   clientId: 'your_client_id',
   ///   postLogoutRedirectUri: 'com.example.app:/postlogout',
   /// );
@@ -86,7 +86,7 @@ class OktaOidcLogoutConsumer {
 
     // Construct the logout URL with query parameters
     final logoutUrl = Uri.parse(
-      '$oktaDomain/oauth2/v1/logout',
+      '$oktaIdentityDomain/oauth2/v1/logout',
     ).replace(queryParameters: payload);
 
     // Make the logout request (returns 302 redirect by default)

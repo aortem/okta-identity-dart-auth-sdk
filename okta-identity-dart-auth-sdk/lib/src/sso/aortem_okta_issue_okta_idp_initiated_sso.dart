@@ -1,7 +1,7 @@
-/// Enables Identity Provider (IdP)-Initiated Single Sign-On (SSO) for Okta.
+/// Enables Identity Provider (IdP)-Initiated Single Sign-On (SSO) for OktaIdentity.
 ///
 /// This class constructs secure redirect URLs for IdP-initiated SSO flows,
-/// allowing Okta (the Identity Provider) to initiate authentication without
+/// allowing OktaIdentity (the Identity Provider) to initiate authentication without
 /// requiring a service provider request first.
 ///
 /// Features:
@@ -9,33 +9,33 @@
 /// - Validates required parameters
 /// - Supports dynamic parameter customization
 /// - Handles both default and custom RelayState values
-class OktaIdpInitiatedSSO {
-  /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
-  final String oktaDomain;
+class OktaIdentityIdpInitiatedSSO {
+  /// The base domain of the OktaIdentity organization (e.g., 'your-org.okta.com')
+  final String oktaIdentityDomain;
 
-  /// The client ID of the Okta OAuth application
+  /// The client ID of the OktaIdentity OAuth application
   final String clientId;
 
   /// Optional default RelayState value for SSO redirects
   final String? defaultRelayState;
 
-  /// Creates an instance of [OktaIdpInitiatedSSO].
+  /// Creates an instance of [OktaIdentityIdpInitiatedSSO].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base domain of your Okta organization
-  /// - [clientId]: The client ID of your Okta application
+  /// - [oktaIdentityDomain]: The base domain of your OktaIdentity organization
+  /// - [clientId]: The client ID of your OktaIdentity application
   ///
   /// Optional parameters:
   /// - [defaultRelayState]: Default RelayState value for SSO redirects
   ///
   /// Throws [ArgumentError] if required parameters are empty
-  OktaIdpInitiatedSSO({
-    required this.oktaDomain,
+  OktaIdentityIdpInitiatedSSO({
+    required this.oktaIdentityDomain,
     required this.clientId,
     this.defaultRelayState,
   }) {
-    if (oktaDomain.trim().isEmpty) {
-      throw ArgumentError('Okta domain must not be empty.');
+    if (oktaIdentityDomain.trim().isEmpty) {
+      throw ArgumentError('OktaIdentity domain must not be empty.');
     }
     if (clientId.trim().isEmpty) {
       throw ArgumentError('Client ID must not be empty.');
@@ -44,14 +44,14 @@ class OktaIdpInitiatedSSO {
 
   /// Constructs an IdP-initiated SSO URL with customizable parameters.
   ///
-  /// The URL follows Okta's IdP-initiated SSO format and includes required
+  /// The URL follows OktaIdentity's IdP-initiated SSO format and includes required
   /// parameters like RelayState. The [customizeParams] callback allows for
   /// dynamic parameter customization.
   ///
   /// Example:
   /// ```dart
-  /// final sso = OktaIdpInitiatedSSO(
-  ///   oktaDomain: 'your-org.okta.com',
+  /// final sso = OktaIdentityIdpInitiatedSSO(
+  ///   oktaIdentityDomain: 'your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   defaultRelayState: '/dashboard',
   /// );
@@ -88,7 +88,7 @@ class OktaIdpInitiatedSSO {
     }
 
     // Construct the base URL
-    final baseUrl = Uri.https(oktaDomain, '/sso/idps/$clientId');
+    final baseUrl = Uri.https(oktaIdentityDomain, '/sso/idps/$clientId');
 
     // Add query parameters
     final ssoUrl = baseUrl.replace(queryParameters: params);

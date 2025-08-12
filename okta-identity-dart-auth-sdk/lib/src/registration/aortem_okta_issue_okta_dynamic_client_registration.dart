@@ -3,37 +3,37 @@ import 'dart:convert';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// Handles Dynamic Client Registration with Okta's OAuth 2.0/OIDC endpoints.
+/// Handles Dynamic Client Registration with OktaIdentity's OAuth 2.0/OIDC endpoints.
 ///
 /// This class implements the OAuth 2.0 Dynamic Client Registration Protocol
-/// (RFC 7591) for programmatically registering clients with Okta's authorization
+/// (RFC 7591) for programmatically registering clients with OktaIdentity's authorization
 /// server.
 ///
 /// Typical use cases include:
 /// - On-demand client registration for multi-tenant applications
 /// - Automated client provisioning in CI/CD pipelines
 /// - Temporary client registration for testing purposes
-class OktaDynamicClientRegistration {
-  /// The base domain of the Okta organization
+class OktaIdentityDynamicClientRegistration {
+  /// The base domain of the OktaIdentity organization
   /// (e.g., 'your-org.okta.com' or 'https://your-org.okta.com')
-  final String oktaDomain;
+  final String oktaIdentityDomain;
 
   /// The HTTP client used for making registration requests
   final http.Client httpClient;
 
-  /// Creates an instance of [OktaDynamicClientRegistration].
+  /// Creates an instance of [OktaIdentityDynamicClientRegistration].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base domain of your Okta organization
+  /// - [oktaIdentityDomain]: The base domain of your OktaIdentity organization
   ///
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
-  OktaDynamicClientRegistration({
-    required this.oktaDomain,
+  OktaIdentityDynamicClientRegistration({
+    required this.oktaIdentityDomain,
     http.Client? httpClient,
   }) : httpClient = httpClient ?? http.Client();
 
-  /// Registers a new OAuth client with Okta's dynamic registration endpoint.
+  /// Registers a new OAuth client with OktaIdentity's dynamic registration endpoint.
   ///
   /// Uses a consumer pattern to allow flexible client configuration while
   /// ensuring required fields are present. The base payload includes:
@@ -42,8 +42,8 @@ class OktaDynamicClientRegistration {
   ///
   /// Example usage:
   /// ```dart
-  /// final registration = OktaDynamicClientRegistration(
-  ///   oktaDomain: 'your-org.okta.com',
+  /// final registration = OktaIdentityDynamicClientRegistration(
+  ///   oktaIdentityDomain: 'your-org.okta.com',
   /// );
   ///
   /// final clientMetadata = await registration.registerClient((payload) {
@@ -81,7 +81,7 @@ class OktaDynamicClientRegistration {
       );
     }
 
-    final uri = Uri.https(oktaDomain, '/oauth2/v1/clients');
+    final uri = Uri.https(oktaIdentityDomain, '/oauth2/v1/clients');
 
     try {
       final response = await httpClient.post(

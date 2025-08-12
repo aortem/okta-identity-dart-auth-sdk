@@ -5,38 +5,40 @@ import 'package:jwt_generator/jwt_generator.dart';
 import '../exception/aortem_okta_issue_token_validation_token.dart';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// Validates JWT tokens issued by Okta using OAuth 2.0.
+/// Validates JWT tokens issued by OktaIdentity using OAuth 2.0.
 ///
 /// This class handles the validation of JWT tokens including:
-/// - Signature verification using Okta's public keys
+/// - Signature verification using OktaIdentity's public keys
 /// - Standard JWT claims validation (expiration, issuer, audience)
 /// - Key rotation support through JWKS endpoint
-class OktaTokenValidator {
-  /// The Okta domain (e.g., 'your-org.okta.com').
-  final String oktaDomain;
+class OktaIdentityTokenValidator {
+  /// The OktaIdentity domain (e.g., 'your-org.okta.com').
+  final String oktaIdentityDomain;
 
   /// The client ID that should match the token's audience claim.
   final String clientId;
 
-  /// The issuer URL derived from [oktaDomain].
+  /// The issuer URL derived from [oktaIdentityDomain].
   final String issuer;
 
   /// Cache for storing public keys by key ID (kid).
   final Map<String, Map<String, dynamic>> _cachedKeys = {};
 
-  /// Creates an instance of [OktaTokenValidator].
+  /// Creates an instance of [OktaIdentityTokenValidator].
   ///
   /// Requires:
-  /// - [oktaDomain]: Your Okta domain (e.g., 'your-org.okta.com')
+  /// - [oktaIdentityDomain]: Your OktaIdentity domain (e.g., 'your-org.okta.com')
   /// - [clientId]: The client ID that should match the token's audience claim
-  OktaTokenValidator({required this.oktaDomain, required this.clientId})
-    : issuer = 'https://$oktaDomain/oauth2/default';
+  OktaIdentityTokenValidator({
+    required this.oktaIdentityDomain,
+    required this.clientId,
+  }) : issuer = 'https://$oktaIdentityDomain/oauth2/default';
 
   /// Validates a JWT token and returns its decoded payload if valid.
   ///
   /// Performs the following validations:
   /// 1. Token structure (3 parts separated by dots)
-  /// 2. Signature verification using Okta's public keys
+  /// 2. Signature verification using OktaIdentity's public keys
   /// 3. Standard claims validation (expiration, issuer, audience)
   ///
   /// Throws [TokenValidationException] if validation fails.
@@ -86,10 +88,10 @@ class OktaTokenValidator {
     return base64Url.decode(normalized);
   }
 
-  /// Fetches and caches public keys (JWKS) from Okta's JWKS endpoint.
+  /// Fetches and caches public keys (JWKS) from OktaIdentity's JWKS endpoint.
   ///
   /// If the key is already cached, returns the cached version.
-  /// Otherwise fetches the latest keys from Okta and caches them.
+  /// Otherwise fetches the latest keys from OktaIdentity and caches them.
   ///
   /// Throws [TokenValidationException] if the key is not found.
   Future<Map<String, dynamic>> _getPublicKey(String kid) async {
@@ -97,7 +99,7 @@ class OktaTokenValidator {
       return _cachedKeys[kid]!;
     }
 
-    final url = Uri.parse('https://$oktaDomain/oauth2/default/v1/keys');
+    final url = Uri.parse('https://$oktaIdentityDomain/oauth2/default/v1/keys');
     final response = await http.get(url);
 
     if (response.statusCode != 200) {

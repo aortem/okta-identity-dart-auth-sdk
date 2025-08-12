@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// A class for retrieving and caching Okta OpenID Connect metadata.
+/// A class for retrieving and caching OktaIdentity OpenID Connect metadata.
 ///
 /// This class handles fetching and caching the OpenID Connect configuration
-/// metadata from Okta's well-known endpoint. The metadata includes important
+/// metadata from OktaIdentity's well-known endpoint. The metadata includes important
 /// OAuth 2.0 and OpenID Connect endpoints like:
 /// - Authorization endpoint
 /// - Token endpoint
@@ -12,9 +12,9 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// - Issuer information
 ///
 /// The metadata is automatically cached for 10 minutes to reduce network calls.
-class OktaMetadata {
-  /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
-  final String oktaDomain;
+class OktaIdentityMetadata {
+  /// The base domain of the OktaIdentity organization (e.g., 'your-org.okta.com')
+  final String oktaIdentityDomain;
 
   /// The HTTP client used for making requests
   final http.Client httpClient;
@@ -25,17 +25,19 @@ class OktaMetadata {
   /// Expiration time for the cached metadata
   DateTime? _cacheExpiry;
 
-  /// Creates an instance of [OktaMetadata].
+  /// Creates an instance of [OktaIdentityMetadata].
   ///
   /// Required parameters:
-  /// - [oktaDomain]: The base domain of your Okta organization
+  /// - [oktaIdentityDomain]: The base domain of your OktaIdentity organization
   ///
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
-  OktaMetadata({required this.oktaDomain, http.Client? httpClient})
-    : httpClient = httpClient ?? http.Client();
+  OktaIdentityMetadata({
+    required this.oktaIdentityDomain,
+    http.Client? httpClient,
+  }) : httpClient = httpClient ?? http.Client();
 
-  /// Fetches the OpenID Connect metadata from Okta's well-known endpoint.
+  /// Fetches the OpenID Connect metadata from OktaIdentity's well-known endpoint.
   ///
   /// The metadata is cached for 10 minutes to avoid unnecessary network calls.
   /// Subsequent calls within the cache period will return the cached version.
@@ -49,7 +51,7 @@ class OktaMetadata {
   ///
   /// Example:
   /// ```dart
-  /// final metadata = OktaMetadata(oktaDomain: 'your-org.okta.com');
+  /// final metadata = OktaIdentityMetadata(oktaIdentityDomain: 'your-org.okta.com');
   /// final config = await metadata.getMetadata();
   /// print('Token endpoint: ${config['token_endpoint']}');
   /// ```
@@ -66,7 +68,7 @@ class OktaMetadata {
 
     // Construct the well-known OpenID configuration URL
     final String metadataUrl =
-        'https://$oktaDomain/.well-known/openid-configuration';
+        'https://$oktaIdentityDomain/.well-known/openid-configuration';
 
     try {
       final response = await httpClient.get(Uri.parse(metadataUrl));
@@ -80,7 +82,7 @@ class OktaMetadata {
             !metadata.containsKey('authorization_endpoint') ||
             !metadata.containsKey('token_endpoint') ||
             !metadata.containsKey('jwks_uri')) {
-          throw Exception('Missing required fields in Okta metadata');
+          throw Exception('Missing required fields in OktaIdentity metadata');
         }
 
         // Cache the metadata with a 10 minute expiration
@@ -90,17 +92,17 @@ class OktaMetadata {
         return metadata;
       } else {
         throw Exception(
-          'Failed to fetch metadata from Okta. Status code: ${response.statusCode}',
+          'Failed to fetch metadata from OktaIdentity. Status code: ${response.statusCode}',
         );
       }
     } catch (e) {
-      throw Exception('Error retrieving Okta metadata: $e');
+      throw Exception('Error retrieving OktaIdentity metadata: $e');
     }
   }
 
   /// Manually invalidates the cached metadata.
   ///
-  /// Forces the next call to [getMetadata] to fetch fresh data from Okta.
+  /// Forces the next call to [getMetadata] to fetch fresh data from OktaIdentity.
   void invalidateCache() {
     _cachedMetadata = null;
     _cacheExpiry = null;

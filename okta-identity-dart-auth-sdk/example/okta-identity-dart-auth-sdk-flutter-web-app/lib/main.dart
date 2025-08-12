@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/IdpSsoTestScreen.dart';
-import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaAuthorization.dart';
-import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaDynamicClientRegistration.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaIdentityAuthorization.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaIdentityDynamicClientRegistration.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_auth_login.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_auth_management.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_logout_complete.dart';
@@ -17,36 +17,36 @@ import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/oktametadata
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_base_sdk_screen.dart';
 
 void main() {
-  runApp(const OktaSampleApp());
+  runApp(const OktaIdentitySampleApp());
 }
 
-class OktaSampleApp extends StatelessWidget {
-  const OktaSampleApp({super.key});
+class OktaIdentitySampleApp extends StatelessWidget {
+  const OktaIdentitySampleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Okta Dart Auth Sample',
+      title: 'OktaIdentity Dart Auth Sample',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const OktaHomePage(),
+        '/': (context) => const OktaIdentityHomePage(),
         '/logout-complete': (context) => const LogoutCompleteScreen(),
       },
-      // home: const OktaHomePage(),
+      // home: const OktaIdentityHomePage(),
     );
   }
 }
 
-class OktaHomePage extends StatelessWidget {
-  const OktaHomePage({super.key});
+class OktaIdentityHomePage extends StatelessWidget {
+  const OktaIdentityHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Okta Dart Auth Web Sample")),
+      appBar: AppBar(title: const Text("OktaIdentity Dart Auth Web Sample")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -59,55 +59,57 @@ class OktaHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               FeatureButton(
-                title: "OktaAuthLogin – Username/Password",
+                title: "OktaIdentityAuthLogin – Username/Password",
                 description:
                     "Authenticate using username & password with consumer pattern.",
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const OktaAuthLoginScreen(),
+                      builder: (_) => const OktaIdentityAuthLoginScreen(),
                     ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaBaseSDKSetup",
+                title: "OktaIdentityBaseSDKSetup",
                 description: "Base SDK Setup and Configuration",
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const OktaBaseSDKScreen(),
+                      builder: (_) => const OktaIdentityBaseSDKScreen(),
                     ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaSocialLogin(Social Sign-In)",
+                title: "OktaIdentitySocialLogin(Social Sign-In)",
                 description:
                     "Implement Social Sign-In Flow via Consumer Pattern",
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const OktaSocialLoginScreen(),
+                      builder: (_) => const OktaIdentitySocialLoginScreen(),
                     ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaOidcLogout",
+                title: "OktaIdentityOidcLogout",
                 description: "OIDC Logout Flow via Consumer Pattern",
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const OktaLogoutScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => const OktaIdentityLogoutScreen(),
+                    ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaTokenValidation",
+                title: "OktaIdentityTokenValidation",
                 description: "JWT Token Validation",
                 onPressed: () {
                   Navigator.push(
@@ -119,41 +121,41 @@ class OktaHomePage extends StatelessWidget {
                 },
               ),
               FeatureButton(
-                title: "OktaGlobalTokenRevocation",
+                title: "OktaIdentityGlobalTokenRevocation",
                 description: "",
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const OktaTokenRevocationScreen(),
+                      builder: (_) => const OktaIdentityTokenRevocationScreen(),
                     ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaUserManagement",
+                title: "OktaIdentityUserManagement",
                 description: "User and Profile Management via Consumer Pattern",
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => OktaUserManagementScreen(),
+                      builder: (_) => OktaIdentityUserManagementScreen(),
                     ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaMultiFactorVerify",
+                title: "OktaIdentityMultiFactorVerify",
                 description: "Multi-Factor Authentication via Consumer Pattern",
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => OktaLoginPage()),
+                    MaterialPageRoute(builder: (_) => OktaIdentityLoginPage()),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaAuthenticatorManagement",
+                title: "OktaIdentityAuthenticatorManagement",
                 description: "",
                 onPressed: () {
                   Navigator.push(
@@ -165,17 +167,19 @@ class OktaHomePage extends StatelessWidget {
                 },
               ),
               FeatureButton(
-                title: "OktaMetadata",
+                title: "OktaIdentityMetadata",
                 description: "",
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => OktaMetadataScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => OktaIdentityMetadataScreen(),
+                    ),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaIdpInitiatedSSO",
+                title: "OktaIdentityIdpInitiatedSSO",
                 description: "",
                 onPressed: () {
                   Navigator.push(
@@ -185,7 +189,7 @@ class OktaHomePage extends StatelessWidget {
                 },
               ),
               FeatureButton(
-                title: "OktaDynamicClientRegistration",
+                title: "OktaIdentityDynamicClientRegistration",
                 description: "",
                 onPressed: () {
                   Navigator.push(
@@ -197,17 +201,17 @@ class OktaHomePage extends StatelessWidget {
                 },
               ),
               FeatureButton(
-                title: "OktaAuthorization",
+                title: "OktaIdentityAuthorization",
                 description: "",
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => OktaAuthScreen()),
+                    MaterialPageRoute(builder: (_) => OktaIdentityAuthScreen()),
                   );
                 },
               ),
               FeatureButton(
-                title: "OktaTokenExchange",
+                title: "OktaIdentityTokenExchange",
                 description: "Token Exchange and Refresh via Consumer Pattern",
                 onPressed: () {
                   Navigator.push(
@@ -217,12 +221,14 @@ class OktaHomePage extends StatelessWidget {
                 },
               ),
               FeatureButton(
-                title: "OktaUtilityMethods",
+                title: "OktaIdentityUtilityMethods",
                 description: "",
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => OktaUtilityScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => OktaIdentityUtilityScreen(),
+                    ),
                   );
                 },
               ),

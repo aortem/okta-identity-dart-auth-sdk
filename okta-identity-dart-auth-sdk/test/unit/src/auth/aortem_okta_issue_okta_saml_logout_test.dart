@@ -2,16 +2,16 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_saml_logout.dart';
 
 void main() {
-  group('OktaSamlLogoutConsumer', () {
-    const oktaDomain = 'https://example.okta.com';
+  group('OktaIdentitySamlLogoutConsumer', () {
+    const oktaIdentityDomain = 'https://example.okta.com';
     const applicationId = 'abc123';
     const defaultRelayState = 'https://myapp.com/logout/callback';
 
-    late OktaSamlLogoutConsumer consumer;
+    late OktaIdentitySamlLogoutConsumer consumer;
 
     setUp(() {
-      consumer = OktaSamlLogoutConsumer(
-        oktaDomain: oktaDomain,
+      consumer = OktaIdentitySamlLogoutConsumer(
+        oktaIdentityDomain: oktaIdentityDomain,
         applicationId: applicationId,
         defaultRelayState: defaultRelayState,
       );
@@ -43,10 +43,10 @@ void main() {
       );
     });
 
-    test('throws ArgumentError if oktaDomain is empty', () {
+    test('throws ArgumentError if oktaIdentityDomain is empty', () {
       expect(
-        () => OktaSamlLogoutConsumer(
-          oktaDomain: '',
+        () => OktaIdentitySamlLogoutConsumer(
+          oktaIdentityDomain: '',
           applicationId: applicationId,
           defaultRelayState: defaultRelayState,
         ),
@@ -56,8 +56,8 @@ void main() {
 
     test('throws ArgumentError if applicationId is empty', () {
       expect(
-        () => OktaSamlLogoutConsumer(
-          oktaDomain: oktaDomain,
+        () => OktaIdentitySamlLogoutConsumer(
+          oktaIdentityDomain: oktaIdentityDomain,
           applicationId: '',
           defaultRelayState: defaultRelayState,
         ),
@@ -67,8 +67,8 @@ void main() {
 
     test('throws ArgumentError if defaultRelayState is empty', () {
       expect(
-        () => OktaSamlLogoutConsumer(
-          oktaDomain: oktaDomain,
+        () => OktaIdentitySamlLogoutConsumer(
+          oktaIdentityDomain: oktaIdentityDomain,
           applicationId: applicationId,
           defaultRelayState: '',
         ),

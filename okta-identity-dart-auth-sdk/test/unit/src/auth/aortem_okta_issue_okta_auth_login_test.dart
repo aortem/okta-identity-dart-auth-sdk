@@ -5,11 +5,11 @@ import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_auth
 import 'package:okta_identity_dart_auth_sdk/src/base/aortem_okta_issue_okta_base_sdk_setup.dart';
 import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_okta_auth_login_exception.dart';
 
-class FakeSDK extends OktaBaseSDK {
+class FakeSDK extends OktaIdentityBaseSDK {
   FakeSDK()
     : super(
-        config: OktaConfig(
-          oktaDomain: 'https://fake.okta.com',
+        config: OktaIdentityConfig(
+          oktaIdentityDomain: 'https://fake.okta.com',
           clientId: 'fake-client-id',
           redirectUri: 'fake:/callback',
         ),
@@ -34,10 +34,10 @@ class FakeSDK extends OktaBaseSDK {
 }
 
 void main() {
-  late OktaAuthLoginConsumer consumer;
+  late OktaIdentityAuthLoginConsumer consumer;
 
   setUp(() {
-    consumer = OktaAuthLoginConsumer(FakeSDK());
+    consumer = OktaIdentityAuthLoginConsumer(FakeSDK());
   });
 
   test('throws payload exception for missing password', () async {
@@ -46,7 +46,7 @@ void main() {
         payload['username'] = 'user@example.com';
         // password is missing
       }),
-      throwsA(isA<OktaAuthPayloadException>()),
+      throwsA(isA<OktaIdentityAuthPayloadException>()),
     );
   });
 }

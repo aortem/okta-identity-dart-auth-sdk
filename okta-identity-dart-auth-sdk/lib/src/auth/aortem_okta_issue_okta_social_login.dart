@@ -2,38 +2,38 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// A class to handle social login via Okta using a consumer pattern.
+/// A class to handle social login via OktaIdentity using a consumer pattern.
 ///
 /// This class implements the OAuth 2.0 Token Exchange grant type to enable
 /// federated authentication with identity providers such as Google, Facebook,
-/// or other social providers supported by Okta.
+/// or other social providers supported by OktaIdentity.
 ///
 /// The consumer pattern allows flexible configuration of the authentication
 /// payload while ensuring required parameters are present.
-class OktaSocialLoginConsumer {
-  /// The base domain URL of the Okta authorization server (e.g., 'https://your-org.okta.com')
-  final String oktaDomain;
+class OktaIdentitySocialLoginConsumer {
+  /// The base domain URL of the OktaIdentity authorization server (e.g., 'https://your-org.okta.com')
+  final String oktaIdentityDomain;
 
-  /// The client ID of the OAuth application registered in Okta
+  /// The client ID of the OAuth application registered in OktaIdentity
   final String clientId;
 
-  /// The redirect URI registered in the Okta application
+  /// The redirect URI registered in the OktaIdentity application
   final String redirectUri;
 
   /// The HTTP client used to make requests (can be customized for testing)
   final http.Client httpClient;
 
-  /// Creates an instance of [OktaSocialLoginConsumer].
+  /// Creates an instance of [OktaIdentitySocialLoginConsumer].
   ///
   /// Requires:
-  /// - [oktaDomain]: The base URL of your Okta organization
-  /// - [clientId]: The client ID of your Okta OAuth application
-  /// - [redirectUri]: The redirect URI registered in your Okta application
+  /// - [oktaIdentityDomain]: The base URL of your OktaIdentity organization
+  /// - [clientId]: The client ID of your OktaIdentity OAuth application
+  /// - [redirectUri]: The redirect URI registered in your OktaIdentity application
   ///
   /// Optional:
   /// - [httpClient]: Custom HTTP client instance (defaults to a new [http.Client])
-  OktaSocialLoginConsumer({
-    required this.oktaDomain,
+  OktaIdentitySocialLoginConsumer({
+    required this.oktaIdentityDomain,
     required this.clientId,
     required this.redirectUri,
     http.Client? httpClient,
@@ -48,8 +48,8 @@ class OktaSocialLoginConsumer {
   ///
   /// Example usage:
   /// ```dart
-  /// final socialLogin = OktaSocialLoginConsumer(
-  ///   oktaDomain: 'https://your-org.okta.com',
+  /// final socialLogin = OktaIdentitySocialLoginConsumer(
+  ///   oktaIdentityDomain: 'https://your-org.okta.com',
   ///   clientId: 'your_client_id',
   ///   redirectUri: 'com.example.app:/callback',
   /// );
@@ -87,7 +87,7 @@ class OktaSocialLoginConsumer {
       );
     }
 
-    final uri = Uri.parse('$oktaDomain/oauth2/v1/token');
+    final uri = Uri.parse('$oktaIdentityDomain/oauth2/v1/token');
     final headers = {'Content-Type': 'application/x-www-form-urlencoded'};
 
     final response = await httpClient.post(

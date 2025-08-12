@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-class OktaUserManagementScreen extends StatefulWidget {
-  const OktaUserManagementScreen({super.key});
+class OktaIdentityUserManagementScreen extends StatefulWidget {
+  const OktaIdentityUserManagementScreen({super.key});
 
   @override
-  State<OktaUserManagementScreen> createState() =>
-      _OktaUserManagementScreenState();
+  State<OktaIdentityUserManagementScreen> createState() =>
+      _OktaIdentityUserManagementScreenState();
 }
 
-class _OktaUserManagementScreenState extends State<OktaUserManagementScreen> {
+class _OktaIdentityUserManagementScreenState
+    extends State<OktaIdentityUserManagementScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
@@ -21,8 +22,8 @@ class _OktaUserManagementScreenState extends State<OktaUserManagementScreen> {
   String _status = '';
 
   // 🧠 Use your SDK
-  final _oktaConsumer = OktaUserManagementConsumer(
-    oktaDomain: 'https://dev-123456.okta.com', // ✅ Replace
+  final _oktaConsumer = OktaIdentityUserManagementConsumer(
+    oktaIdentityDomain: 'https://dev-123456.okta.com', // ✅ Replace
     apiToken: 'your_api_token_here', // ✅ Replace
   );
 
@@ -59,7 +60,7 @@ class _OktaUserManagementScreenState extends State<OktaUserManagementScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Okta Sign Up (via SDK)')),
+    appBar: AppBar(title: const Text('OktaIdentity Sign Up (via SDK)')),
     body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(

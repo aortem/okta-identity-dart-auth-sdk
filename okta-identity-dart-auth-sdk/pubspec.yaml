@@ -1,5 +1,5 @@
 name: okta_identity_dart_auth_sdk
-description: A Dart SDK for Okta Authentication, enabling secure server-side authentication and user management for Dart-based backend applications.
+description: A Dart SDK for OktaIdentity Authentication, enabling secure server-side authentication and user management for Dart-based backend applications.
 version: 0.0.1-pre
 repository: https://github.com/aortem_sdks/okta_identity_dart_auth_sdk
 

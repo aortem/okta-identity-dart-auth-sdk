@@ -2,14 +2,14 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/sso/aortem_okta_issue_okta_idp_initiated_sso.dart';
 
 void main() {
-  group('OktaIdpInitiatedSSO', () {
-    const oktaDomain = 'example.okta.com';
+  group('OktaIdentityIdpInitiatedSSO', () {
+    const oktaIdentityDomain = 'example.okta.com';
     const clientId = 'client123';
     const defaultRelayState = 'https://myapp.com/after-login';
 
     test('constructs SSO URL with default RelayState and custom params', () {
-      final sso = OktaIdpInitiatedSSO(
-        oktaDomain: oktaDomain,
+      final sso = OktaIdentityIdpInitiatedSSO(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         defaultRelayState: defaultRelayState,
       );
@@ -19,7 +19,7 @@ void main() {
         params['feature'] = 'login';
       });
 
-      expect(url, contains(oktaDomain));
+      expect(url, contains(oktaIdentityDomain));
       expect(url, contains('RelayState=https%3A%2F%2Fmyapp.com%2Fafter-login'));
       expect(url, contains('utm_source=email_campaign'));
       expect(url, contains('feature=login'));
@@ -27,8 +27,8 @@ void main() {
     });
 
     test('throws ArgumentError if RelayState is missing', () {
-      final sso = OktaIdpInitiatedSSO(
-        oktaDomain: oktaDomain,
+      final sso = OktaIdentityIdpInitiatedSSO(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
       );
 
@@ -38,23 +38,29 @@ void main() {
       );
     });
 
-    test('throws ArgumentError when oktaDomain is empty', () {
+    test('throws ArgumentError when oktaIdentityDomain is empty', () {
       expect(
-        () => OktaIdpInitiatedSSO(oktaDomain: '', clientId: clientId),
+        () => OktaIdentityIdpInitiatedSSO(
+          oktaIdentityDomain: '',
+          clientId: clientId,
+        ),
         throwsA(isA<ArgumentError>()),
       );
     });
 
     test('throws ArgumentError when clientId is empty', () {
       expect(
-        () => OktaIdpInitiatedSSO(oktaDomain: oktaDomain, clientId: ''),
+        () => OktaIdentityIdpInitiatedSSO(
+          oktaIdentityDomain: oktaIdentityDomain,
+          clientId: '',
+        ),
         throwsA(isA<ArgumentError>()),
       );
     });
 
     test('throws Exception if constructed URL is invalid', () {
-      final sso = OktaIdpInitiatedSSO(
-        oktaDomain: 'not-a-valid-domain',
+      final sso = OktaIdentityIdpInitiatedSSO(
+        oktaIdentityDomain: 'not-a-valid-domain',
         clientId: clientId,
         defaultRelayState: defaultRelayState,
       );
@@ -63,8 +69,8 @@ void main() {
     });
 
     test('allows complete override of RelayState in consumer', () {
-      final sso = OktaIdpInitiatedSSO(
-        oktaDomain: oktaDomain,
+      final sso = OktaIdentityIdpInitiatedSSO(
+        oktaIdentityDomain: oktaIdentityDomain,
         clientId: clientId,
         defaultRelayState: 'https://default.com/relay',
       );

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-class OktaTokenRevocationScreen extends StatefulWidget {
-  const OktaTokenRevocationScreen({super.key});
+class OktaIdentityTokenRevocationScreen extends StatefulWidget {
+  const OktaIdentityTokenRevocationScreen({super.key});
 
   @override
-  State<OktaTokenRevocationScreen> createState() =>
-      _OktaTokenRevocationScreenState();
+  State<OktaIdentityTokenRevocationScreen> createState() =>
+      _OktaIdentityTokenRevocationScreenState();
 }
 
-class _OktaTokenRevocationScreenState extends State<OktaTokenRevocationScreen> {
-  final String _oktaDomain = 'https://dev-07140130.okta.com';
+class _OktaIdentityTokenRevocationScreenState
+    extends State<OktaIdentityTokenRevocationScreen> {
+  final String _oktaIdentityDomain = 'https://dev-07140130.okta.com';
   final String _clientId = 'your_client_id_here';
   final String _clientSecret = 'your_client_secret_here';
 
@@ -32,8 +33,8 @@ class _OktaTokenRevocationScreenState extends State<OktaTokenRevocationScreen> {
     required String type,
   }) async {
     try {
-      final revoker = OktaGlobalTokenRevocationConsumer(
-        oktaDomain: _oktaDomain,
+      final revoker = OktaIdentityGlobalTokenRevocationConsumer(
+        oktaIdentityDomain: _oktaIdentityDomain,
         clientId: _clientId,
         clientSecret: _clientSecret,
       );
@@ -60,7 +61,9 @@ class _OktaTokenRevocationScreenState extends State<OktaTokenRevocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Okta Token Revocation Example')),
+      appBar: AppBar(
+        title: const Text('OktaIdentity Token Revocation Example'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(

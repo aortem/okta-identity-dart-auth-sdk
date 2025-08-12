@@ -1,13 +1,13 @@
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 class OktaSocialLoginService {
-  final AortemOktaSocialLoginConsumer _consumer;
+  final OktaSocialLoginConsumer _consumer;
 
   OktaSocialLoginService({
     required String oktaDomain,
     required String clientId,
     required String redirectUri,
-  }) : _consumer = AortemOktaSocialLoginConsumer(
+  }) : _consumer = OktaSocialLoginConsumer(
          oktaDomain: oktaDomain,
          clientId: clientId,
          redirectUri: redirectUri,

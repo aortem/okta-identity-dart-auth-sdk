@@ -57,7 +57,7 @@ Create a base configuration with your Okta details:
 
 ```dart
 // Create the Okta config for your app/org
-final config = AortemOktaConfig(
+final config = OktaConfig(
   oktaDomain: 'dev-12345678.okta.com',  // issuer host (no https://)
   clientId: 'YOUR_CLIENT_ID',
   redirectUri: 'https://yourapp.example.com/callback',
@@ -66,7 +66,7 @@ final config = AortemOktaConfig(
 );
 
 // Instantiate the base SDK
-final okta = AortemOktaBaseSDK(config);
+final okta = OktaBaseSDK(config);
 ```
 
 > `oktaDomain` should be the hostname portion of your issuer (e.g. `dev-xxxxx.okta.com`). Your Okta app’s **Redirect URI** must exactly match what you pass here.
@@ -81,7 +81,7 @@ final pkce = await okta.utils.generatePkcePair();
 // pkce.codeVerifier, pkce.codeChallenge
 
 // Build the /authorize URL for your login button/webview
-final auth = AortemOktaAuthorization(
+final auth = OktaAuthorization(
   oktaDomain: config.oktaDomain,
   clientId: config.clientId,
   redirectUri: config.redirectUri,
@@ -103,7 +103,7 @@ final authorizeUrl = auth.authorizeUrl(
 
 ```dart
 // When your redirect/callback handler receives `code`:
-final tokenExchange = AortemOktaTokenExchangeConsumer(okta);
+final tokenExchange = OktaTokenExchangeConsumer(okta);
 
 final tokens = await tokenExchange.exchangeToken((payload) async {
   payload['grant_type'] = 'authorization_code';
@@ -127,7 +127,7 @@ final refreshed = await tokenExchange.exchangeToken((payload) async {
 ### 3) Validate an ID Token
 
 ```dart
-final validator = AortemOktaTokenValidator(okta);
+final validator = OktaTokenValidator(okta);
 
 // Throws if invalid signature/claims; returns decoded payload on success.
 final payload = await validator.validateToken(tokens.idToken);
@@ -141,7 +141,7 @@ validator.validateClaims(payload, expectedIssuer: 'https://${config.oktaDomain}/
 Use for first-party, trusted apps only (typically server-side or enterprise environments). Not recommended for public/mobile clients.
 
 ```dart
-final ropc = AortemOktaAuthLoginConsumer(okta);
+final ropc = OktaAuthLoginConsumer(okta);
 
 final ropcTokens = await ropc.signIn((payload) {
   payload['username'] = 'user@example.com';
@@ -159,9 +159,9 @@ Most network and OAuth errors are surfaced as typed exceptions:
 ```dart
 try {
   final payload = await validator.validateToken(tokens.idToken);
-} on AortemOktaTokenValidationException catch (e) {
+} on OktaTokenValidationException catch (e) {
   // Signature/claims invalid, expired, wrong audience/issuer, etc.
-} on AortemOktaRequestException catch (e) {
+} on OktaRequestException catch (e) {
   // HTTP/network issues or non-2xx responses from Okta
 } catch (e) {
   // Other errors
@@ -181,12 +181,12 @@ The repository includes a Flutter Web example showing authorization, token excha
 
 ## API Surface (at a glance)
 
-* `AortemOktaConfig` – Domain, clientId, redirectUri, scopes, optional clientSecret.
-* `AortemOktaBaseSDK` – Root container that wires up helpers and utilities.
-* `AortemOktaAuthorization` – Builds `/authorize` URLs (PKCE).
-* `AortemOktaTokenExchangeConsumer` – Exchanges codes and refresh tokens.
-* `AortemOktaAuthLoginConsumer` – ROPC login.
-* `AortemOktaTokenValidator` – Fetches JWKS and validates ID tokens.
+* `OktaConfig` – Domain, clientId, redirectUri, scopes, optional clientSecret.
+* `OktaBaseSDK` – Root container that wires up helpers and utilities.
+* `OktaAuthorization` – Builds `/authorize` URLs (PKCE).
+* `OktaTokenExchangeConsumer` – Exchanges codes and refresh tokens.
+* `OktaAuthLoginConsumer` – ROPC login.
+* `OktaTokenValidator` – Fetches JWKS and validates ID tokens.
 * Exceptions in `exception/` – Request, validation, and auth-specific errors.
 * Utilities in `utils/` – PKCE helpers and common HTTP plumbing.
 

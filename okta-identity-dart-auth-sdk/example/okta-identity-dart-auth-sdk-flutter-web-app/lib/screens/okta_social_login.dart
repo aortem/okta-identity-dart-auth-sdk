@@ -18,7 +18,7 @@ class _OktaSocialLoginScreenState extends State<OktaSocialLoginScreen> {
       result = '';
     });
 
-    final socialLoginConsumer = AortemOktaSocialLoginConsumer(
+    final socialLoginConsumer = OktaSocialLoginConsumer(
       oktaDomain: 'https://dev-07140130.okta.com',
       clientId: '0oaplfz1eaN0o0DLU5d7',
       redirectUri: 'http://localhost:8080/callback',

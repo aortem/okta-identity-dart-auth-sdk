@@ -48,19 +48,19 @@ class OktaUserRequestBuilder {
 /// - User registration
 /// - Profile retrieval
 /// - Password changes
-class AortemOktaUserManagementConsumer {
+class OktaUserManagementConsumer {
   /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
   final String oktaDomain;
 
   /// The Okta API token with user management permissions
   final String apiToken;
 
-  /// Creates an [AortemOktaUserManagementConsumer] instance.
+  /// Creates an [OktaUserManagementConsumer] instance.
   ///
   /// Required parameters:
   /// - [oktaDomain]: Your Okta organization domain
   /// - [apiToken]: An API token with sufficient permissions
-  AortemOktaUserManagementConsumer({
+  OktaUserManagementConsumer({
     required this.oktaDomain,
     required this.apiToken,
   });

@@ -7,7 +7,7 @@ import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_miss
 import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_revocation_exception.dart';
 
 void main() {
-  group('AortemOktaGlobalTokenRevocationConsumer', () {
+  group('OktaGlobalTokenRevocationConsumer', () {
     test('successfully revokes token', () async {
       final mockClient = MockClient((request) async {
         expect(request.url.path, contains('/v1/revoke'));
@@ -17,7 +17,7 @@ void main() {
         return http.Response('', 200);
       });
 
-      final consumer = AortemOktaGlobalTokenRevocationConsumer(
+      final consumer = OktaGlobalTokenRevocationConsumer(
         oktaDomain: 'https://example.okta.com',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -32,7 +32,7 @@ void main() {
     });
 
     test('throws MissingTokenFieldException when token is missing', () async {
-      final consumer = AortemOktaGlobalTokenRevocationConsumer(
+      final consumer = OktaGlobalTokenRevocationConsumer(
         oktaDomain: 'https://example.okta.com',
         clientId: 'clientId',
         clientSecret: 'clientSecret',
@@ -50,7 +50,7 @@ void main() {
         (_) async => http.Response('Unauthorized', 401),
       );
 
-      final consumer = AortemOktaGlobalTokenRevocationConsumer(
+      final consumer = OktaGlobalTokenRevocationConsumer(
         oktaDomain: 'https://example.okta.com',
         clientId: 'clientId',
         clientSecret: 'clientSecret',

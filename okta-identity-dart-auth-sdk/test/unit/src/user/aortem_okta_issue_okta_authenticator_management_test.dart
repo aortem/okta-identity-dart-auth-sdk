@@ -10,7 +10,7 @@ void main() {
   const userId = 'user123';
   const factorId = 'factorABC';
 
-  group('AortemOktaAuthenticatorManagement', () {
+  group('OktaAuthenticatorManagement', () {
     test('addAuthenticator - success', () async {
       final mockClient = MockClient((http.Request request) async {
         expect(
@@ -22,7 +22,7 @@ void main() {
         return http.Response(jsonEncode({'id': 'factor123'}), 200);
       });
 
-      final manager = AortemOktaAuthenticatorManagement(
+      final manager = OktaAuthenticatorManagement(
         oktaDomain: oktaDomain,
         apiToken: apiToken,
         httpClient: mockClient,
@@ -54,7 +54,7 @@ void main() {
         return http.Response(jsonEncode(mockResponse), 200);
       });
 
-      final manager = AortemOktaAuthenticatorManagement(
+      final manager = OktaAuthenticatorManagement(
         oktaDomain: oktaDomain,
         apiToken: apiToken,
         httpClient: mockClient,
@@ -76,7 +76,7 @@ void main() {
         return http.Response('', 204);
       });
 
-      final manager = AortemOktaAuthenticatorManagement(
+      final manager = OktaAuthenticatorManagement(
         oktaDomain: oktaDomain,
         apiToken: apiToken,
         httpClient: mockClient,
@@ -88,7 +88,7 @@ void main() {
     test(
       'addAuthenticator - missing authenticatorType throws ArgumentError',
       () async {
-        final manager = AortemOktaAuthenticatorManagement(
+        final manager = OktaAuthenticatorManagement(
           oktaDomain: oktaDomain,
           apiToken: apiToken,
           httpClient: MockClient((_) async => http.Response('', 200)),
@@ -111,7 +111,7 @@ void main() {
           return http.Response(jsonEncode({'not': 'a list'}), 200);
         });
 
-        final manager = AortemOktaAuthenticatorManagement(
+        final manager = OktaAuthenticatorManagement(
           oktaDomain: oktaDomain,
           apiToken: apiToken,
           httpClient: mockClient,
@@ -127,7 +127,7 @@ void main() {
     test(
       'deleteAuthenticator - missing factorId throws ArgumentError',
       () async {
-        final manager = AortemOktaAuthenticatorManagement(
+        final manager = OktaAuthenticatorManagement(
           oktaDomain: oktaDomain,
           apiToken: apiToken,
           httpClient: MockClient((_) async => http.Response('', 204)),

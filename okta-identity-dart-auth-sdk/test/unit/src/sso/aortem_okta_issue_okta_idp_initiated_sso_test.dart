@@ -2,13 +2,13 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/sso/aortem_okta_issue_okta_idp_initiated_sso.dart';
 
 void main() {
-  group('AortemOktaIdpInitiatedSSO', () {
+  group('OktaIdpInitiatedSSO', () {
     const oktaDomain = 'example.okta.com';
     const clientId = 'client123';
     const defaultRelayState = 'https://myapp.com/after-login';
 
     test('constructs SSO URL with default RelayState and custom params', () {
-      final sso = AortemOktaIdpInitiatedSSO(
+      final sso = OktaIdpInitiatedSSO(
         oktaDomain: oktaDomain,
         clientId: clientId,
         defaultRelayState: defaultRelayState,
@@ -27,7 +27,7 @@ void main() {
     });
 
     test('throws ArgumentError if RelayState is missing', () {
-      final sso = AortemOktaIdpInitiatedSSO(
+      final sso = OktaIdpInitiatedSSO(
         oktaDomain: oktaDomain,
         clientId: clientId,
       );
@@ -40,20 +40,20 @@ void main() {
 
     test('throws ArgumentError when oktaDomain is empty', () {
       expect(
-        () => AortemOktaIdpInitiatedSSO(oktaDomain: '', clientId: clientId),
+        () => OktaIdpInitiatedSSO(oktaDomain: '', clientId: clientId),
         throwsA(isA<ArgumentError>()),
       );
     });
 
     test('throws ArgumentError when clientId is empty', () {
       expect(
-        () => AortemOktaIdpInitiatedSSO(oktaDomain: oktaDomain, clientId: ''),
+        () => OktaIdpInitiatedSSO(oktaDomain: oktaDomain, clientId: ''),
         throwsA(isA<ArgumentError>()),
       );
     });
 
     test('throws Exception if constructed URL is invalid', () {
-      final sso = AortemOktaIdpInitiatedSSO(
+      final sso = OktaIdpInitiatedSSO(
         oktaDomain: 'not-a-valid-domain',
         clientId: clientId,
         defaultRelayState: defaultRelayState,
@@ -63,7 +63,7 @@ void main() {
     });
 
     test('allows complete override of RelayState in consumer', () {
-      final sso = AortemOktaIdpInitiatedSSO(
+      final sso = OktaIdpInitiatedSSO(
         oktaDomain: oktaDomain,
         clientId: clientId,
         defaultRelayState: 'https://default.com/relay',

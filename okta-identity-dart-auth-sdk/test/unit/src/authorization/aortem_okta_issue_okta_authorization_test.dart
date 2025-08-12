@@ -6,13 +6,13 @@ import 'package:http/testing.dart';
 import 'dart:convert';
 
 void main() {
-  group('AortemOktaAuthorization', () {
+  group('OktaAuthorization', () {
     const oktaDomain = 'example.okta.com';
     const clientId = 'test-client-id';
     const redirectUri = 'https://myapp.com/callback';
 
     test('constructs correct authorization URL', () {
-      final auth = AortemOktaAuthorization(
+      final auth = OktaAuthorization(
         oktaDomain: oktaDomain,
         clientId: clientId,
         redirectUri: redirectUri,
@@ -38,7 +38,7 @@ void main() {
     test(
       'throws ArgumentError if required fields are missing in URL construction',
       () {
-        final auth = AortemOktaAuthorization(
+        final auth = OktaAuthorization(
           oktaDomain: oktaDomain,
           clientId: clientId,
           redirectUri: redirectUri,
@@ -73,7 +73,7 @@ void main() {
         );
       });
 
-      final auth = AortemOktaAuthorization(
+      final auth = OktaAuthorization(
         oktaDomain: oktaDomain,
         clientId: clientId,
         redirectUri: redirectUri,
@@ -94,7 +94,7 @@ void main() {
         return http.Response('Invalid request', 400);
       });
 
-      final auth = AortemOktaAuthorization(
+      final auth = OktaAuthorization(
         oktaDomain: oktaDomain,
         clientId: clientId,
         redirectUri: redirectUri,

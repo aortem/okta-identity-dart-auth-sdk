@@ -1,14 +1,14 @@
 /// Exception thrown when the authentication payload is missing required fields.
 ///
-/// This exception is thrown when the payload provided to [AortemOktaAuthLoginConsumer.signIn]
+/// This exception is thrown when the payload provided to [OktaAuthLoginConsumer.signIn]
 /// doesn't include the required 'username' and 'password' fields.
-class AortemOktaAuthPayloadException implements Exception {
+class OktaAuthPayloadException implements Exception {
   /// A message describing the payload error.
   final String message;
 
-  /// Creates an instance of [AortemOktaAuthPayloadException] with the given [message].
-  AortemOktaAuthPayloadException(this.message);
+  /// Creates an instance of [OktaAuthPayloadException] with the given [message].
+  OktaAuthPayloadException(this.message);
 
   @override
-  String toString() => 'AortemOktaAuthPayloadException: $message';
+  String toString() => 'OktaAuthPayloadException: $message';
 }

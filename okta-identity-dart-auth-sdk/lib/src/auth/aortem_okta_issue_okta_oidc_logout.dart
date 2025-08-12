@@ -14,7 +14,7 @@ typedef LogoutPayloadModifier = FutureOr<void> Function(Map<String, String>);
 /// flexible payload configuration.
 ///
 /// The logout flow follows OpenID Connect RP-Initiated Logout specifications.
-class AortemOktaOidcLogoutConsumer {
+class OktaOidcLogoutConsumer {
   /// The base domain URL of the Okta authorization server
   /// (e.g., 'https://your-org.okta.com')
   final String oktaDomain;
@@ -28,7 +28,7 @@ class AortemOktaOidcLogoutConsumer {
   /// The HTTP client used to make requests (can be customized for testing)
   final http.Client httpClient;
 
-  /// Creates an instance of [AortemOktaOidcLogoutConsumer].
+  /// Creates an instance of [OktaOidcLogoutConsumer].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base URL of your Okta organization
@@ -37,7 +37,7 @@ class AortemOktaOidcLogoutConsumer {
   ///
   /// Optional parameter:
   /// - [httpClient]: Custom HTTP client instance (defaults to a new [http.Client])
-  AortemOktaOidcLogoutConsumer({
+  OktaOidcLogoutConsumer({
     required this.oktaDomain,
     required this.clientId,
     required this.postLogoutRedirectUri,
@@ -53,7 +53,7 @@ class AortemOktaOidcLogoutConsumer {
   ///
   /// Example usage:
   /// ```dart
-  /// final logoutConsumer = AortemOktaOidcLogoutConsumer(
+  /// final logoutConsumer = OktaOidcLogoutConsumer(
   ///   oktaDomain: 'https://your-org.okta.com',
   ///   clientId: 'your_client_id',
   ///   postLogoutRedirectUri: 'com.example.app:/postlogout',

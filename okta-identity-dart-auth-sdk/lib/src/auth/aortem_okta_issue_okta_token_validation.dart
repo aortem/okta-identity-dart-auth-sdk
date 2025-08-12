@@ -11,7 +11,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// - Signature verification using Okta's public keys
 /// - Standard JWT claims validation (expiration, issuer, audience)
 /// - Key rotation support through JWKS endpoint
-class AortemOktaTokenValidator {
+class OktaTokenValidator {
   /// The Okta domain (e.g., 'your-org.okta.com').
   final String oktaDomain;
 
@@ -24,12 +24,12 @@ class AortemOktaTokenValidator {
   /// Cache for storing public keys by key ID (kid).
   final Map<String, Map<String, dynamic>> _cachedKeys = {};
 
-  /// Creates an instance of [AortemOktaTokenValidator].
+  /// Creates an instance of [OktaTokenValidator].
   ///
   /// Requires:
   /// - [oktaDomain]: Your Okta domain (e.g., 'your-org.okta.com')
   /// - [clientId]: The client ID that should match the token's audience claim
-  AortemOktaTokenValidator({required this.oktaDomain, required this.clientId})
+  OktaTokenValidator({required this.oktaDomain, required this.clientId})
     : issuer = 'https://$oktaDomain/oauth2/default';
 
   /// Validates a JWT token and returns its decoded payload if valid.

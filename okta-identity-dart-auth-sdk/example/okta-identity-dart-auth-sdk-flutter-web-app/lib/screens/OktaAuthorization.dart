@@ -10,7 +10,7 @@ class OktaAuthScreen extends StatefulWidget {
 }
 
 class _OktaAuthScreenState extends State<OktaAuthScreen> {
-  late AortemOktaAuthorization _auth;
+  late OktaAuthorization _auth;
   String? _authUrl;
   String? _tokenResult;
   final String clientId = 'your-client-id';
@@ -21,7 +21,7 @@ class _OktaAuthScreenState extends State<OktaAuthScreen> {
   @override
   void initState() {
     super.initState();
-    _auth = AortemOktaAuthorization(
+    _auth = OktaAuthorization(
       clientId: clientId,
       redirectUri: redirectUri,
       oktaDomain: oktaDomain,

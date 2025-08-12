@@ -5,15 +5,15 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/base/aortem_okta_issue_okta_base_sdk_setup.dart';
 
 void main() {
-  group('AortemOktaBaseSDK', () {
+  group('OktaBaseSDK', () {
     test('initializes with valid configuration', () {
-      final config = AortemOktaConfig(
+      final config = OktaConfig(
         oktaDomain: 'https://example.okta.com',
         clientId: 'testClientId',
         redirectUri: 'https://myapp.com/callback',
       );
 
-      final sdk = AortemOktaBaseSDK(config: config);
+      final sdk = OktaBaseSDK(config: config);
 
       expect(sdk.config.oktaDomain, equals('https://example.okta.com'));
       expect(sdk.httpClient, isA<http.Client>());
@@ -23,20 +23,20 @@ void main() {
 
     test('throws ArgumentError for empty config values', () {
       expect(
-        () => AortemOktaConfig(oktaDomain: '', clientId: '', redirectUri: ''),
+        () => OktaConfig(oktaDomain: '', clientId: '', redirectUri: ''),
         throwsA(isA<ArgumentError>()),
       );
     });
 
     test('uses provided HTTP client', () {
       final mockClient = http.Client();
-      final config = AortemOktaConfig(
+      final config = OktaConfig(
         oktaDomain: 'https://example.okta.com',
         clientId: 'testClientId',
         redirectUri: 'https://myapp.com/callback',
       );
 
-      final sdk = AortemOktaBaseSDK(config: config, httpClient: mockClient);
+      final sdk = OktaBaseSDK(config: config, httpClient: mockClient);
       expect(sdk.httpClient, equals(mockClient));
 
       sdk.dispose();

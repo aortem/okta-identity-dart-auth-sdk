@@ -7,7 +7,7 @@ import 'package:http/testing.dart';
 // Update import path if needed
 
 void main() {
-  group('AortemOktaDynamicClientRegistration', () {
+  group('OktaDynamicClientRegistration', () {
     late List<http.Request> capturedRequests;
 
     setUp(() {
@@ -37,7 +37,7 @@ void main() {
           );
         });
 
-        final registration = AortemOktaDynamicClientRegistration(
+        final registration = OktaDynamicClientRegistration(
           oktaDomain: 'example.okta.com',
           httpClient: mockClient,
         );
@@ -52,7 +52,7 @@ void main() {
     );
 
     test('throws ArgumentError if redirect_uris is missing', () async {
-      final registration = AortemOktaDynamicClientRegistration(
+      final registration = OktaDynamicClientRegistration(
         oktaDomain: 'example.okta.com',
         httpClient: MockClient((_) async => http.Response('{}', 201)),
       );
@@ -70,7 +70,7 @@ void main() {
         return http.Response('Bad Request', 400);
       });
 
-      final registration = AortemOktaDynamicClientRegistration(
+      final registration = OktaDynamicClientRegistration(
         oktaDomain: 'example.okta.com',
         httpClient: mockClient,
       );
@@ -94,7 +94,7 @@ void main() {
         throw Exception('Connection refused');
       });
 
-      final registration = AortemOktaDynamicClientRegistration(
+      final registration = OktaDynamicClientRegistration(
         oktaDomain: 'example.okta.com',
         httpClient: mockClient,
       );

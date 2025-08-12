@@ -24,7 +24,7 @@ class _DynamicClientRegistrationScreenState
       _error = null;
     });
 
-    final registrar = AortemOktaDynamicClientRegistration(
+    final registrar = OktaDynamicClientRegistration(
       oktaDomain: 'dev-123456.okta.com', // Replace with your Okta domain
     );
 

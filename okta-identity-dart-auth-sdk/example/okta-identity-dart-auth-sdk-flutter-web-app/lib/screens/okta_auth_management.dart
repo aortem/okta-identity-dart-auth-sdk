@@ -11,7 +11,7 @@ class AuthenticatorTestScreen extends StatefulWidget {
 }
 
 class _AuthenticatorTestScreenState extends State<AuthenticatorTestScreen> {
-  final _manager = AortemOktaAuthenticatorManagement(
+  final _manager = OktaAuthenticatorManagement(
     oktaDomain: 'dev-07140130.okta.com', // <-- replace with your Okta domain
     apiToken:
         'your_api_token_here', // <-- securely store this, avoid hardcoding

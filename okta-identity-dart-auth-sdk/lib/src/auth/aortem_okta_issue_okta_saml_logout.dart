@@ -8,7 +8,7 @@ import 'dart:async';
 ///
 /// The consumer pattern allows flexible configuration of the SAML logout request
 /// while ensuring required parameters are present.
-class AortemOktaSamlLogoutConsumer {
+class OktaSamlLogoutConsumer {
   /// The base domain URL of the Okta organization
   /// (e.g., 'https://your-org.okta.com')
   final String oktaDomain;
@@ -19,7 +19,7 @@ class AortemOktaSamlLogoutConsumer {
   /// The default RelayState value to be included in logout requests
   final String defaultRelayState;
 
-  /// Creates an instance of [AortemOktaSamlLogoutConsumer].
+  /// Creates an instance of [OktaSamlLogoutConsumer].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base URL of your Okta organization (must not be empty)
@@ -27,7 +27,7 @@ class AortemOktaSamlLogoutConsumer {
   /// - [defaultRelayState]: The default RelayState value (must not be empty)
   ///
   /// Throws [ArgumentError] if any required parameters are empty.
-  AortemOktaSamlLogoutConsumer({
+  OktaSamlLogoutConsumer({
     required this.oktaDomain,
     required this.applicationId,
     required this.defaultRelayState,
@@ -58,7 +58,7 @@ class AortemOktaSamlLogoutConsumer {
   ///
   /// Example usage:
   /// ```dart
-  /// final samlLogout = AortemOktaSamlLogoutConsumer(
+  /// final samlLogout = OktaSamlLogoutConsumer(
   ///   oktaDomain: 'https://your-org.okta.com',
   ///   applicationId: '0oa1a2b3c4d5e6f7g8h9',
   ///   defaultRelayState: 'https://yourapp.com/logout',

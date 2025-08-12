@@ -12,7 +12,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// - Issuer information
 ///
 /// The metadata is automatically cached for 10 minutes to reduce network calls.
-class AortemOktaMetadata {
+class OktaMetadata {
   /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
   final String oktaDomain;
 
@@ -25,14 +25,14 @@ class AortemOktaMetadata {
   /// Expiration time for the cached metadata
   DateTime? _cacheExpiry;
 
-  /// Creates an instance of [AortemOktaMetadata].
+  /// Creates an instance of [OktaMetadata].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base domain of your Okta organization
   ///
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
-  AortemOktaMetadata({required this.oktaDomain, http.Client? httpClient})
+  OktaMetadata({required this.oktaDomain, http.Client? httpClient})
     : httpClient = httpClient ?? http.Client();
 
   /// Fetches the OpenID Connect metadata from Okta's well-known endpoint.
@@ -49,7 +49,7 @@ class AortemOktaMetadata {
   ///
   /// Example:
   /// ```dart
-  /// final metadata = AortemOktaMetadata(oktaDomain: 'your-org.okta.com');
+  /// final metadata = OktaMetadata(oktaDomain: 'your-org.okta.com');
   /// final config = await metadata.getMetadata();
   /// print('Token endpoint: ${config['token_endpoint']}');
   /// ```

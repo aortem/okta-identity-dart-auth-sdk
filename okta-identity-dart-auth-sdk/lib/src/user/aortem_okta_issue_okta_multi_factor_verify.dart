@@ -11,7 +11,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// - Supports token type hints for optimized revocation
 /// - Implements Basic Authentication for client credentials
 /// - Validates input parameters
-class AortemOktaTokenRevocation {
+class OktaTokenRevocation {
   /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
   final String oktaDomain;
 
@@ -24,7 +24,7 @@ class AortemOktaTokenRevocation {
   /// The HTTP client used for making revocation requests
   final http.Client httpClient;
 
-  /// Creates an instance of [AortemOktaTokenRevocation].
+  /// Creates an instance of [OktaTokenRevocation].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base domain of your Okta organization
@@ -33,7 +33,7 @@ class AortemOktaTokenRevocation {
   /// Optional parameters:
   /// - [clientSecret]: Required for confidential clients
   /// - [httpClient]: Custom HTTP client (defaults to standard [http.Client])
-  AortemOktaTokenRevocation({
+  OktaTokenRevocation({
     required this.oktaDomain,
     required this.clientId,
     this.clientSecret,
@@ -47,7 +47,7 @@ class AortemOktaTokenRevocation {
   ///
   /// Example:
   /// ```dart
-  /// final revoker = AortemOktaTokenRevocation(
+  /// final revoker = OktaTokenRevocation(
   ///   oktaDomain: 'your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   clientSecret: 'your-client-secret',

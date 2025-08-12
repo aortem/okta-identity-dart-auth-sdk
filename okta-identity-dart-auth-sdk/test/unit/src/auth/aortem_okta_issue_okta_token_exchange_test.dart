@@ -8,13 +8,13 @@ import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_toke
 class MockHttpClient extends Mock implements http.Client {}
 
 void main() {
-  group('AortemOktaTokenExchangeConsumer', () {
-    late AortemOktaTokenExchangeConsumer tokenExchangeConsumer;
+  group('OktaTokenExchangeConsumer', () {
+    late OktaTokenExchangeConsumer tokenExchangeConsumer;
     late MockHttpClient mockHttpClient;
 
     setUp(() {
       mockHttpClient = MockHttpClient();
-      tokenExchangeConsumer = AortemOktaTokenExchangeConsumer(
+      tokenExchangeConsumer = OktaTokenExchangeConsumer(
         oktaDomain: 'https://example.okta.com',
         clientId: 'testClientId',
         redirectUri: 'https://example.com/callback',

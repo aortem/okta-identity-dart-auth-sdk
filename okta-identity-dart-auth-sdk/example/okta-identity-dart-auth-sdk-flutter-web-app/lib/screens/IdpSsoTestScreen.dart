@@ -20,7 +20,7 @@ class _IdpSsoTestScreenState extends State<IdpSsoTestScreen> {
 
   void _buildSsoUrl() {
     try {
-      final sso = AortemOktaIdpInitiatedSSO(
+      final sso = OktaIdpInitiatedSSO(
         oktaDomain: _oktaDomain,
         clientId: _clientId,
         defaultRelayState: _relayState,

@@ -11,7 +11,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 ///
 /// The consumer pattern allows flexible configuration of token requests while
 /// maintaining required parameters and validation.
-class AortemOktaTokenExchangeConsumer {
+class OktaTokenExchangeConsumer {
   /// The base domain URL of the Okta authorization server
   /// (e.g., 'https://your-org.okta.com')
   final String oktaDomain;
@@ -25,7 +25,7 @@ class AortemOktaTokenExchangeConsumer {
   /// The redirect URI registered in the Okta application
   final String redirectUri;
 
-  /// Creates an instance of [AortemOktaTokenExchangeConsumer].
+  /// Creates an instance of [OktaTokenExchangeConsumer].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base URL of your Okta organization
@@ -34,7 +34,7 @@ class AortemOktaTokenExchangeConsumer {
   ///
   /// Optional parameter:
   /// - [clientSecret]: The client secret for confidential clients
-  AortemOktaTokenExchangeConsumer({
+  OktaTokenExchangeConsumer({
     required this.oktaDomain,
     required this.clientId,
     required this.redirectUri,
@@ -57,7 +57,7 @@ class AortemOktaTokenExchangeConsumer {
   ///
   /// Example usage for authorization code exchange:
   /// ```dart
-  /// final tokenExchange = AortemOktaTokenExchangeConsumer(
+  /// final tokenExchange = OktaTokenExchangeConsumer(
   ///   oktaDomain: 'https://your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   redirectUri: 'com.example.app:/callback',

@@ -5,17 +5,17 @@ import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_soci
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
 void main() {
-  group('AortemOktaSocialLoginConsumer', () {
+  group('OktaSocialLoginConsumer', () {
     const oktaDomain = 'https://your-org.okta.com';
     const clientId = 'test-client-id';
     const redirectUri = 'com.example.app:/callback';
 
-    late AortemOktaSocialLoginConsumer consumer;
+    late OktaSocialLoginConsumer consumer;
 
     test(
       'should throw ArgumentError when required fields are missing',
       () async {
-        consumer = AortemOktaSocialLoginConsumer(
+        consumer = OktaSocialLoginConsumer(
           oktaDomain: oktaDomain,
           clientId: clientId,
           redirectUri: redirectUri,
@@ -36,7 +36,7 @@ void main() {
         return http.Response('Unauthorized', 401);
       });
 
-      consumer = AortemOktaSocialLoginConsumer(
+      consumer = OktaSocialLoginConsumer(
         oktaDomain: oktaDomain,
         clientId: clientId,
         redirectUri: redirectUri,

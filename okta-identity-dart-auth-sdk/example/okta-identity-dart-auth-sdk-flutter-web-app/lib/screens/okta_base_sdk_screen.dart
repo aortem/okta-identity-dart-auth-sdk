@@ -9,7 +9,7 @@ class OktaBaseSDKScreen extends StatefulWidget {
 }
 
 class _OktaBaseSDKScreenState extends State<OktaBaseSDKScreen> {
-  late AortemOktaBaseSDK _sdk;
+  late OktaBaseSDK _sdk;
   String _status = 'Initializing...';
 
   @override
@@ -20,14 +20,14 @@ class _OktaBaseSDKScreenState extends State<OktaBaseSDKScreen> {
 
   void _initializeSdk() {
     try {
-      final config = AortemOktaConfig(
+      final config = OktaConfig(
         oktaDomain: 'https://dev-07140130.okta.com',
         clientId: '0oaplfz1eaN0o0DLU5d7',
         redirectUri: 'http://localhost:8080/callback',
         clientSecret: 'yourClientSecret',
       );
 
-      _sdk = AortemOktaBaseSDK(config: config);
+      _sdk = OktaBaseSDK(config: config);
 
       setState(() {
         _status = 'SDK initialized successfully!';

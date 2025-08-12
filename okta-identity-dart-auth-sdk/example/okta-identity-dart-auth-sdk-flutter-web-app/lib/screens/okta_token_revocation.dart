@@ -32,7 +32,7 @@ class _OktaTokenRevocationScreenState extends State<OktaTokenRevocationScreen> {
     required String type,
   }) async {
     try {
-      final revoker = AortemOktaGlobalTokenRevocationConsumer(
+      final revoker = OktaGlobalTokenRevocationConsumer(
         oktaDomain: _oktaDomain,
         clientId: _clientId,
         clientSecret: _clientSecret,

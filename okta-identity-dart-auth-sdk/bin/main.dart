@@ -4,7 +4,7 @@ import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_soci
 
 void main() async {
   // Initialize Okta configuration
-  final config = AortemOktaConfig(
+  final config = OktaConfig(
     oktaDomain: 'https://dev-07140130.okta.com',
     clientId: '0oaplfz1eaN0o0DLU5d7',
     clientSecret:
@@ -13,11 +13,11 @@ void main() async {
   );
 
   // Create base SDK instance
-  final baseSDK = AortemOktaBaseSDK(config: config);
+  final baseSDK = OktaBaseSDK(config: config);
 
   try {
     // Example 1: Username/Password Authentication
-    final authLogin = AortemOktaAuthLoginConsumer(baseSDK);
+    final authLogin = OktaAuthLoginConsumer(baseSDK);
     final tokenResponse = await authLogin.signIn((payload) {
       payload['username'] = 'developers@aortem.io';
       payload['password'] = 'Hello@1234';
@@ -27,7 +27,7 @@ void main() async {
     print('Refresh Token: ${tokenResponse.refreshToken}');
 
     // Example 2: Social Login
-    final socialLogin = AortemOktaSocialLoginConsumer(
+    final socialLogin = OktaSocialLoginConsumer(
       oktaDomain: config.oktaDomain,
       clientId: config.clientId,
       redirectUri: config.redirectUri,

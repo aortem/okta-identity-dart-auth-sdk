@@ -16,7 +16,7 @@ typedef AuthenticatorPayloadBuilder = Map<String, dynamic> Function();
 /// - Delete existing authenticators
 ///
 /// Requires an Okta API token with appropriate permissions.
-class AortemOktaAuthenticatorManagement {
+class OktaAuthenticatorManagement {
   /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
   final String oktaDomain;
 
@@ -26,7 +26,7 @@ class AortemOktaAuthenticatorManagement {
   /// The HTTP client used for making requests
   final http.Client _httpClient;
 
-  /// Creates an instance of [AortemOktaAuthenticatorManagement].
+  /// Creates an instance of [OktaAuthenticatorManagement].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base domain of your Okta organization
@@ -34,7 +34,7 @@ class AortemOktaAuthenticatorManagement {
   ///
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
-  AortemOktaAuthenticatorManagement({
+  OktaAuthenticatorManagement({
     required this.oktaDomain,
     required this.apiToken,
     http.Client? httpClient,
@@ -48,7 +48,7 @@ class AortemOktaAuthenticatorManagement {
   ///
   /// Example:
   /// ```dart
-  /// final authManager = AortemOktaAuthenticatorManagement(
+  /// final authManager = OktaAuthenticatorManagement(
   ///   oktaDomain: 'your-org.okta.com',
   ///   apiToken: 'your_api_token',
   /// );

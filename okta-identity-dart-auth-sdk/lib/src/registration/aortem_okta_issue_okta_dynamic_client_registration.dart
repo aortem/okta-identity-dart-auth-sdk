@@ -13,7 +13,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// - On-demand client registration for multi-tenant applications
 /// - Automated client provisioning in CI/CD pipelines
 /// - Temporary client registration for testing purposes
-class AortemOktaDynamicClientRegistration {
+class OktaDynamicClientRegistration {
   /// The base domain of the Okta organization
   /// (e.g., 'your-org.okta.com' or 'https://your-org.okta.com')
   final String oktaDomain;
@@ -21,14 +21,14 @@ class AortemOktaDynamicClientRegistration {
   /// The HTTP client used for making registration requests
   final http.Client httpClient;
 
-  /// Creates an instance of [AortemOktaDynamicClientRegistration].
+  /// Creates an instance of [OktaDynamicClientRegistration].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base domain of your Okta organization
   ///
   /// Optional parameters:
   /// - [httpClient]: Custom HTTP client instance (defaults to [http.Client])
-  AortemOktaDynamicClientRegistration({
+  OktaDynamicClientRegistration({
     required this.oktaDomain,
     http.Client? httpClient,
   }) : httpClient = httpClient ?? http.Client();
@@ -42,7 +42,7 @@ class AortemOktaDynamicClientRegistration {
   ///
   /// Example usage:
   /// ```dart
-  /// final registration = AortemOktaDynamicClientRegistration(
+  /// final registration = OktaDynamicClientRegistration(
   ///   oktaDomain: 'your-org.okta.com',
   /// );
   ///

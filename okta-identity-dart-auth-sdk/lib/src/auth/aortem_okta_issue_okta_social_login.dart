@@ -10,7 +10,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 ///
 /// The consumer pattern allows flexible configuration of the authentication
 /// payload while ensuring required parameters are present.
-class AortemOktaSocialLoginConsumer {
+class OktaSocialLoginConsumer {
   /// The base domain URL of the Okta authorization server (e.g., 'https://your-org.okta.com')
   final String oktaDomain;
 
@@ -23,7 +23,7 @@ class AortemOktaSocialLoginConsumer {
   /// The HTTP client used to make requests (can be customized for testing)
   final http.Client httpClient;
 
-  /// Creates an instance of [AortemOktaSocialLoginConsumer].
+  /// Creates an instance of [OktaSocialLoginConsumer].
   ///
   /// Requires:
   /// - [oktaDomain]: The base URL of your Okta organization
@@ -32,7 +32,7 @@ class AortemOktaSocialLoginConsumer {
   ///
   /// Optional:
   /// - [httpClient]: Custom HTTP client instance (defaults to a new [http.Client])
-  AortemOktaSocialLoginConsumer({
+  OktaSocialLoginConsumer({
     required this.oktaDomain,
     required this.clientId,
     required this.redirectUri,
@@ -48,7 +48,7 @@ class AortemOktaSocialLoginConsumer {
   ///
   /// Example usage:
   /// ```dart
-  /// final socialLogin = AortemOktaSocialLoginConsumer(
+  /// final socialLogin = OktaSocialLoginConsumer(
   ///   oktaDomain: 'https://your-org.okta.com',
   ///   clientId: 'your_client_id',
   ///   redirectUri: 'com.example.app:/callback',

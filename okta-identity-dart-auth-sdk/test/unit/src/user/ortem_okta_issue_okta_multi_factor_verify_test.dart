@@ -5,7 +5,7 @@ import 'package:http/testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/user/aortem_okta_issue_okta_multi_factor_verify.dart';
 
 void main() {
-  group('AortemOktaTokenRevocation', () {
+  group('OktaTokenRevocation', () {
     const oktaDomain = 'dev-123456.okta.com';
     const clientId = 'test-client-id';
     const clientSecret = 'test-secret';
@@ -26,7 +26,7 @@ void main() {
         return http.Response('', 200);
       });
 
-      final revoker = AortemOktaTokenRevocation(
+      final revoker = OktaTokenRevocation(
         oktaDomain: oktaDomain,
         clientId: clientId,
         clientSecret: clientSecret,
@@ -37,7 +37,7 @@ void main() {
     });
 
     test('throws ArgumentError for empty token', () {
-      final revoker = AortemOktaTokenRevocation(
+      final revoker = OktaTokenRevocation(
         oktaDomain: oktaDomain,
         clientId: clientId,
         clientSecret: clientSecret,
@@ -54,7 +54,7 @@ void main() {
         return http.Response('Unauthorized', 401);
       });
 
-      final revoker = AortemOktaTokenRevocation(
+      final revoker = OktaTokenRevocation(
         oktaDomain: oktaDomain,
         clientId: clientId,
         clientSecret: clientSecret,
@@ -79,7 +79,7 @@ void main() {
         return http.Response('', 200);
       });
 
-      final revoker = AortemOktaTokenRevocation(
+      final revoker = OktaTokenRevocation(
         oktaDomain: oktaDomain,
         clientId: clientId,
         clientSecret: clientSecret,

@@ -3,12 +3,12 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/utils/aortem_okta_issue_okta_utility_methods.dart';
 
 void main() {
-  group('AortemOktaUtilityMethods', () {
-    late AortemOktaUtilityMethods oktaUtility;
+  group('OktaUtilityMethods', () {
+    late OktaUtilityMethods oktaUtility;
 
     group('getSignInLink', () {
       test('should throw exception on failure', () async {
-        oktaUtility = AortemOktaUtilityMethods(
+        oktaUtility = OktaUtilityMethods(
           oktaDomain: 'https://your-org.okta.com',
           apiToken: 'mock-api-token',
         );
@@ -25,7 +25,7 @@ void main() {
 
     group('acceptDelegatedRequest', () {
       test('should throw exception on failure', () async {
-        oktaUtility = AortemOktaUtilityMethods(
+        oktaUtility = OktaUtilityMethods(
           oktaDomain: 'https://your-org.okta.com',
           apiToken: 'mock-api-token',
         );

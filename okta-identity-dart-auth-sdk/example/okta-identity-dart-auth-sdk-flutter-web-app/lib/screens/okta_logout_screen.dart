@@ -19,7 +19,7 @@ class _OktaLogoutScreenState extends State<OktaLogoutScreen> {
       _message = "Processing logout...";
     });
 
-    final logoutConsumer = AortemOktaOidcLogoutConsumer(
+    final logoutConsumer = OktaOidcLogoutConsumer(
       oktaDomain: 'https://dev-07140130.okta.com', // Replace with your domain
       clientId: '0oaplfz1eaN0o0DLU5d7', // Replace with your Client ID
       postLogoutRedirectUri: 'http://localhost:8080',

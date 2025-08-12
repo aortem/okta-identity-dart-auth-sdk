@@ -62,7 +62,7 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
     if (uri.queryParameters.containsKey('code')) {
       setState(() => _result = "🔁 Handling callback...");
 
-      final tokenHandler = AortemOktaTokenExchangeConsumer(
+      final tokenHandler = OktaTokenExchangeConsumer(
         oktaDomain: _oktaDomain,
         clientId: _clientId,
         redirectUri: _redirectUri,
@@ -94,7 +94,7 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
 
   Future<void> _startLogin() async {
     _generateAndStorePkcePair();
-    final authorize = AortemOktaAuthorization(
+    final authorize = OktaAuthorization(
       oktaDomain: _oktaDomain,
       clientId: _clientId,
       redirectUri: _redirectUri,
@@ -112,7 +112,7 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
   }
 
   Future<void> _logout() async {
-    final logoutConsumer = AortemOktaOidcLogoutConsumer(
+    final logoutConsumer = OktaOidcLogoutConsumer(
       oktaDomain: _oktaDomain,
       clientId: _clientId,
       postLogoutRedirectUri: _redirectUri,
@@ -131,7 +131,7 @@ class _OktaAuthLoginScreenState extends State<OktaAuthLoginScreen> {
 
   Future<void> _samlLogout() async {
     try {
-      final samlLogout = AortemOktaSamlLogoutConsumer(
+      final samlLogout = OktaSamlLogoutConsumer(
         oktaDomain: 'https://dev-07140130.okta.com',
         applicationId: '0oaplfz1eaN0o0DLU5d7', // Your Okta SAML App ID
         defaultRelayState:

@@ -6,12 +6,12 @@ import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_toke
 import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_token_validation_token.dart';
 
 void main() {
-  group('AortemOktaTokenValidator', () {
-    late AortemOktaTokenValidator validator;
+  group('OktaTokenValidator', () {
+    late OktaTokenValidator validator;
     late String fakeToken;
 
     setUp(() {
-      validator = AortemOktaTokenValidator(
+      validator = OktaTokenValidator(
         oktaDomain: 'example.okta.com',
         clientId: 'test-client-id',
       );
@@ -64,7 +64,7 @@ void main() {
     });
 
     test('throws when key is not found in JWKS', () async {
-      final validator = AortemOktaTokenValidator(
+      final validator = OktaTokenValidator(
         oktaDomain: 'example.okta.com',
         clientId: 'test-client-id',
       );

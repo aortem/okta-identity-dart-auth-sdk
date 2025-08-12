@@ -2,7 +2,7 @@
 ///
 /// Contains the authentication tokens and metadata returned after a successful
 /// username/password authentication.
-class AortemOktaTokenResponse {
+class OktaTokenResponse {
   /// The access token used to authenticate API requests.
   final String accessToken;
 
@@ -18,8 +18,8 @@ class AortemOktaTokenResponse {
   /// The type of token returned (typically 'Bearer').
   final String tokenType;
 
-  /// Creates an instance of [AortemOktaTokenResponse] with the given token values.
-  AortemOktaTokenResponse({
+  /// Creates an instance of [OktaTokenResponse] with the given token values.
+  OktaTokenResponse({
     required this.accessToken,
     this.idToken,
     this.refreshToken,
@@ -28,8 +28,8 @@ class AortemOktaTokenResponse {
   });
 
   /// Creates an instance from a JSON map.
-  factory AortemOktaTokenResponse.fromJson(Map<String, dynamic> json) {
-    return AortemOktaTokenResponse(
+  factory OktaTokenResponse.fromJson(Map<String, dynamic> json) {
+    return OktaTokenResponse(
       accessToken: json['access_token'],
       idToken: json['id_token'],
       refreshToken: json['refresh_token'],

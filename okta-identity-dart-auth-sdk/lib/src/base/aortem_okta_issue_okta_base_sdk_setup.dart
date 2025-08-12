@@ -12,14 +12,14 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 /// ## Usage
 ///
 /// ```dart
-/// final config = AortemOktaConfig(
+/// final config = OktaConfig(
 ///   oktaDomain: 'https://your-okta-domain.okta.com',
 ///   clientId: 'your_client_id',
 ///   redirectUri: 'com.example.app:/callback',
 ///   clientSecret: 'your_client_secret', // optional for public clients
 /// );
 ///
-/// final sdk = AortemOktaBaseSDK(config: config);
+/// final sdk = OktaBaseSDK(config: config);
 /// ```
 ///
 /// ## Features
@@ -31,10 +31,10 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 ///
 /// This exception is typically thrown when required configuration parameters
 /// are missing or malformed during initialization.
-class AortemOktaConfigurationException implements Exception {
+class OktaConfigurationException implements Exception {
   /// Creates a configuration exception with the given error message.
   /// [message] should describe the specific configuration issue encountered.
-  AortemOktaConfigurationException(this.message);
+  OktaConfigurationException(this.message);
 
   /// The error message describing the configuration issue.
   /// This provides details about what went wrong during configuration.
@@ -43,14 +43,14 @@ class AortemOktaConfigurationException implements Exception {
   /// Returns a string representation of the exception.
   /// Formats the exception type with its message for debugging purposes.
   @override
-  String toString() => 'AortemOktaConfigurationException: $message';
+  String toString() => 'OktaConfigurationException: $message';
 }
 
 /// Holds all required configuration parameters for initializing the Okta SDK.
 ///
 /// This class validates and stores the essential configuration needed to
 /// communicate with Okta's OAuth 2.0 and OpenID Connect endpoints.
-class AortemOktaConfig {
+class OktaConfig {
   /// Creates a new Okta configuration.
   ///
   /// Validates that required parameters are not empty before initialization.
@@ -64,7 +64,7 @@ class AortemOktaConfig {
   /// - [clientSecret]: The client secret (required for confidential clients)
   ///
   /// Throws [ArgumentError] if any required parameters are empty.
-  AortemOktaConfig({
+  OktaConfig({
     required this.oktaDomain,
     required this.clientId,
     required this.redirectUri,
@@ -104,7 +104,7 @@ class AortemOktaConfig {
 /// - Resource cleanup
 ///
 /// All Okta SDK functionality should extend or use this base class.
-class AortemOktaBaseSDK {
+class OktaBaseSDK {
   /// Initializes the base SDK with the given configuration.
   ///
   /// Parameters:
@@ -112,7 +112,7 @@ class AortemOktaBaseSDK {
   /// - [httpClient]: Optional custom HTTP client (uses default if not provided)
   ///
   /// The constructor stores the configuration and initializes the HTTP client.
-  AortemOktaBaseSDK({required AortemOktaConfig config, http.Client? httpClient})
+  OktaBaseSDK({required OktaConfig config, http.Client? httpClient})
     : _config = config, // Stores the provided configuration
       _httpClient =
           httpClient ??
@@ -120,7 +120,7 @@ class AortemOktaBaseSDK {
 
   /// Private field storing the Okta configuration.
   /// Accessed through the public getter `config`.
-  final AortemOktaConfig _config;
+  final OktaConfig _config;
 
   /// Private field storing the HTTP client instance.
   /// Accessed through the public getter `httpClient`.
@@ -132,7 +132,7 @@ class AortemOktaBaseSDK {
 
   /// Gets the current Okta configuration.
   /// Provides read-only access to the configuration parameters.
-  AortemOktaConfig get config => _config;
+  OktaConfig get config => _config;
 
   /// Gets the shared HTTP client for making authenticated requests.
   ///

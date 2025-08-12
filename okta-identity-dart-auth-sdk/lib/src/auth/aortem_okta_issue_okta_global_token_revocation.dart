@@ -84,7 +84,7 @@ class OktaTokenRevocationPayloadBuilder {
 /// - Requires proper client credentials
 /// - Should only be used with HTTPS connections
 /// - Tokens are immediately invalidated globally
-class AortemOktaGlobalTokenRevocationConsumer {
+class OktaGlobalTokenRevocationConsumer {
   /// The base domain of the Okta organization
   ///
   /// Example: 'your-org.okta.com'
@@ -113,13 +113,13 @@ class AortemOktaGlobalTokenRevocationConsumer {
   ///
   /// Example:
   /// ```dart
-  /// final revoker = AortemOktaGlobalTokenRevocationConsumer(
+  /// final revoker = OktaGlobalTokenRevocationConsumer(
   ///   oktaDomain: 'your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   clientSecret: 'your-secret-here',
   /// );
   /// ```
-  AortemOktaGlobalTokenRevocationConsumer({
+  OktaGlobalTokenRevocationConsumer({
     required this.oktaDomain,
     required this.clientId,
     this.clientSecret,

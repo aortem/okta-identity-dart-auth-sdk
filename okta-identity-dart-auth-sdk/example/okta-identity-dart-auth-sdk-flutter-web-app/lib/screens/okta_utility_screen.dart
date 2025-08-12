@@ -9,7 +9,7 @@ class OktaUtilityScreen extends StatefulWidget {
 }
 
 class _OktaUtilityScreenState extends State<OktaUtilityScreen> {
-  final okta = AortemOktaUtilityMethods(
+  final okta = OktaUtilityMethods(
     oktaDomain: 'https://dev-123456.okta.com', // Replace with your Okta domain
     apiToken: 'yourApiToken', // Replace with your API token
   );

@@ -22,7 +22,7 @@ class _OktaMetadataScreenState extends State<OktaMetadataScreen> {
     });
 
     try {
-      final oktaMetadata = AortemOktaMetadata(oktaDomain: _oktaDomain);
+      final oktaMetadata = OktaMetadata(oktaDomain: _oktaDomain);
       final data = await oktaMetadata.getMetadata();
 
       setState(() {

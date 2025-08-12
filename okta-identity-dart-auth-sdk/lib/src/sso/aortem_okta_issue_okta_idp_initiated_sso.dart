@@ -9,7 +9,7 @@
 /// - Validates required parameters
 /// - Supports dynamic parameter customization
 /// - Handles both default and custom RelayState values
-class AortemOktaIdpInitiatedSSO {
+class OktaIdpInitiatedSSO {
   /// The base domain of the Okta organization (e.g., 'your-org.okta.com')
   final String oktaDomain;
 
@@ -19,7 +19,7 @@ class AortemOktaIdpInitiatedSSO {
   /// Optional default RelayState value for SSO redirects
   final String? defaultRelayState;
 
-  /// Creates an instance of [AortemOktaIdpInitiatedSSO].
+  /// Creates an instance of [OktaIdpInitiatedSSO].
   ///
   /// Required parameters:
   /// - [oktaDomain]: The base domain of your Okta organization
@@ -29,7 +29,7 @@ class AortemOktaIdpInitiatedSSO {
   /// - [defaultRelayState]: Default RelayState value for SSO redirects
   ///
   /// Throws [ArgumentError] if required parameters are empty
-  AortemOktaIdpInitiatedSSO({
+  OktaIdpInitiatedSSO({
     required this.oktaDomain,
     required this.clientId,
     this.defaultRelayState,
@@ -50,7 +50,7 @@ class AortemOktaIdpInitiatedSSO {
   ///
   /// Example:
   /// ```dart
-  /// final sso = AortemOktaIdpInitiatedSSO(
+  /// final sso = OktaIdpInitiatedSSO(
   ///   oktaDomain: 'your-org.okta.com',
   ///   clientId: '0oa1a2b3c4d5e6f7g8h9',
   ///   defaultRelayState: '/dashboard',

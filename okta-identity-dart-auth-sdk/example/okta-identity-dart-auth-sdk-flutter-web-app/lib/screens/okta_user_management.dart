@@ -21,7 +21,7 @@ class _OktaUserManagementScreenState extends State<OktaUserManagementScreen> {
   String _status = '';
 
   // 🧠 Use your SDK
-  final _oktaConsumer = AortemOktaUserManagementConsumer(
+  final _oktaConsumer = OktaUserManagementConsumer(
     oktaDomain: 'https://dev-123456.okta.com', // ✅ Replace
     apiToken: 'your_api_token_here', // ✅ Replace
   );

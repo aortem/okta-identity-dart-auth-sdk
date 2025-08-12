@@ -2,15 +2,15 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/src/auth/aortem_okta_issue_okta_saml_logout.dart';
 
 void main() {
-  group('AortemOktaSamlLogoutConsumer', () {
+  group('OktaSamlLogoutConsumer', () {
     const oktaDomain = 'https://example.okta.com';
     const applicationId = 'abc123';
     const defaultRelayState = 'https://myapp.com/logout/callback';
 
-    late AortemOktaSamlLogoutConsumer consumer;
+    late OktaSamlLogoutConsumer consumer;
 
     setUp(() {
-      consumer = AortemOktaSamlLogoutConsumer(
+      consumer = OktaSamlLogoutConsumer(
         oktaDomain: oktaDomain,
         applicationId: applicationId,
         defaultRelayState: defaultRelayState,
@@ -45,7 +45,7 @@ void main() {
 
     test('throws ArgumentError if oktaDomain is empty', () {
       expect(
-        () => AortemOktaSamlLogoutConsumer(
+        () => OktaSamlLogoutConsumer(
           oktaDomain: '',
           applicationId: applicationId,
           defaultRelayState: defaultRelayState,
@@ -56,7 +56,7 @@ void main() {
 
     test('throws ArgumentError if applicationId is empty', () {
       expect(
-        () => AortemOktaSamlLogoutConsumer(
+        () => OktaSamlLogoutConsumer(
           oktaDomain: oktaDomain,
           applicationId: '',
           defaultRelayState: defaultRelayState,
@@ -67,7 +67,7 @@ void main() {
 
     test('throws ArgumentError if defaultRelayState is empty', () {
       expect(
-        () => AortemOktaSamlLogoutConsumer(
+        () => OktaSamlLogoutConsumer(
           oktaDomain: oktaDomain,
           applicationId: applicationId,
           defaultRelayState: '',

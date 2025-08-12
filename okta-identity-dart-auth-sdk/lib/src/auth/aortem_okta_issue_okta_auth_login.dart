@@ -13,14 +13,14 @@ import '../base/aortem_okta_issue_okta_base_sdk_setup.dart';
 /// allowing users to authenticate with username and password credentials.
 ///
 /// The consumer pattern provides flexibility in constructing the authentication payload.
-class AortemOktaAuthLoginConsumer {
-  final AortemOktaBaseSDK _baseSDK;
+class OktaAuthLoginConsumer {
+  final OktaBaseSDK _baseSDK;
 
-  /// Creates an instance of [AortemOktaAuthLoginConsumer] with the given [baseSDK].
+  /// Creates an instance of [OktaAuthLoginConsumer] with the given [baseSDK].
   ///
   /// The [baseSDK] provides the base configuration (client ID, domain, etc.)
   /// needed for authentication.
-  AortemOktaAuthLoginConsumer(this._baseSDK);
+  OktaAuthLoginConsumer(this._baseSDK);
 
   /// Authenticates a user with username and password credentials.
   ///
@@ -29,7 +29,7 @@ class AortemOktaAuthLoginConsumer {
   ///
   /// Example usage:
   /// ```dart
-  /// final consumer = AortemOktaAuthLoginConsumer(sdk);
+  /// final consumer = OktaAuthLoginConsumer(sdk);
   /// final tokens = await consumer.signIn((payload) {
   ///   payload['username'] = 'user@example.com';
   ///   payload['password'] = 'securePassword123';
@@ -37,11 +37,11 @@ class AortemOktaAuthLoginConsumer {
   /// });
   /// ```
   ///
-  /// Throws [AortemOktaAuthPayloadException] if the payload is missing required fields.
+  /// Throws [OktaAuthPayloadException] if the payload is missing required fields.
   /// Throws [Exception] if the authentication request fails.
   ///
-  /// Returns [AortemOktaTokenResponse] containing the authentication tokens on success.
-  Future<AortemOktaTokenResponse> signIn(
+  /// Returns [OktaTokenResponse] containing the authentication tokens on success.
+  Future<OktaTokenResponse> signIn(
     void Function(Map<String, dynamic>) payloadConsumer,
   ) async {
     // Base payload with required OAuth2 parameters
@@ -58,7 +58,7 @@ class AortemOktaAuthLoginConsumer {
 
     // Validate that required fields are present
     if (!payload.containsKey('username') || !payload.containsKey('password')) {
-      throw AortemOktaAuthPayloadException(
+      throw OktaAuthPayloadException(
         'Payload must include both "username" and "password" fields.',
       );
     }
@@ -84,7 +84,7 @@ class AortemOktaAuthLoginConsumer {
     // Process the response
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return AortemOktaTokenResponse.fromJson(data);
+      return OktaTokenResponse.fromJson(data);
     } else {
       throw Exception(
         'Authentication failed: ${response.statusCode} - ${response.body}',

@@ -11,7 +11,7 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 ///
 /// Supports both public clients (without client secret) and confidential clients
 /// (with client secret).
-class AortemOktaAuthorization {
+class OktaAuthorization {
   /// The client ID registered in your Okta application
   final String clientId;
 
@@ -27,7 +27,7 @@ class AortemOktaAuthorization {
   /// The HTTP client used for making requests
   final http.Client _httpClient;
 
-  /// Creates an instance of [AortemOktaAuthorization].
+  /// Creates an instance of [OktaAuthorization].
   ///
   /// Required parameters:
   /// - [clientId]: Your Okta application's client ID
@@ -37,7 +37,7 @@ class AortemOktaAuthorization {
   /// Optional parameters:
   /// - [clientSecret]: Required for confidential clients
   /// - [httpClient]: Custom HTTP client (defaults to standard [http.Client])
-  AortemOktaAuthorization({
+  OktaAuthorization({
     required this.clientId,
     required this.redirectUri,
     required this.oktaDomain,
@@ -54,7 +54,7 @@ class AortemOktaAuthorization {
   ///
   /// Example:
   /// ```dart
-  /// final auth = AortemOktaAuthorization(
+  /// final auth = OktaAuthorization(
   ///   clientId: 'your_client_id',
   ///   redirectUri: 'com.example.app:/callback',
   ///   oktaDomain: 'your-domain.okta.com',

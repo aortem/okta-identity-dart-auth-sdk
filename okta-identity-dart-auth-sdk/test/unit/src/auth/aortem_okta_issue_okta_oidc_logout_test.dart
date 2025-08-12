@@ -21,9 +21,9 @@ void main() {
   const clientId = 'fake-client-id';
   const redirectUri = 'fake:/logout';
 
-  group('AortemOktaOidcLogoutConsumer', () {
+  group('OktaOidcLogoutConsumer', () {
     test('returns logout Uri successfully', () async {
-      final consumer = AortemOktaOidcLogoutConsumer(
+      final consumer = OktaOidcLogoutConsumer(
         oktaDomain: oktaDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,
@@ -47,7 +47,7 @@ void main() {
     });
 
     test('throws ArgumentError if required fields are missing', () async {
-      final consumer = AortemOktaOidcLogoutConsumer(
+      final consumer = OktaOidcLogoutConsumer(
         oktaDomain: oktaDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,
@@ -65,7 +65,7 @@ void main() {
     });
 
     test('throws Exception on HTTP failure response', () async {
-      final consumer = AortemOktaOidcLogoutConsumer(
+      final consumer = OktaOidcLogoutConsumer(
         oktaDomain: oktaDomain,
         clientId: clientId,
         postLogoutRedirectUri: redirectUri,

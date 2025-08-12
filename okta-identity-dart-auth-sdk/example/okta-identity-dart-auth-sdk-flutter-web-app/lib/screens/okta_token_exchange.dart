@@ -16,7 +16,7 @@ class _TokenExchangeScreenState extends State<TokenExchangeScreen> {
   String _result = '';
   bool _loading = false;
 
-  final _tokenExchange = AortemOktaTokenExchangeConsumer(
+  final _tokenExchange = OktaTokenExchangeConsumer(
     oktaDomain: 'https://dev-123456.okta.com',
     clientId: 'yourClientId',
     redirectUri: 'com.example.app:/callback',

@@ -13,7 +13,6 @@
 ### Removed
 - Deprecated helpers and unused code paths.
 
-
 ## 0.0.1
 
 - Added support for token refresh flow in `OktaIdentityClient`.

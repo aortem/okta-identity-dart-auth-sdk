@@ -1,21 +1,46 @@
-//import 'package:okta_identity_dart_auth_sdk/src/okta_identity_auth.dart';
+import 'package:okta_identity_dart_auth_sdk/src/base/okta_issue_okta_base_sdk_setup.dart';
+import 'package:okta_identity_dart_auth_sdk/src/auth/okta_issue_okta_auth_login.dart';
+import 'package:okta_identity_dart_auth_sdk/src/auth/okta_issue_okta_social_login.dart';
 
 void main() async {
-  final auth =
-      okta - identityAuth(apiKey: 'YOUR_API_KEY', projectId: 'YOUR_PROJECT_ID');
+  // Initialize OktaIdentity configuration
+  final config = OktaIdentityConfig(
+    oktaIdentityDomain: 'https://dev-07140130.okta.com',
+    clientId: '0oaplfz1eaN0o0DLU5d7',
+    clientSecret:
+        'MZhEzzq5mVHh7eWd-6xVHCmsITbeZc-w-RU8gVfycT-s1cj2V-ZL5hCjiA2lFAYm',
+    redirectUri: 'http://localhost:8080/authorization-code/callback',
+  );
+
+  // Create base SDK instance
+  final baseSDK = OktaIdentityBaseSDK(config: config);
 
   try {
-    // Sign up a new user
-    final newUser = await auth.createUserWithEmailAndPassword(
-        'newuser@aortem.com', 'password123');
-    print('User created: ${newUser.user.displayName}');
-    print('User created: ${newUser.user.email}');
+    // Example 1: Username/Password Authentication
+    final authLogin = OktaIdentityAuthLoginConsumer(baseSDK);
+    final tokenResponse = await authLogin.signIn((payload) {
+      payload['username'] = 'developers@aortem.io';
+      payload['password'] = 'Hello@1234';
+    });
+    print('Access Token: ${tokenResponse.accessToken}');
+    print('ID Token: ${tokenResponse.idToken}');
+    print('Refresh Token: ${tokenResponse.refreshToken}');
 
-    // Sign in with the new user
-    final userCredential = await auth.signInWithEmailAndPassword(
-        'newuser@aortem.com', 'password123');
-    print('Signed in: ${userCredential?.user.email}');
+    // Example 2: Social Login
+    final socialLogin = OktaIdentitySocialLoginConsumer(
+      oktaIdentityDomain: config.oktaIdentityDomain,
+      clientId: config.clientId,
+      redirectUri: config.redirectUri,
+    );
+    final socialResponse = await socialLogin.signIn((payload) {
+      payload['provider'] = 'google';
+      payload['social_token'] = 'google-auth-token';
+    });
+    print('Social Login Access Token: ${socialResponse['access_token']}');
   } catch (e) {
-    print('Error: $e');
+    print('Authentication failed: $e');
+  } finally {
+    // Clean up resources
+    baseSDK.dispose();
   }
 }

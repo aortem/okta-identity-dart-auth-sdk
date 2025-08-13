@@ -5,15 +5,13 @@
   </picture>
 </p>
 
-<h2 align="center">okta_identity_dart_auth_sdk</h2>
-
 <!-- x-hide-in-docs-end -->
+
 <p align="center" class="github-badges">
-  <!-- Release Badge -->
-  <a href="https://github.com/aortem/okta_identity_dart_auth_sdk/tags">
-    <img alt="Release" src="https://img.shields.io/static/v1?label=release&message=v0.0.2-pre+10&color=blue&style=for-the-badge" />
+  <!-- GitHub Tag Badge -->
+  <a href="https://github.com/aortem/okta-identity-dart-auth-sdk/tags">
+    <img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/aortem/okta-identity-dart-auth-sdk?style=for-the-badge" />
   </a>
-  <br/>
   <!-- Dart-Specific Badges -->
   <a href="https://pub.dev/packages/okta_identity_dart_auth_sdk">
     <img alt="Pub Version" src="https://img.shields.io/pub/v/okta_identity_dart_auth_sdk.svg?style=for-the-badge" />
@@ -21,199 +19,96 @@
   <a href="https://dart.dev/">
     <img alt="Built with Dart" src="https://img.shields.io/badge/Built%20with-Dart-blue.svg?style=for-the-badge" />
   </a>
- <!-- okta-identity Badge -->
-   <a href="https://okta-identity.google.com/docs/reference/admin/node/okta-identity-admin.auth?_gl=1*1ewipg9*_up*MQ..*_ga*NTUxNzc0Mzk3LjE3MzMxMzk3Mjk.*_ga_CW55HF8NVT*MTczMzEzOTcyOS4xLjAuMTczMzEzOTcyOS4wLjAuMA..">
-    <img alt="API Reference" src="https://img.shields.io/badge/API-reference-blue.svg?style=for-the-badge" />
-  <br/>
-<!-- Pipeline Badge -->
-<a href="https://github.com/aortem/okta_identity_dart_auth_sdk/actions">
-  <img alt="Pipeline Status" src="https://img.shields.io/github/actions/workflow/status/aortem/okta_identity_dart_auth_sdk/dart-analysis.yml?branch=main&label=pipeline&style=for-the-badge" />
-</a>
-<!-- Code Coverage Badges -->
-  </a>
-  <a href="https://codecov.io/gh/open-feature/dart-server-sdk">
-    <img alt="Code Coverage" src="https://codecov.io/gh/open-feature/dart-server-sdk/branch/main/graph/badge.svg?token=FZ17BHNSU5" />
-<!-- Open Source Badge -->
-  </a>
-  <a href="https://bestpractices.coreinfrastructure.org/projects/6601">
-    <img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/6601/badge?style=for-the-badge" />
-  </a>
-</p>
 <!-- x-hide-in-docs-start -->
 
-## **Feature Comparison Chart**
+# Okta Identity Dart Auth SDK
 
-### **Core Authentication Methods**
+Okta Identity Dart Auth SDK is designed to provide select out-of-the-box Okta features in Dart. Both low-level and high-level abstractions are provided.
 
-# Firebase vs Amazon Cognito for Server-Side Dart SDK
+## Features
 
-This document provides a high-level comparison of Firebase Authentication and Amazon Cognito features tailored for building a server-side Dart SDK. The goal is to evaluate how a server-side Dart SDK could integrate Amazon Cognito and compare its capabilities to Firebase Authentication.
+This implementation does not yet support all functionalities of Okta. Here is a list of functionalities with the current support status (based on the code in this repo):
 
+| #  | Method / Area                                                                  | Supported |
+| -- | ------------------------------------------------------------------------------ | :-------: |
+| 1  | Constructors & Base SDK Setup (`OktaIdentityBaseSDK`)                          |     ✅     |
+| 2  | Configuration & HTTP Client (domain, clientId/secret)                          |     ✅     |
+| 3  | Username/Password Login (ROPC) `OktaIdentityAuthLoginConsumer`                 |     ✅     |
+| 4  | Social / Federated Login (Token Exchange) `OktaIdentitySocialLoginConsumer`    |     ✅     |
+| 5  | OIDC Logout                                                                    |     ✅     |
+| 6  | SAML Logout                                                                    |     ✅     |
+| 7  | Authorization URL & Code Exchange `OktaIdentityAuthorization`                  |     ✅     |
+| 8  | Token Validation (JWT + JWKS rotation) `OktaIdentityTokenValidator`            |     ✅     |
+| 9  | Global Token Revocation (RFC 7009) `OktaIdentityTokenRevocationPayloadBuilder` |     ✅     |
+| 10 | IdP-Initiated SSO URL Builder `OktaIdentityIdpInitiatedSSO`                    |     ✅     |
+| 11 | Dynamic Client Registration                                                    |     ✅     |
+| 12 | User Management APIs                                                           |     ✅     |
+| 13 | MFA / Authenticator Verification                                               |     ✅     |
+| 14 | Authenticator Management                                                       |     ✅     |
+| 15 | Metadata Retrieval / Discovery                                                 |     ✅     |
+| 16 | Utility Methods & Helpers                                                      |     ✅     |
+| 17 | Exceptions (config, API, validation, missing token)                            |     ✅     |
 
-## **Feature Comparison Chart**
-
-### **Core Authentication Methods**
-
-| Firebase Method                                  | Amazon Cognito Equivalent                       | Notes                                                                                  | Supported |
-|--------------------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------- |-------------|
-| `FirebaseAuth.signInWithEmailAndPassword()`      | Cognito Admin: `AdminInitiateAuth`             | Authenticate user with email and password. Server-side API supports admin privileges.  | ✅         |
-| `FirebaseAuth.createUserWithEmailAndPassword()`  | Cognito Admin: `AdminCreateUser`               | Server-side method to create a new user in the user pool.                              | ✅         |
-| `FirebaseAuth.signOut()`                         | Not Applicable                                 | Cognito does not provide server-side logout; tokens must be invalidated by the client. | ❌         |
-| `FirebaseAuth.setPersistence()`                  | Not Applicable                                 | Token persistence is a client-side feature.                                            | ❌         |
-| `FirebaseAuth.sendPasswordResetEmail()`          | Cognito Admin: `AdminResetUserPassword`        | Sends a reset password request to the user.                                            | ✅         |
-| `FirebaseAuth.connectAuthEmulator`               | Not Applicable                                 | Cognito does not support emulated authentication environments.                         | ❌         |
-
----
-
-### **User Management**
-
-| Firebase Method                                  | Amazon Cognito Equivalent                      | Notes                                                                                   | Supported |
-|--------------------------------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------|-------------|
-| `FirebaseUser.updateEmail()`                     | Cognito Admin: `AdminUpdateUserAttributes`     | Updates the user's email or other attributes.                                           | ✅         |
-| `FirebaseUser.updatePassword()`                  | Cognito Admin: `AdminSetUserPassword`          | Updates the user's password.                                                            | ✅         |
-| `FirebaseUser.deleteUser()`                      | Cognito Admin: `AdminDeleteUser`               | Deletes the user account from the user pool.                                            | ✅         |
-| `FirebaseUser.updateProfile()`                   | Cognito Admin: `AdminUpdateUserAttributes`     | Updates custom attributes in the user's profile.                                        | ✅         |
-| `FirebaseUser.sendEmailVerification()`           | Not Applicable                                 | Cognito uses built-in email verification workflows; server-side triggering is indirect. | ❌         |
-| `FirebaseUser.reload()`                          | Cognito Admin: `AdminGetUser`                  | Refreshes the user profile information.                                                 | ✅         |
-| `FirebaseAuth.updateCurrentUser()`               | Cognito Admin: `AdminUpdateUserAttributes`     | Updates the current user's details, such as profile attributes.                         | ✅         |
-
----
-
-### **Token Management**
-
-| Firebase Method                                  | Amazon Cognito Equivalent                      | Notes                                                                                 | Supported  |
-|--------------------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------|------------|
-| `FirebaseAuth.getIdToken()`                      | Cognito: `InitiateAuth`                        | Retrieves tokens for user sessions.                                                   | ✅         |
-| `FirebaseAuth.revokeAccessToken()`               | Cognito: `RevokeToken`                         | Revokes a user's refresh token.                                                       | ✅         |
-| `FirebaseAuth.signInWithCustomToken()`           | Not Applicable                                 | Cognito does not support custom tokens like Firebase.                                 | ❌         |
-
----
-
-### **Multi-Factor Authentication (MFA)**
-
-| Firebase Method                                  | Amazon Cognito Equivalent                      | Notes                                                                                | Supported   |
-|--------------------------------------------------|------------------------------------------------|----------------------------------------------------------------------------------------|-------------|
-| `FirebaseAuth.getMultiFactorResolver()`          | Cognito Admin: `AdminSetUserMFAPreference`     | Retrieve MFA configurations and set user preferences.                                  | ✅         |
-| `FirebaseUser.multiFactor()`                     | Cognito: `AssociateSoftwareToken`              | Registers a user for software-based MFA (e.g., TOTP).                                  | ✅         |
-| `FirebaseUser.reauthenticateWithCredential()`    | Cognito: `InitiateAuth`                        | Reauthenticates the user with credentials.                                             | ✅         |
-
----
-
-### **Sign-In Methods**
-
-| Firebase Method                                 | Amazon Cognito Equivalent                      | Notes                                                                                  | Supported |
-|-------------------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------|-----------|
-| `FirebaseAuth.signInWithPopup()`                | Not Applicable                                 | Cognito does not support popup-based authentication flows.                             | ❌         |
-| `FirebaseAuth.signInWithRedirect()`             | Cognito: `HostedUI`                            | Hosted UI provides OAuth-based sign-in with redirect support.                          | ✅         |
-| `FirebaseAuth.signInWithPhoneNumber()`          | Cognito: `InitiateAuth`                        | Phone-based authentication is supported via custom attributes.                        | ✅         |
-
----
-
-### **Action Code Handling**
-
-| Firebase Method                                  | Amazon Cognito Equivalent                      | Notes                                                                                  | Supported |
-|--------------------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------|-----------|
-| `FirebaseAuth.applyActionCode()`                 | Not Applicable                                 | Cognito does not use action codes.                                                    | ❌         |
-| `FirebaseAuth.checkActionCode()`                 | Not Applicable                                 | Cognito does not use action codes.                                                    | ❌         |
-| `FirebaseAuth.verifyPasswordResetCode()`         | Cognito: `AdminResetUserPassword`              | Password reset is handled via workflows, not codes.                                   | ✅         |
-
----
-
-### **Enterprise Features Unique to Amazon Cognito**
-
-| Feature                                          | Description                                                                            | Supported |
-|--------------------------------------------------|----------------------------------------------------------------------------------------|-----------|
-| User Pool Groups                                 | Organize users into groups for role-based access control.                              | ✅       |
-| Lambda Triggers                                  | Extend authentication workflows with serverless functions.                             | ✅       |
-| Hosted UI                                        | Simplify OAuth and federated login flows with pre-built UI.                            | ✅       |
-| Advanced Security Features                       | Detect anomalies and enforce adaptive authentication.                                  | ✅       |
-| Identity Federation                              | Support for third-party identity providers like Google, Facebook, and SAML.            | ✅       |
-
----
-
-## **Key Differences Between Firebase and Amazon Cognito**
-
-1. **Server-Side Capabilities:** Amazon Cognito provides robust server-side APIs (e.g., Admin APIs), while Firebase is primarily client-focused.
-2. **Enterprise Features:** Cognito supports advanced features like Lambda triggers and adaptive authentication, which are absent in Firebase.
-3. **Custom Token Support:** Firebase enables custom token generation for integration with external systems, while Cognito lacks this feature.
-
----
-
-## **Next Steps**
-
-1. Design the Dart SDK for server-side integration with Amazon Cognito Admin APIs.
-2. Implement key features such as user management, MFA, and token management.
-3. Provide documentation and examples to facilitate adoption for both mobile and web developers.
-
-Let me know if you'd like to explore specific areas further!
-
-
-
-
+> Notes:
+>
+> * Token validation uses `jwt_generator` and fetches signing keys from the Okta JWKS endpoint.
+> * The base SDK centralizes config (Okta domain, client credentials, redirect URI) and HTTP client lifecycle.
+> * Social/federated login and SSO helpers follow Okta OIDC/OAuth patterns.
 
 ## Available Versions
 
-okta-identity Dart Admin Auth SDK is available in two versions to cater to different needs:
+Okta Identity Dart Auth SDK is available in two versions to cater to different needs:
 
-1. **Main - Stable Version**: Usually one release a month.  This version attempts to keep stability without introducing breaking changes.
-2. **Pre-Release - Edge Version**: Provided as an early indication of a release when breaking changes are expect.  This release is inconsistent. Use only if you are looking to test new features.
+1. **Main – Stable Version**: Usually one release a month. This version aims to maintain stability without introducing breaking changes.
+2. **Sample Apps – Frontend Versions**: Example apps are provided (Flutter/Dart web, etc.) to help you integrate your frontend with a Dart backend. New features are first exercised in the sample apps before being released to the mainline branch. Use as guidance only.
 
 ## Documentation
 
-For detailed guides, API references, and example projects, visit our [okta-identity Dart Admin Auth SDK Documentation](https://aortem.gitbook.io/okta-identity-dart-auth-admin-sdk). Start building with  okta-identity Dart Admin Auth SDK today and take advantage of its robust features and elegant syntax.
+For detailed guides, API references, and example projects, visit our **Okta Identity Dart Auth SDK Documentation** (replace with your docs URL):
+`https://sdks.aortem.io/okta-identity-dart-auth-sdk`
+
+Helpful Okta references for implementers:
+
+* Okta Identity Providers (IdPs) API
+* Okta OpenID Connect & OAuth 2.0 docs
+* Okta JWKS / token validation docs
 
 ## Examples
 
-Explore the `/example` directory in this repository to find sample applications demonstrating  okta-identity Dart Admin Auth SDK's capabilities in real-world scenarios.
+Explore the `/example` directory in this repository to find sample applications demonstrating Okta Identity Dart Auth SDK capabilities in real-world scenarios (Flutter web/desktop placeholders and a Dart web sample are included).
 
 ## Contributing
 
-We welcome contributions of all forms from the community! If you're interested in helping improve  okta-identity Dart Admin Auth SDK, please fork the repository and submit your pull requests. For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide.  Our team will review your pull request. Once approved, we will integrate your changes into our primary repository and push the mirrored changes on the main github branch.
+We welcome contributions of all forms from the community! If you're interested in helping improve Okta Identity Dart Auth SDK, please fork the repository and submit your pull requests. For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide. Our team will review your pull request. Once approved, we will integrate your changes into our primary repository and push the mirrored changes on the main GitHub branch.
 
-## Support Tiers
+## Support
 
-okta-identity Dart Admin Auth SDK offers various support tiers for our open-source products with an Initial Response Service Level Agreement (IRSLA):
-
-### Community Support
-- **Cost**: Free
-- **Features**: Access to community forums, basic documentation.
-- **Ideal for**: Individual developers or small startups.
-- **SLA**: NA
-
-### Standard Support
-- **Cost**: $10/month - Billed Annually.
-- **Features**: Extended documentation, email support, 10 business days response SLA.
-- **Ideal for**: Growing startups and small businesses.
-- **SLA**: 10 business days (Monday-Friday) IRSLANA
-- [Subscribe-Coming Soon]()
-
-### Enhanced Support
-- **Cost**: $100/month - Billed Annually
-- **Features**: Access to roadmap, 72-hour response SLA, feature request prioritization.
-- **Ideal for**: Medium-sized enterprises requiring frequent support.
-- **SLA**: 5 business days IRSLA
-- [Subscribe-Coming Soon]()
-
-### Enterprise Support
-- **Cost**: 450/month
-- **Features**: 
-  - 48-hour response SLA, 
-  - Access to beta features:
-  - Comprehensive support for all Aortem Open Source products.
-  - Premium access to our exclusive enterprise customer forum.
-  - Early access to cutting-edge features.
-  - Exclusive access to Partner/Reseller/Channel Program..
-- **Ideal for**: Large organizations and enterprises with complex needs.
-- **SLA**: 48-hour IRSLA
-- [Subscribe-Coming Soon]()
-
-*Enterprise Support is designed for businesses, agencies, and partners seeking top-tier support across a wide range of Dart backend and server-side projects.  All Open Source projects that are part of the Aortem Collective are included in the Enterprise subscription, with more projects being added soon.
+For support across all Aortem open-source products, including this SDK, visit our [Support Page](https://aortem.io/support).
 
 ## Licensing
 
-All  okta-identity Dart Admin Auth SDK packages are licensed under BSD-3, except for the *services packages*, which uses the ELv2 license, which are licensed from third party software  Inc. In short, this means that you can, without limitation, use any of the client packages in your app as long as you do not offer the SDK's or services as a cloud service to 3rd parties (this is typically only relevant for cloud service providers).  See the [LICENSE](LICENSE.md) file for more details.
+The **Okta Identity Dart Auth SDK** is licensed under a dual-license approach:
 
+1. **BSD-3 License**:
 
-## Enhance with okta-identity Dart Admin Auth SDK
+   * Applies to all packages and libraries in the SDK.
+   * Allows use, modification, and redistribution, provided that credit is given and compliance with the BSD-3 terms is maintained.
+   * Permits usage in open-source projects, applications, and private deployments.
 
-We hope the okta-identity Dart Admin Auth SDK helps you to efficiently build and scale your server-side applications. Join our growing community and start contributing to the ecosystem today!  test
+2. **Enhanced License Version 2 (ELv2)**:
+
+   * Applies to all use cases where the SDK or its derivatives are offered as part of a **cloud service**.
+   * This ensures that the SDK cannot be directly used by cloud providers to offer competing services without explicit permission.
+   * Example restricted use cases:
+
+     * Including the SDK in a hosted SaaS authentication platform.
+     * Offering the SDK as a component of a managed cloud service.
+
+### **Summary**
+
+* You are free to use the SDK in your applications, including open-source and commercial projects, as long as the SDK is not directly offered as part of a third-party cloud service.
+* For details, refer to the [LICENSE](LICENSE.md) file.
+
+## Enhance with Okta Identity Dart Auth SDK
+
+We hope the Okta Identity Dart Auth SDK helps you efficiently build and scale your server-side applications. Join our growing community and start contributing to the ecosystem today!

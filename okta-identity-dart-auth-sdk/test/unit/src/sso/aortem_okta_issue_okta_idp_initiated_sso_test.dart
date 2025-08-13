@@ -1,5 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:okta_identity_dart_auth_sdk/src/sso/aortem_okta_issue_okta_idp_initiated_sso.dart';
+import 'package:okta_identity_dart_auth_sdk/src/sso/okta_issue_okta_idp_initiated_sso.dart';
 
 void main() {
   group('OktaIdentityIdpInitiatedSSO', () {

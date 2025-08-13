@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:okta_identity_dart_auth_sdk/src/registration/aortem_okta_issue_okta_dynamic_client_registration.dart';
+import 'package:okta_identity_dart_auth_sdk/src/registration/okta_issue_okta_dynamic_client_registration.dart';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 import 'package:http/testing.dart';

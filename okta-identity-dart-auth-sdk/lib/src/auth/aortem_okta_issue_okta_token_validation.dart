@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:asn1lib/asn1lib.dart';
 import 'package:jwt_generator/jwt_generator.dart';
-import '../exception/aortem_okta_issue_token_validation_token.dart';
+import '../exception/okta_issue_token_validation_token.dart';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
 /// Validates JWT tokens issued by OktaIdentity using OAuth 2.0.

@@ -3,7 +3,7 @@ import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:http/testing.dart';
 import 'dart:convert';
 
-import 'package:okta_identity_dart_auth_sdk/src/metadata/aortem_okta_issue_okta_metadata.dart';
+import 'package:okta_identity_dart_auth_sdk/src/metadata/okta_issue_okta_metadata.dart';
 
 void main() {
   group('OktaIdentityMetadata', () {

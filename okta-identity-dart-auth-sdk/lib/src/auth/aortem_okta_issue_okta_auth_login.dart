@@ -3,9 +3,9 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_okta_auth_login_exception.dart';
-import 'package:okta_identity_dart_auth_sdk/src/model/aortem_okta_issue_okta_auth_login_model.dart';
-import '../base/aortem_okta_issue_okta_base_sdk_setup.dart';
+import 'package:okta_identity_dart_auth_sdk/src/exception/okta_issue_okta_auth_login_exception.dart';
+import 'package:okta_identity_dart_auth_sdk/src/model/okta_issue_okta_auth_login_model.dart';
+import '../base/okta_issue_okta_base_sdk_setup.dart';
 
 /// Provides username/password authentication support for OktaIdentity using a consumer pattern.
 ///

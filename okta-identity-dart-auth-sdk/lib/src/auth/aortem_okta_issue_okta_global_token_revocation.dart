@@ -1,4 +1,4 @@
-// File: lib/aortem-okta-global-token-revocation-consumer.dart
+// File: lib/okta-global-token-revocation-consumer.dart
 
 import 'dart:convert';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;

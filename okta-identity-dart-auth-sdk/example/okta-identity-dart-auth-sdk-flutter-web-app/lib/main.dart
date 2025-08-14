@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/IdpSsoTestScreen.dart';
-import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaIdentityAuthorization.dart';
-import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaIdentityDynamicClientRegistration.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaAuthorization.dart';
+import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/OktaDynamicClientRegistration.dart';
+
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_auth_login.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_auth_management.dart';
 import 'package:okta_identity_dart_auth_sdk_flutter_web_app/screens/okta_logout_complete.dart';

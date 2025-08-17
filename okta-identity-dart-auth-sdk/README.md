@@ -38,7 +38,7 @@ Or add to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  okta_identity_dart_auth_sdk: ^0.0.2
+  okta_identity_dart_auth_sdk: ^0.0.3
 ```
 
 > **Note:** Version may vary. Check the latest on pub.dev.

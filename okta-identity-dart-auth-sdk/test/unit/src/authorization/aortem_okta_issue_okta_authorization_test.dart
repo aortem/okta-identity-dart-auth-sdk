@@ -1,7 +1,6 @@
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:okta_identity_dart_auth_sdk/src/authorization/okta_issue_okta_authorization.dart';
-
+import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 import 'package:http/testing.dart';
 import 'dart:convert';
 

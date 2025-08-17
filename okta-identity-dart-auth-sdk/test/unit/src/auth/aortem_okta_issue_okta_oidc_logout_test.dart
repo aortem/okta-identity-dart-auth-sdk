@@ -1,7 +1,6 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:okta_identity_dart_auth_sdk/src/auth/okta_issue_okta_oidc_logout.dart';
-
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
+import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 class FakeHttpClient extends http.BaseClient {
   final int statusCode;

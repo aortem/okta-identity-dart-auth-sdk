@@ -1,4 +1,4 @@
-# OktaIdentity Identity Dart Auth SDK – Flutter Web Sample App 🧪
+# Okta Identity Dart Auth SDK – Flutter Web Sample App 🧪
 
 This Flutter Web sample app demonstrates **complete integration and testing** of the `okta_identity_dart_auth_sdk`. It verifies the SDK's features through real-world OAuth, OIDC, and SAML flows against a live OktaIdentity dev environment.
 

@@ -1,10 +1,10 @@
 name: okta_identity_dart_auth_sdk
 description: A Dart SDK for OktaIdentity Authentication, enabling secure server-side authentication and user management for Dart-based backend applications.
-version: 0.0.2
+version: 0.0.4
 repository: https://github.com/aortem_sdks/okta_identity_dart_auth_sdk
 
 environment:
-  sdk: ^3.8.3
+  sdk: ^3.9.0
 
 # Add regular dependencies here.
 
@@ -12,12 +12,12 @@ dependencies:
 #------------------ STANDARD FEATURES---------------------------------
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
-  ds_standard_features: ^0.0.8 #Standard Dart Team Utilities For HTTP //Default
-  jwt_generator: ^0.0.4
+  ds_standard_features: ^0.1.0 #Standard Dart Team Utilities For HTTP //Default
+  jwt_generator: ^0.0.5
   asn1lib: ^1.6.5
 
 dev_dependencies:
-  ds_tools_testing: ^0.0.5 #Standard Dart Team Testing Tools
+  ds_tools_testing: ^0.0.8 #Standard Dart Team Testing Tools
   git_hooks: any
   http: any
 

@@ -1,6 +1,4 @@
-import 'package:okta_identity_dart_auth_sdk/src/base/okta_issue_okta_base_sdk_setup.dart';
-import 'package:okta_identity_dart_auth_sdk/src/auth/okta_issue_okta_auth_login.dart';
-import 'package:okta_identity_dart_auth_sdk/src/auth/okta_issue_okta_social_login.dart';
+import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 void main() async {
   // Initialize OktaIdentity configuration

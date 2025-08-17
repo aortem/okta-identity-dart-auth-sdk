@@ -1,3 +1,9 @@
+## 0.0.4
+
+### Changed
+
+- Updated Test folder with revised naming conventions
+
 ## 0.0.3
 
 ### Changed

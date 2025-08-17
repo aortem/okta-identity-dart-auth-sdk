@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
-import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_token_validation_token.dart';
+import 'package:okta_identity_dart_auth_sdk/src/exception/okta_issue_token_validation_token.dart';
 
 void main() {
   group('OktaIdentityTokenValidator', () {

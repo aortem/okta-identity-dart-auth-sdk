@@ -2,8 +2,8 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:http/testing.dart';
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
-import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_missing_token_exception.dart';
-import 'package:okta_identity_dart_auth_sdk/src/exception/aortem_okta_issue_revocation_exception.dart';
+import 'package:okta_identity_dart_auth_sdk/src/exception/okta_issue_missing_token_exception.dart';
+import 'package:okta_identity_dart_auth_sdk/src/exception/okta_issue_revocation_exception.dart';
 
 void main() {
   group('OktaIdentityGlobalTokenRevocationConsumer', () {

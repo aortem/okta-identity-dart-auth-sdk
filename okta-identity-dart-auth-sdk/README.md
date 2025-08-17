@@ -1,8 +1,8 @@
-# OktaIdentity Identity Dart Auth SDK
+# Okta Identity Dart Auth SDK
 
 ## Overview
 
-The **OktaIdentity Identity Dart Auth SDK** provides a lightweight, idiomatic Dart/Flutter toolkit for implementing OktaIdentity OIDC authentication flows. It helps you:
+The **Okta Identity Dart Auth SDK** provides a lightweight, idiomatic Dart/Flutter toolkit for implementing OktaIdentity OIDC authentication flows. It helps you:
 
 * Build `/authorize` requests (PKCE).
 * Exchange authorization codes and refresh tokens.
@@ -38,7 +38,7 @@ Or add to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  okta_identity_dart_auth_sdk: ^0.0.2
+  okta_identity_dart_auth_sdk: ^0.0.4
 ```
 
 > **Note:** Version may vary. Check the latest on pub.dev.

@@ -1,3 +1,31 @@
+## 0.0.4
+
+### Changed
+
+- Updated Test folder with revised naming conventions
+
+## 0.0.3
+
+### Changed
+
+- Renamed all internal modules from `aortem_okta_issue_*` → `okta_issue_*` for consistency.
+- Simplified SDK entry point: `bin/main.dart` now uses a **single consolidated import** instead of multiple file-level imports.
+- Updated example Flutter app (`/example/lib/main.dart`) to reflect new import structure.
+- Standardized file naming across the SDK for clarity and maintainability.
+
+### Updated
+
+- Bump Dart SDK Version
+
+### Breaking
+
+- Direct imports of `aortem_okta_issue_*` files will no longer work.
+
+  - ✅ Developers should now import only via:
+
+    ```dart
+    import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
+    ```
 ## 0.0.2
 
 ### Added

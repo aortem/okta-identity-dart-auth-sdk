@@ -1,6 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-
-import 'package:okta_identity_dart_auth_sdk/src/utils/okta_issue_okta_utility_methods.dart';
+import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
 void main() {
   group('OktaIdentityUtilityMethods', () {

@@ -1,3 +1,9 @@
+## 0.0.5
+
+### Updated
+
+- Bump Dart version to 3.10.3
+
 ## 0.0.4
 
 ### Changed

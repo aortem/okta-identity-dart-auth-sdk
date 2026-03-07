@@ -1,0 +1,47 @@
+﻿= Getting Started
+:page-layout: default
+
+This page covers the quickest path to installing and navigating Okta Identity Dart Auth SDK.
+
+== Install the Package
+
+Add the package to your pubspec.yaml:
+
+[source,yaml]
+----
+dependencies:
+  okta_identity_dart_auth_sdk: ^0.0.5
+----
+
+Then run:
+
+[source,bash]
+----
+dart pub get
+----
+
+== Import the Library
+
+[source,dart]
+----
+import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
+----
+
+== Start with the Package Sources
+
+* Pubspec: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/pubspec.yaml
+* README: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/README.md
+* Examples: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/example
+* Tests: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/test
+
+== Build the Docs
+
+From apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/docs:
+
+[source,bash]
+----
+npm install
+npx antora antora-playbook.yml
+----
+
+The generated site is written to build/site.

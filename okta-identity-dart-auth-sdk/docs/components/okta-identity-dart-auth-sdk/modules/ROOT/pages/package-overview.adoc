@@ -1,0 +1,25 @@
+﻿= Package Overview
+:page-layout: default
+
+Okta Identity Dart Auth SDK is published as okta_identity_dart_auth_sdk at version v0.0.5.
+
+== Source of Truth
+
+* Pubspec: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/pubspec.yaml
+* README: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/README.md
+* Changelog: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/CHANGELOG.md
+
+== Directory Layout
+
+* Repository root: apps/sdks/okta-identity-dart-auth-sdk
+* Package root: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk
+* Documentation: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/docs
+* Library sources: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/lib
+* Examples: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/example
+* Tests: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/test
+* Local dev tools: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/local_dev_tools
+
+== Primary Source Areas
+
+* Public entrypoint: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/lib/okta_identity_dart_auth_sdk.dart
+* apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/lib/src

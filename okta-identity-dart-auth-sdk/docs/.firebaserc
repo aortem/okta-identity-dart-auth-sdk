@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "aortem-prod"
+  },
+  "targets": {
+    "aortem-prod": {
+      "hosting": {
+        "okta-identity-dart-auth-sdk-docs": [
+          "okta-identity-dart-auth-sdk-docs"
+        ]
+      }
+    }
+  }
+}

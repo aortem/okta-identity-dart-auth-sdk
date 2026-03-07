@@ -4,11 +4,7 @@ version: 0.0.5
 repository: https://github.com/aortem_sdks/okta_identity_dart_auth_sdk
 
 environment:
-<<<<<<< HEAD
   sdk: ^3.10.7
-=======
-  sdk: ^3.10.3
->>>>>>> main
 
 # Add regular dependencies here.
 

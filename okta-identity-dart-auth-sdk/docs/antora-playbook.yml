@@ -1,0 +1,15 @@
+site:
+  title: Okta Identity Dart Auth SDK Docs
+  start_page: okta-identity-dart-auth-sdk::index.adoc
+  url: https://okta-identity-dart-auth-sdk-docs.web.app/
+
+content:
+  sources:
+    - url: ..
+      branches: HEAD
+      start_path: okta-identity-dart-auth-sdk/docs/components/okta-identity-dart-auth-sdk
+
+ui:
+  bundle:
+    url: ./ui/antora-ui-custom/ui-bundle
+    snapshot: true

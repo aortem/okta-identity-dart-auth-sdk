@@ -5,7 +5,7 @@ site:
 
 content:
   sources:
-    - url: ..
+    - url: ../..
       branches: HEAD
       start_path: okta-identity-dart-auth-sdk/docs/components/okta-identity-dart-auth-sdk
 

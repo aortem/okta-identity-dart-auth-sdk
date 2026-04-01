@@ -1,21 +1,96 @@
-﻿= Releases
+= Releases
 :navtitle: Releases
-:description: Release tracking for Okta Identity Dart Auth SDK.
+:description: Release highlights and package history for Okta Identity Dart Auth SDK.
 :sectnums:
 
-This page tracks the current public package version documented for Okta Identity Dart Auth SDK.
+This page summarizes the stable package release history for Okta Identity Dart Auth SDK and keeps the public docs aligned with the published SDK versions.
 '''
-
-== v0.0.5
-
-=== Overview
-The current public package version for okta_identity_dart_auth_sdk is v0.0.5.
 
 === Release Sources
 
 * Pubspec: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/pubspec.yaml
 * Changelog: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/CHANGELOG.md
 
+== v0.0.5
+
+=== Overview
+This release aligns the package with a newer Dart SDK baseline.
+
+=== Highlights
+* Dart SDK bumped to `3.10.3`
+
+=== Improvements
+* Updated the package to the newer Dart SDK baseline.
+
+== v0.0.4
+
+=== Overview
+This release refreshes test-directory naming to keep the repo structure more consistent.
+
+=== Highlights
+* Revised test folder naming conventions
+
+=== Improvements
+* Updated the test folder structure to align with the revised naming convention.
+
+== v0.0.3
+
+=== Overview
+This release normalizes the Okta package namespace, simplifies imports, and refreshes the example app for the new structure.
+
+=== Highlights
+* Renamed internal modules to the `okta_issue_*` namespace
+* Simplified the SDK entrypoint import structure
+* Updated the example app to match the new package layout
+
+=== Improvements
+* Renamed internal modules from `aortem_okta_issue_*` to `okta_issue_*`.
+* Consolidated `bin/main.dart` around a single package import.
+* Updated example app imports and standardized file naming.
+* Bumped the Dart SDK version.
+
 === Notes
-* Keep this page aligned with the version declared in pubspec.yaml.
-* Detailed release history and change notes remain in CHANGELOG.md until fuller curated release notes are added here.
+* This release includes breaking changes for direct imports of the old `aortem_okta_issue_*` files.
+
+== v0.0.2
+
+=== Overview
+This release expands examples and tests while improving error handling and internal cleanup.
+
+=== Highlights
+* Added quick-start and usage examples
+* Improved token-expiry and credential error handling
+* Added more unit coverage
+
+=== Improvements
+* Added new example usage flows and optional configuration notes in the README.
+* Improved token-expiry and invalid-credential handling.
+* Clarified API docs and inline auth-flow comments.
+* Removed deprecated helpers and unused code paths.
+
+== v0.0.1
+
+=== Overview
+This release establishes the first stable package version for the Okta SDK.
+
+=== Highlights
+* First stable package release
+* Added token refresh support
+* Improved invalid-token handling
+
+=== Improvements
+* Added token refresh support in `OktaIdentityClient`.
+* Improved error handling for invalid and expired tokens.
+* Updated authentication API docs and applied minor refactors and formatting cleanup.
+
+== Pre-release History
+
+=== Overview
+Earlier pre-stable package builds are part of the SDK history and remain documented in the changelog.
+
+=== Included Pre-release Tags
+* `0.0.2-pre`
+
+=== Notes
+* Keep this page aligned with the version declared in `pubspec.yaml`.
+* Use `CHANGELOG.md` as the source of truth for exhaustive historical change notes.

@@ -1,5 +1,5 @@
 name: okta-identity-dart-auth-sdk
 title: Okta Identity Dart Auth SDK
-version: v0.0.5
+version: v0.0.6
 nav:
 - modules/ROOT/nav.adoc

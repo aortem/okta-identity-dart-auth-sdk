@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.0.6]
+### Added
+
+- Example index documentation under `example/README.md` for the current sample-app directories.
+
+### Changed
+
+- Refreshed the package README to a backend-first structure with clearer initialization guidance and domain-format notes.
+- Bumped the package Dart SDK floor to `3.11.4`.
+- Bumped the Flutter web example Dart SDK floor to `3.11.4`.
+- Updated backend validation CI to enforce the `3.11.4` minimum SDK version.
+- Corrected frontend CI paths to the current hyphenated Okta example-app directory names.
+
+### Notes
+
+- No API-breaking changes are intended in this release-prep update.
+
 ## [0.0.5]
 ### Updated
 

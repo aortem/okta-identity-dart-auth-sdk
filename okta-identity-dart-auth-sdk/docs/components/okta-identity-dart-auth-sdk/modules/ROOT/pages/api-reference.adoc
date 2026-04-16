@@ -6,7 +6,7 @@ This page maps the public package entrypoint to the current source tree.
 == Package API
 
 * Package: okta_identity_dart_auth_sdk
-* Version: v0.0.5
+* Version: v0.0.6
 * Package root: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk
 * Import path: package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart
 * Entrypoint file: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/lib/okta_identity_dart_auth_sdk.dart

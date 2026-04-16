@@ -1,7 +1,7 @@
 ﻿= Package Overview
 :page-layout: default
 
-Okta Identity Dart Auth SDK is published as okta_identity_dart_auth_sdk at version v0.0.5.
+Okta Identity Dart Auth SDK is published as okta_identity_dart_auth_sdk at version v0.0.6.
 
 == Source of Truth
 

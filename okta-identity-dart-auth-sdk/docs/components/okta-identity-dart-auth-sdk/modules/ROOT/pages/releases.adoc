@@ -11,6 +11,26 @@ This page summarizes the stable package release history for Okta Identity Dart A
 * Pubspec: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/pubspec.yaml
 * Changelog: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/CHANGELOG.md
 
+== v0.0.6
+
+=== Overview
+This release prepares the Okta package for the next publish with updated docs, corrected CI example paths, and a consistent Dart `3.11.4` baseline.
+
+=== Highlights
+* README restructured around the current backend initialization model
+* Dart SDK floor aligned to `3.11.4`
+* Frontend CI paths corrected to the current example directory names
+
+=== Improvements
+* Reworked the package README to focus on the supported backend-first initialization and current helper usage.
+* Added a concrete index for the current example directories under `example/README.md`.
+* Updated the package and Flutter web example Dart SDK minimum to `3.11.4`.
+* Updated backend validation CI to enforce the `3.11.4` minimum SDK version.
+* Corrected frontend CI paths so analysis targets the actual Okta sample-app directory.
+
+=== Notes
+* This entry reflects release preparation only; publishing is a separate step.
+
 == v0.0.5
 
 === Overview

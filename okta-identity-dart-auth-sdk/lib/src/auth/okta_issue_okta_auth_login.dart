@@ -1,5 +1,5 @@
-/// Ticket #2 - OktaIdentityAuthLogin: Implement Username/Password Authentication via Consumer Pattern
-/// Provides dynamic and flexible API for username/password login.
+// Ticket #2 - OktaIdentityAuthLogin: Implement Username/Password Authentication via Consumer Pattern
+// Provides dynamic and flexible API for username/password login.
 
 import 'dart:async';
 import 'dart:convert';

@@ -54,7 +54,7 @@ class OktaIdentityTokenRevocationPayloadBuilder {
   /// Validates that required fields are present and returns a properly
   /// formatted Map for use in revocation requests.
   ///
-  /// @return Map<String, String> The formatted revocation payload
+  /// @return `Map<String, String>` The formatted revocation payload
   /// @throws MissingTokenFieldException If token is null or empty
   Map<String, String> build() {
     if (token == null || token!.isEmpty) {
@@ -138,7 +138,7 @@ class OktaIdentityGlobalTokenRevocationConsumer {
   /// - [buildPayload]: A callback that receives and configures the payload builder
   ///
   /// Returns:
-  /// Future<void> that completes when revocation is successful
+  /// `Future<void>` that completes when revocation is successful
   ///
   /// Throws:
   /// - [MissingTokenFieldException] if token is not provided

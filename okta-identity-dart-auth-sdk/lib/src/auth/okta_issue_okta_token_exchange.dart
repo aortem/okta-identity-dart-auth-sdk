@@ -25,6 +25,9 @@ class OktaIdentityTokenExchangeConsumer {
   /// The redirect URI registered in the OktaIdentity application
   final String redirectUri;
 
+  /// HTTP client used to send token exchange requests.
+  final http.Client httpClient;
+
   /// Creates an instance of [OktaIdentityTokenExchangeConsumer].
   ///
   /// Required parameters:
@@ -39,7 +42,8 @@ class OktaIdentityTokenExchangeConsumer {
     required this.clientId,
     required this.redirectUri,
     this.clientSecret,
-  });
+    http.Client? httpClient,
+  }) : httpClient = httpClient ?? http.Client();
 
   /// Performs OAuth 2.0 token exchange or refresh operation.
   ///
@@ -123,7 +127,7 @@ class OktaIdentityTokenExchangeConsumer {
     final uri = Uri.parse('$oktaIdentityDomain/oauth2/default/v1/token');
 
     try {
-      final response = await http.post(
+      final response = await httpClient.post(
         uri,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: payload,

@@ -4,38 +4,37 @@ import 'dart:convert';
 
 import 'package:okta_identity_dart_auth_sdk/okta_identity_dart_auth_sdk.dart';
 
-// Mock class for the HTTP client
-class MockHttpClient extends Mock implements http.Client {}
-
 void main() {
   group('OktaIdentityTokenExchangeConsumer', () {
-    late OktaIdentityTokenExchangeConsumer tokenExchangeConsumer;
-    late MockHttpClient mockHttpClient;
-
-    setUp(() {
-      mockHttpClient = MockHttpClient();
-      tokenExchangeConsumer = OktaIdentityTokenExchangeConsumer(
-        oktaIdentityDomain: 'https://example.okta.com',
-        clientId: 'testClientId',
-        redirectUri: 'https://example.com/callback',
-      );
-    });
-
     test('should successfully exchange token for authorization code', () async {
-      // Prepare the mock response
       final mockResponse = json.encode({
         'access_token': 'mockAccessToken',
         'id_token': 'mockIdToken',
         'refresh_token': 'mockRefreshToken',
       });
 
-      when(
-        mockHttpClient.post(
-          Uri.parse('https://example.okta.com/oauth2/default/v1/token'),
-          headers: anyNamed('headers'),
-          body: anyNamed('body'),
-        ),
-      ).thenAnswer((_) async => http.Response(mockResponse, 200));
+      final mockClient = MockClient((request) async {
+        expect(
+          request.url.toString(),
+          'https://example.okta.com/oauth2/default/v1/token',
+        );
+        expect(request.method, equals('POST'));
+        expect(request.bodyFields['client_id'], equals('testClientId'));
+        expect(
+          request.bodyFields['redirect_uri'],
+          equals('https://example.com/callback'),
+        );
+        expect(request.bodyFields['grant_type'], equals('authorization_code'));
+        expect(request.bodyFields['code'], equals('mockAuthorizationCode'));
+        return http.Response(mockResponse, 200);
+      });
+
+      final tokenExchangeConsumer = OktaIdentityTokenExchangeConsumer(
+        oktaIdentityDomain: 'https://example.okta.com',
+        clientId: 'testClientId',
+        redirectUri: 'https://example.com/callback',
+        httpClient: mockClient,
+      );
 
       // Prepare the consumer callback
       final modifyPayload = (Map<String, String> payload) {
@@ -54,6 +53,12 @@ void main() {
     });
 
     test('should throw ArgumentError if grant_type is missing', () async {
+      final tokenExchangeConsumer = OktaIdentityTokenExchangeConsumer(
+        oktaIdentityDomain: 'https://example.okta.com',
+        clientId: 'testClientId',
+        redirectUri: 'https://example.com/callback',
+      );
+
       final modifyPayload = (Map<String, String> payload) {
         // Don't set grant_type here to trigger an error
       };
@@ -69,6 +74,12 @@ void main() {
     test(
       'should throw ArgumentError if authorization code is missing',
       () async {
+        final tokenExchangeConsumer = OktaIdentityTokenExchangeConsumer(
+          oktaIdentityDomain: 'https://example.okta.com',
+          clientId: 'testClientId',
+          redirectUri: 'https://example.com/callback',
+        );
+
         final modifyPayload = (Map<String, String> payload) {
           payload['grant_type'] = 'authorization_code'; // Missing the 'code'
         };
@@ -83,13 +94,16 @@ void main() {
     );
 
     test('should throw Exception if network request fails', () async {
-      when(
-        mockHttpClient.post(
-          Uri.parse('https://example.okta.com/oauth2/default/v1/token'),
-          headers: anyNamed('headers'),
-          body: anyNamed('body'),
-        ),
-      ).thenAnswer((_) async => http.Response('Network error', 500));
+      final mockClient = MockClient((request) async {
+        return http.Response('Network error', 500);
+      });
+
+      final tokenExchangeConsumer = OktaIdentityTokenExchangeConsumer(
+        oktaIdentityDomain: 'https://example.okta.com',
+        clientId: 'testClientId',
+        redirectUri: 'https://example.com/callback',
+        httpClient: mockClient,
+      );
 
       final modifyPayload = (Map<String, String> payload) {
         payload['grant_type'] = 'authorization_code';

@@ -12,7 +12,7 @@ dependencies:
 #------------------ STANDARD FEATURES---------------------------------
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
-  ds_standard_features: ^0.1.6 #Standard Dart Team Utilities For HTTP //Default
+  ds_standard_features: ^0.1.7 #Standard Dart Team Utilities For HTTP //Default
   jwt_generator: ^0.0.9
   asn1lib: ^1.6.5
 
@@ -20,6 +20,7 @@ dev_dependencies:
   ds_tools_testing: ^0.1.4 #Standard Dart Team Testing Tools
   git_hooks: any
   http: any
+  lints: ^6.1.0
 
 git_hooks:
   hooks:

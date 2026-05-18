@@ -130,7 +130,7 @@ class OktaIdentityBaseSDK {
 
   /// Public field for OktaIdentity domain access.
   /// Note: This appears to be redundant with the config's oktaIdentityDomain.
-  var oktaIdentityDomain;
+  String? oktaIdentityDomain;
 
   /// Gets the current OktaIdentity configuration.
   /// Provides read-only access to the configuration parameters.
@@ -144,11 +144,11 @@ class OktaIdentityBaseSDK {
 
   /// Placeholder getter for clientId.
   /// Note: Should likely be removed or properly implemented to return _config.clientId.
-  get clientId => null;
+  String? get clientId => null;
 
   /// Placeholder getter for redirectUri.
   /// Note: Should likely be removed or properly implemented to return _config.redirectUri.
-  get redirectUri => null;
+  String? get redirectUri => null;
 
   /// Cleans up resources, particularly the HTTP client.
   ///

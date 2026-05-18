@@ -24,7 +24,7 @@ class OktaIdentityUtilityMethods {
   ///
   /// @param redirectUri The URI where OktaIdentity should redirect after authentication
   /// @param clientId The client ID of your OktaIdentity OAuth application
-  /// @return Future<String> containing the sign-in URL
+  /// @return `Future<String>` containing the sign-in URL
   /// @throws Exception if the request fails or response is invalid
   Future<String> getSignInLink({
     required String redirectUri,
@@ -52,7 +52,7 @@ class OktaIdentityUtilityMethods {
   /// Accepts a delegated access request in OktaIdentity
   ///
   /// @param requestId The ID of the delegated access request to accept
-  /// @return Future<Map<String, dynamic>> containing the response from OktaIdentity
+  /// @return `Future<Map<String, dynamic>>` containing the response from OktaIdentity
   /// @throws Exception if the request fails or response is invalid
   Future<Map<String, dynamic>> acceptDelegatedRequest({
     required String requestId,
@@ -80,7 +80,7 @@ class OktaIdentityUtilityMethods {
   /// @param method The HTTP method ('GET' or 'POST')
   /// @param url The full URL to request
   /// @param body Optional request body for POST requests
-  /// @return Future<Map<String, dynamic>> containing the parsed JSON response
+  /// @return `Future<Map<String, dynamic>>` containing the parsed JSON response
   /// @throws Exception if the request fails or returns non-200 status
   Future<Map<String, dynamic>> _sendRequest(
     String method,

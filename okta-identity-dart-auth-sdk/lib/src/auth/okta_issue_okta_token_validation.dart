@@ -57,8 +57,9 @@ class OktaIdentityTokenValidator {
     final signature = parts[2];
 
     final kid = header['kid'];
-    if (kid == null)
+    if (kid == null) {
       throw TokenValidationException('Missing "kid" in JWT header');
+    }
 
     // final publicKey = await _getPublicKey(kid);
     final publicKeyJwk = await _getPublicKey(kid);

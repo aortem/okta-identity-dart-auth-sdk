@@ -8,7 +8,7 @@ This package provides helpers for authorization URL generation, token exchange, 
 
 ```yaml
 dependencies:
-  okta_identity_dart_auth_sdk: ^0.0.6
+  okta_identity_dart_auth_sdk: ^0.0.7
 ```
 
 ## Recommended Initialization Model

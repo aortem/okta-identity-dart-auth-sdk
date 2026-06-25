@@ -1,4 +1,4 @@
-﻿= Okta Identity Dart Auth SDK Documentation
+= Okta Identity Dart Auth SDK Documentation
 :page-layout: default
 :sectanchors:
 :toc: macro
@@ -21,7 +21,7 @@ toc::[]
 == Current Public Package
 
 * Package: okta_identity_dart_auth_sdk
-* Version: v0.0.6
+* Version: v0.0.7
 * Repository root: apps/sdks/okta-identity-dart-auth-sdk
 * Package root: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk
 * Docs root: apps/sdks/okta-identity-dart-auth-sdk/okta-identity-dart-auth-sdk/docs
